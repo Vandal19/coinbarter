@@ -2,6 +2,9 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ResponsiveAppBar from "./components/NavBar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Homepage from './pages/Home';
+
 import Products from "./components/products";
 import { Button, Container } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
@@ -30,6 +33,16 @@ function App() {
   }
 
   return (
+
+    <div className="App">
+     <ResponsiveAppBar />
+    <Router>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+      </Routes>
+    </Router>
+    </div>
+    
     <ThemeProvider theme={theme}>
 
     <Container
