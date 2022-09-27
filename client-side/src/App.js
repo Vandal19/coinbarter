@@ -2,6 +2,8 @@ import './App.css';
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import ResponsiveAppBar from './components/NavBar';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Homepage from './pages/Home';
 
 function App() {
   const [name, setName] = useState("")
@@ -27,6 +29,11 @@ function App() {
   return (
     <div className="App">
      <ResponsiveAppBar />
+    <Router>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+      </Routes>
+    </Router>
     </div>
   );
 }
