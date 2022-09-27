@@ -2,6 +2,7 @@ import './App.css';
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import ResponsiveAppBar from './components/NavBar';
+import Products from './components/products';
 
 function App() {
   const [name, setName] = useState("")
@@ -27,6 +28,7 @@ function App() {
   return (
     <div className="App">
      <ResponsiveAppBar />
+     {/* <Products /> */}
     </div>
   );
 }
