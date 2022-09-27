@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ResponsiveAppBar from "./components/NavBar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Homepage from './pages/Home';
+import Homepage from "./pages/Home";
 
 import Products from "./components/products";
 import { Button, Container } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
-import theme from "./styles/theme"
+import theme from "./styles/theme";
 
 function App() {
   const [name, setName] = useState("");
@@ -33,15 +33,14 @@ function App() {
   }
 
   return (
-  <ThemeProvider theme={theme}>
-
-    <Container
-      maxWidth="xl"
-      sx={{
-        background: "#fff",
-      }}
+    <ThemeProvider theme={theme}>
+      <Container
+        maxWidth="xl"
+        sx={{
+          background: "#fff",
+        }}
       >
-      {/*
+        {/*
       ResponsiveAppBar
       Banner
       Title
@@ -49,13 +48,13 @@ function App() {
       Footer
       Searchbox
     */}
-     <ResponsiveAppBar />
-    <Router>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-      </Routes>
-    </Router>
-    </Container>
+        <ResponsiveAppBar />
+        <Router>
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+          </Routes>
+        </Router>
+      </Container>
     </ThemeProvider>
   );
 }
