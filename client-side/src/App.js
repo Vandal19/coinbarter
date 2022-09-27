@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import ResponsiveAppBar from './components/NavBar';
 
 function App() {
   const [name, setName] = useState("")
@@ -25,11 +26,7 @@ function App() {
 
   return (
     <div className="App">
-      <form onSubmit={postName}>
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-        <button type='submit'>Send Name</button>
-      </form>
-      {home}
+     <ResponsiveAppBar />
     </div>
   );
 }
