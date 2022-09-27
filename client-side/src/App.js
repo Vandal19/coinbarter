@@ -33,17 +33,7 @@ function App() {
   }
 
   return (
-
-    <div className="App">
-     <ResponsiveAppBar />
-    <Router>
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-      </Routes>
-    </Router>
-    </div>
-    
-    <ThemeProvider theme={theme}>
+  <ThemeProvider theme={theme}>
 
     <Container
       maxWidth="xl"
@@ -59,7 +49,12 @@ function App() {
       Footer
       Searchbox
     */}
-      <ResponsiveAppBar />
+     <ResponsiveAppBar />
+    <Router>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+      </Routes>
+    </Router>
     </Container>
     </ThemeProvider>
   );

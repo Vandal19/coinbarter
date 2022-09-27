@@ -28,7 +28,9 @@ const theme = createTheme({
     primary: {
       main: Colors.primary
     },
-    secondary: Colors.secondary
+    secondary: {
+      main: Colors.secondary
+    }
   },
 
   components: {
