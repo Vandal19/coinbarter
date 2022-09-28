@@ -54,6 +54,7 @@ function App() {
             <Route path="/" element={<Homepage />} />
           </Routes>
         </Router>
+        <Products />
       </Container>
     </ThemeProvider>
   );

@@ -4,25 +4,25 @@ import { Product, ProductActionsWrapper, ProductFavButton, ProductImage, Product
 import ProductMeta from './ProductMeta'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 
-const SingleProduct = ({product, matches}) => {
+const SingleProductDT = ({product, matches}) => {
 
 
   return (
     <>
     <Product>
       <ProductImage src={product.cover_image_url} />
+      <ProductFavButton isFav={0}>
+          <FavoriteIcon />
+      </ProductFavButton>
       <ProductMeta product={product} matches={matches} />
       <ProductActionsWrapper>
         <Stack direction="row">
-          <ProductFavButton isFav={0}>
-            <FavoriteIcon />
-          </ProductFavButton>
+
         </Stack>
       </ProductActionsWrapper>
     </Product>
-    <ProductAddToCart variant="contained">Add to cart</ProductAddToCart>
     </>
   )
 }
 
-export default SingleProduct
+export default SingleProductDT
