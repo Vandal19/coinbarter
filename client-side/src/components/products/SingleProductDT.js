@@ -30,7 +30,7 @@ const SingleProductDT = ({ product, matches }) => {
         </ProductFavButton>
 
         {showOpt && (
-          <ProductAddToCart show={showOpt} variant="outlined">
+          <ProductAddToCart show={showOpt} variant="contained">
             Add to Cart
           </ProductAddToCart>
         )}
