@@ -11,8 +11,12 @@ export default function NavBar() {
 
   return (
     <>
-      {matches ? <NavBarMobile /> : <NavBarDesktop />}
+      {matches ? (
+        <NavBarMobile matches={matches} /> 
+      ) : (
+        <NavBarDesktop matches={matches} />
+      )}
     </>
-  )
+  );
 
 }
