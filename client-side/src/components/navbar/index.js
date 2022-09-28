@@ -1,5 +1,7 @@
 import { useTheme } from "@emotion/react";
 import { useMediaQuery } from "@mui/material";
+import NavBarDesktop from "./NavBarDesktop";
+import NavBarMobile from "./NavBarMobile";
 
 
 export default function NavBar() {
@@ -9,7 +11,7 @@ export default function NavBar() {
 
   return (
     <>
-      {matches ? <h1>Mobile</h1> : <h1>Desktop</h1>}
+      {matches ? <NavBarMobile /> : <NavBarDesktop />}
     </>
   )
 
