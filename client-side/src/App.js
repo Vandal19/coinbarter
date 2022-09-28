@@ -9,6 +9,7 @@ import Products from "./components/products";
 import { Button, Container } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
 import theme from "./styles/theme";
+import NavBar from "./components/navbar/index.js";
 
 function App() {
   const [name, setName] = useState("");
@@ -40,6 +41,7 @@ function App() {
           background: "#fff",
         }}
       >
+        <NavBar />
         {/*
       ResponsiveAppBar
       Banner
@@ -48,13 +50,12 @@ function App() {
       Footer
       Searchbox
     */}
-        <ResponsiveAppBar />
-        <Router>
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-          </Routes>
-        </Router>
-        <Products />
+        {/* <ResponsiveAppBar /> */}
+          {/* <Router>
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+            </Routes>
+          </Router> */}
       </Container>
     </ThemeProvider>
   );
