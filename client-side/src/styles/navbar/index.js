@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Box, color } from "@mui/system";
 import { Colors } from "../theme";
+import "@fontsource/fira-code";
 
 // container
 export const NavBarContainer = styled(Box)(() => ({
