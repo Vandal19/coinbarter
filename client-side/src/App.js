@@ -10,6 +10,7 @@ import { Button, Container } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
 import theme from "./styles/theme";
 import NavBar from "./components/navbar/index.js";
+import Banner from "./components/banner";
 
 function App() {
   const [name, setName] = useState("");
@@ -42,9 +43,8 @@ function App() {
         }}
       >
         <NavBar />
+        <Banner />
         {/*
-      ResponsiveAppBar
-      Banner
       Title
       Products
       Footer
