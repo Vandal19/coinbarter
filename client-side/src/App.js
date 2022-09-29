@@ -10,6 +10,7 @@ import { Box, Button, Container, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
 import theme from "./styles/theme";
 import NavBar from "./components/navbar/index.js";
+import Footer from "./components/Footer";
 import Banner from "./components/banner";
 import Slider from "./components/slider";
 
@@ -50,6 +51,7 @@ function App() {
           <Typography variant="h4">Our Products</Typography>
         </Box>
         <Products />
+        <Footer />
         {/*
       Title
       Products

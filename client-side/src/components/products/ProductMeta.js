@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material'
 import React from 'react'
-import { ProductMetaWrapper } from '../../styles/Products'
+import { ProductMetaWrapper } from '../../styles/products'
 
 const ProductMeta = ({ product, matches }) => {
   return (

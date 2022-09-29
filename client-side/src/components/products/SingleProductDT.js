@@ -6,7 +6,7 @@ import {
   ProductFavButton,
   ProductImage,
   ProductAddToCart,
-} from "../../styles/Products";
+} from "../../styles/products";
 import ProductMeta from "./ProductMeta";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 

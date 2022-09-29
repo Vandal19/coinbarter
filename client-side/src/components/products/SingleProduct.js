@@ -1,6 +1,6 @@
 import { Stack } from '@mui/material'
 import React from 'react'
-import { Product, ProductActionsWrapper, ProductFavButton, ProductImage, ProductAddToCart } from "../../styles/Products"
+import { Product, ProductActionsWrapper, ProductFavButton, ProductImage, ProductAddToCart } from "../../styles/products"
 import ProductMeta from './ProductMeta'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 
