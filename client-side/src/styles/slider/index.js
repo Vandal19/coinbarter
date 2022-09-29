@@ -7,12 +7,12 @@ import "@fontsource/fira-code";
 export const SliderContainer = styled(Box)(({theme}) => ({
 
   [theme.breakpoints.up('md')]: {
-    padding: '40px 0px 40px 0px'
+    padding: '30px 0px 30px 0px'
   },
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  padding: '20px 0px 20px 0px',
+  padding: '15px 0px 15px 0px',
   overflow: 'hidden',
   background: Colors.secondary
 }));
@@ -22,8 +22,8 @@ export const MessageText = styled(Typography)(({theme}) => ({
 
   fontFamily: '"Fira Code", monospace',
   [theme.breakpoints.up('md')]: {
-    fontSize: '3rem',
+    fontSize: '2rem',
   },
   color: Colors.white,
-  fontSize: '1.5rem'
+  fontSize: '1.2rem'
 }));
