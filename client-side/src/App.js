@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Home";
 
 import Products from "./components/products";
-import { Button, Container } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
 import theme from "./styles/theme";
 import NavBar from "./components/navbar/index.js";
@@ -46,6 +46,9 @@ function App() {
         <NavBar />
         <Banner />
         <Slider />
+        <Box display="flex" justifyContent={"center"} sx={{ p: 4 }}>
+          <Typography variant="h4">Our Products</Typography>
+        </Box>
         <Products />
         {/*
       Title
