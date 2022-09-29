@@ -10,7 +10,7 @@ export default function Banner() {
 
   return (
     <BannerContainer>
-        <BannerImage src="/images/banner/homepage-c.png"/>
+        <BannerImage src="/images/banner/homepage-dcut.png"/>
       <BannerContent>
 
         <Typography>
