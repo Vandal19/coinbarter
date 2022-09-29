@@ -11,6 +11,7 @@ import { ThemeProvider } from "@mui/system";
 import theme from "./styles/theme";
 import NavBar from "./components/navbar/index.js";
 import Banner from "./components/banner";
+import Slider from "./components/slider";
 
 function App() {
   const [name, setName] = useState("");
@@ -44,6 +45,8 @@ function App() {
       >
         <NavBar />
         <Banner />
+        <Slider />
+        <Products />
         {/*
       Title
       Products
@@ -56,7 +59,6 @@ function App() {
               <Route path="/" element={<Homepage />} />
             </Routes>
           </Router> */}
-        <Products />
       </Container>
     </ThemeProvider>
   );
