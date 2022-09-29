@@ -1,15 +1,18 @@
 import { Box, Slide } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MessageText, SliderContainer } from "../../styles/slider";
 
 
 const messages = [
-  "Free shipping on all domestic orders",
+  "Free shipping on domestic orders",
   "20% off on your first order!",
   "Save up to $200 on select laptops"
 ];
 
 export default function Slider() {
+
+  // hook to contain messages in slider container
+  const containerRef = useRef();
   
   // state to loop through slider messages
   const [messageIndex, setMessageIndex] = useState(0);
@@ -38,8 +41,9 @@ export default function Slider() {
   }, []);
 
   return (
-    <SliderContainer>
-      <Slide direction={show ? "left" : "right"} in={show} 
+    <SliderContainer ref={containerRef}>
+      <Slide container={containerRef.current} 
+        direction={show ? "left" : "right"} in={show} 
         timeout={{
           enter: 500,
           exit: 100
