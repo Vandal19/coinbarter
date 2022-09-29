@@ -10,6 +10,7 @@ import { Button, Container } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
 import theme from "./styles/theme";
 import NavBar from "./components/navbar/index.js";
+import Footer from "./components/Footer";
 
 function App() {
   const [name, setName] = useState("");
@@ -57,6 +58,7 @@ function App() {
             </Routes>
           </Router> */}
         <Products />
+        <Footer />
       </Container>
     </ThemeProvider>
   );
