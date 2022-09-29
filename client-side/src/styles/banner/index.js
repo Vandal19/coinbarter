@@ -47,8 +47,8 @@ export const BannerContent = styled(Box)(() => ({
 // banner title
 export const BannerTitle = styled(Typography)(({theme}) => ({
 
-  lineHeight: 1.3,
-  fontSize: '50px',
+  lineHeight: 1.2,
+  fontSize: '47px',
   marginBottom: '20px',
   fontFamily: '"Fira Code", monospace',
   [theme.breakpoints.down('sm')]: {
