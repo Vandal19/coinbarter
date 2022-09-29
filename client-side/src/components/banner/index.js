@@ -10,19 +10,19 @@ export default function Banner() {
 
   return (
     <BannerContainer>
-        <BannerImage src="/images/banner/homepage-hero.jpeg"/>
+        <BannerImage src="/images/banner/homepage-c.png"/>
       <BannerContent>
 
         <Typography>
         </Typography>
 
         <BannerTitle variant="h2">
-            e-commerce reimagined
+          Buy Now, <br/>
+          Pay With<Box sx={{ display: 'inline', fontStyle: 'italic' }}> Crypto</Box>
         </BannerTitle>
 
         <BannerDescription variant="subtitle">
-            Buy Now, <br/>
-            Pay With<Box sx={{ display: 'inline', fontStyle: 'italic' }}> Crypto</Box>
+          E-commerce Reimagined
         </BannerDescription>
 
       </BannerContent>
