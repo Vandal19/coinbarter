@@ -32,8 +32,10 @@ export const ProductActionButton = styled(IconButton)(() => ({
   margin: 4,
 }));
 
-export const ProductFavButton = styled(ProductActionButton)(({ isfav, theme }) => ({
-  color: isfav ? Colors.primary : Colors.light,
+export const ProductFavButton = styled(ProductActionButton, {
+  shouldForwardProp: (prop) => prop !== 'isFav'
+})(({ isFav, theme }) => ({
+  color: isFav ? Colors.primary : Colors.light,
   [theme.breakpoints.up("md")]: {
     position: "absolute",
     right: 0,
@@ -66,7 +68,9 @@ export const ProductMetaWrapper = styled(Box)(({theme}) => ({
   alignItems: "center",
 }));
 
-export const ProductActionsWrapper = styled(Box)(({ show, theme }) => ({
+export const ProductActionsWrapper = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "show",
+})(({ show, theme }) => ({
   [theme.breakpoints.up("md")]: {
     display: show ? 'visible' : 'none',
     position: "absolute",
