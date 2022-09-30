@@ -18,7 +18,9 @@ export default function NavBarDesktop({ matches }) {
 
   return (
     <NavBarContainer>
-      <NavBarHeader>CoinBarter</NavBarHeader>
+      <NavBarHeader>
+      <Link to="/" style={{ textDecoration: "none", color: Colors.primary }}>CoinBarter</Link>
+      </NavBarHeader>
       <MyList type="row">
         <NavBarCategories>
         <Link to="/cell-phones" style={{ textDecoration: "none", color: Colors.primary }}>Cell Phones</Link>

@@ -13,6 +13,7 @@ import NavBar from "./components/navbar/index.js";
 import Footer from "./components/Footer";
 import Banner from "./components/banner";
 import Slider from "./components/slider";
+import { NavBarCategories } from "./styles/navbar";
 
 function App() {
   const [name, setName] = useState("");
@@ -58,11 +59,15 @@ function App() {
           <Route path="/products" element={<>
             <Products />
           </>} />
-
+          {/* Cell-Phones Page*/}
+          <Route path="/cell-phones" element={<NavBarCategories/>} />
+          {/* Computer*/}
+          <Route path="/computers" element={<NavBarCategories/>} />
+          {/* Gaming*/}
+          <Route path="/gaming" element={<NavBarCategories/>} />
+          {/* Television*/}
+          <Route path="/television" element={<NavBarCategories/>} />
         </Routes>
-
-
-
         <Footer />
         {/*
       Title
