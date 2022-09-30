@@ -16,6 +16,7 @@ import Slider from "./components/slider";
 import { NavBarCategories } from "./styles/navbar";
 import MobileMenu from "./components/drawer";
 import { UIProvider } from "./context/ui";
+import SearchBox from "./components/search";
 
 function App() {
   const [name, setName] = useState("");
@@ -76,6 +77,7 @@ function App() {
           </Routes>
           <Footer />
           <MobileMenu />
+          <SearchBox />
         </UIProvider>
 
         {/*
