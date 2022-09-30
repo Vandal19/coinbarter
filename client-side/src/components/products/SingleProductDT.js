@@ -9,9 +9,13 @@ import {
 } from "../../styles/products";
 import ProductMeta from "./ProductMeta";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import useCart from "../../hooks/useCart";
+
 
 const SingleProductDT = ({ product, matches }) => {
   const [showOpt, setShowOpt] = useState(false);
+
+  const { addToCart, addToCartText } = useCart(product);
 
   const toggleMouse = (item, action) => {
     if (showOpt === true) {
@@ -30,8 +34,8 @@ const SingleProductDT = ({ product, matches }) => {
         </ProductFavButton>
 
         {showOpt && (
-          <ProductAddToCart show={showOpt} variant="contained">
-            Add to Cart
+          <ProductAddToCart onClick={addToCart} show={showOpt} variant="contained">
+            {addToCartText}
           </ProductAddToCart>
         )}
         <ProductActionsWrapper show={showOpt}>
