@@ -13,6 +13,8 @@ import NavBar from "./components/navbar/index.js";
 import Footer from "./components/Footer";
 import Banner from "./components/banner";
 import Slider from "./components/slider";
+import MobileMenu from "./components/drawer";
+import { UIProvider } from "./context/ui";
 
 function App() {
   const [name, setName] = useState("");
@@ -44,14 +46,17 @@ function App() {
           background: "#fff",
         }}
       >
-        <NavBar />
-        <Banner />
-        <Slider />
-        <Box display="flex" justifyContent={"center"} sx={{ p: 4 }}>
-          <Typography variant="h4">Our Products</Typography>
-        </Box>
-        <Products />
-        <Footer />
+        <UIProvider>
+          <NavBar />
+          <Banner />
+          <Slider />
+          <Box display="flex" justifyContent={"center"} sx={{ p: 4 }}>
+            <Typography variant="h4">Our Products</Typography>
+          </Box>
+          <Products />
+          <Footer />
+          <MobileMenu />
+        </UIProvider>
         {/*
       Title
       Products
