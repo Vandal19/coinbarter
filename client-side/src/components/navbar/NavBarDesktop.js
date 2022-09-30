@@ -36,7 +36,22 @@ export default function NavBarDesktop({ matches }) {
         </NavBarCategories>
         <ListItemButton>
           <ListItemIcon>
-            <SearchIcon onClick={() => setShowSearchBox(true)}/>
+            {/* <SearchIcon onClick={() => setShowSearchBox(true)}/> */}
+
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <SearchFieldText
+                component="form"
+                sx={{
+                  '& > :not(style)': { m: 1, width: '25ch' },
+                }}
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </Search>
+
           </ListItemIcon>
         </ListItemButton>
       </MyList>
