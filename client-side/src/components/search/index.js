@@ -1,6 +1,6 @@
 import { IconButton, Slide } from "@mui/material";
 import { useUIContext } from "../../context/ui";
-import { SearchBoxContainer, SearchField } from "../../styles/search";
+import { SearchBoxContainer, SearchField, Search, SearchIconWrapper, SearchFieldText } from "../../styles/search";
 import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -10,7 +10,8 @@ export default function SearchBox() {
   const { showSearchBox, setShowSearchBox } = useUIContext();
 
   return (
-    <Slide direction="down" in={showSearchBox} timeout={500}>
+
+    <Slide direction="left" in={showSearchBox} timeout={500}>
       <SearchBoxContainer>
         <SearchField 
             color="secondary" 
