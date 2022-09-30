@@ -1,4 +1,4 @@
-import { List, Typography } from "@mui/material";
+import { IconButton, List, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { Colors } from "../theme";
@@ -50,4 +50,13 @@ export const ActionIconsContainerMobile = styled(Box)(() => ({
 export const ActionIconsContainerDesktop = styled(Box)(() => ({
 
   flexGrow: 0
+}));
+
+// button to close mobile menu
+export const DrawerCloseButton = styled(IconButton)(() => ({
+
+  position: 'absolute',
+  top: 10,
+  left: '250px',
+  zIndex: 1999
 }));
