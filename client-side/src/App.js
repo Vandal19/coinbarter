@@ -14,6 +14,8 @@ import Footer from "./components/Footer";
 import Banner from "./components/banner";
 import Slider from "./components/slider";
 import { NavBarCategories } from "./styles/navbar";
+import MobileMenu from "./components/drawer";
+import { UIProvider } from "./context/ui";
 
 function App() {
   const [name, setName] = useState("");
@@ -44,31 +46,38 @@ function App() {
         sx={{
           background: "#fff",
         }}
-        >
-        <NavBar />
-        <Routes>
-          {/* Home Page*/}
-          <Route path="/" element={<>
-          <Banner/>
-          <Slider/>
+
+      >
+        <UIProvider>
+          <NavBar />
+          <Routes>
+            {/* Home Page*/}
+            <Route path="/" element={<>
+            <Banner/>
+            <Slider/>
+
           <Box display="flex" justifyContent={"center"} sx={{ p: 4 }}>
             <Typography variant="h4">Our Products</Typography>
           </Box>
           <Products />
+
           </>} />
-          <Route path="/products" element={<>
-            <Products />
-          </>} />
-          {/* Cell-Phones Page*/}
-          <Route path="/cell-phones" element={<NavBarCategories/>} />
-          {/* Computer*/}
-          <Route path="/computers" element={<NavBarCategories/>} />
-          {/* Gaming*/}
-          <Route path="/gaming" element={<NavBarCategories/>} />
-          {/* Television*/}
-          <Route path="/television" element={<NavBarCategories/>} />
-        </Routes>
-        <Footer />
+            <Route path="/products" element={<>
+              <Products />
+            </>} />
+            {/* Cell-Phones Page*/}
+            <Route path="/cell-phones" element={<NavBarCategories/>} />
+            {/* Computer*/}
+            <Route path="/computers" element={<NavBarCategories/>} />
+            {/* Gaming*/}
+            <Route path="/gaming" element={<NavBarCategories/>} />
+            {/* Television*/}
+            <Route path="/television" element={<NavBarCategories/>} />
+          </Routes>
+          <Footer />
+          <MobileMenu />
+        </UIProvider>
+
         {/*
       Title
       Products

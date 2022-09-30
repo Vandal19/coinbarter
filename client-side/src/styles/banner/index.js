@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { Colors } from "../theme";
 import "@fontsource/fira-code";
 
@@ -23,13 +23,13 @@ export const BannerContainer = styled(Box)(({ image, theme}) => ({
 export const BannerImage = styled('img')(({ src, theme }) => ({
 
   src: `url(${src})`,
-  width: '500px',
+  width: '400px',
   [theme.breakpoints.down('md')]: {
     width: '350px'
   },
 
   [theme.breakpoints.down('sm')]: {
-    width: '320px',
+    width: '300px',
     height: '300px'
   }
 }));
@@ -66,5 +66,27 @@ export const BannerDescription = styled(Typography)(({theme}) => ({
     lineHeight: 1.15,
     letterSpacing: 1.15,
     marginBottom: "1.5em"
+  }
+}));
+
+// shop button on banner
+export const BannerShopButton = styled(Button, {
+  shouldForwardProp: (prop) => prop !== 'color',
+  name: 'ShopButton',
+  slot: 'Root',
+  overridesResolver: (props, styles) => [
+    styles.root,
+    props.color === 'primary' && styles.primary,
+    props.color === 'secondary' && styles.secondary,
+  ]
+})(({theme}) => ({
+
+  padding: '10px 0px',
+  color: Colors.white,
+  fontWeight: "bold",
+  fontSize: '16px',
+  [theme.breakpoints.down('sm')]: {
+    padding: '5px 0px',
+    fontSize: '14px'
   }
 }));

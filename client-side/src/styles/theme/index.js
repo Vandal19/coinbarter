@@ -1,4 +1,6 @@
 import { createTheme } from "@mui/material/styles";
+import { lighten, modularScale } from 'polished';
+import { borders, borderRadius, borderRight } from '@mui/system';
 
 export const Colors = {
   primary: "#5f2c3e",
@@ -38,6 +40,44 @@ const theme = createTheme({
       defaultProps: {
         disableElevation: true,
         disableRipple: true,
+      }
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          width: 250,
+          background: Colors.primary,
+          color: Colors.secondary,
+          borderRadius: '0px 100px 0px 0px',
+          borderRight: `1px solid ${Colors.secondary}`
+        }
+      }
+    },
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          borderColor: lighten(0.2, Colors.primary)
+        }
+      }
+    },
+
+    ShopButton: {
+      styleOverrides: {
+        root: {
+          color: Colors.white
+        },
+        primary: {
+          background: Colors.primary,
+          "&:hover": {
+            background: lighten(0.05, Colors.primary),
+          }
+        },
+        secondary: {
+          background: Colors.secondary,
+          "&:hover": {
+            background: lighten(0.05, Colors.secondary),
+          }
+        }
       }
     }
   }
