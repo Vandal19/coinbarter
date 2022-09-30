@@ -2,7 +2,7 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ResponsiveAppBar from "./components/NavBar";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Home";
 
 import Products from "./components/products";
@@ -43,14 +43,26 @@ function App() {
         sx={{
           background: "#fff",
         }}
-      >
+        >
         <NavBar />
-        <Banner />
-        <Slider />
-        <Box display="flex" justifyContent={"center"} sx={{ p: 4 }}>
-          <Typography variant="h4">Our Products</Typography>
-        </Box>
-        <Products />
+        <Routes>
+          {/* Home Page*/}
+          <Route path="/" element={<>
+          <Banner/>
+          <Slider/>
+          <Box display="flex" justifyContent={"center"} sx={{ p: 4 }}>
+            <Typography variant="h4">Our Products</Typography>
+          </Box>
+          <Products />
+          </>} />
+          <Route path="/products" element={<>
+            <Products />
+          </>} />
+
+        </Routes>
+
+
+
         <Footer />
         {/*
       Title

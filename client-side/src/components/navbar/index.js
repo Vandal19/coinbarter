@@ -2,6 +2,7 @@ import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
 import NavBarDesktop from "./NavBarDesktop";
 import NavBarMobile from "./NavBarMobile";
+import { Link } from "react-router-dom"
 
 
 export default function NavBar() {
@@ -12,7 +13,7 @@ export default function NavBar() {
   return (
     <>
       {matches ? (
-        <NavBarMobile matches={matches} /> 
+        <NavBarMobile matches={matches} />
       ) : (
         <NavBarDesktop matches={matches} />
       )}
