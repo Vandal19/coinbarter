@@ -16,6 +16,7 @@ import Slider from "./components/slider";
 import { NavBarCategories } from "./styles/navbar";
 import MobileMenu from "./components/drawer";
 import { UIProvider } from "./context/ui";
+import Cart from "./components/cart";
 
 function App() {
   const [name, setName] = useState("");
@@ -76,6 +77,7 @@ function App() {
           </Routes>
           <Footer />
           <MobileMenu />
+          <Cart />
         </UIProvider>
 
         {/*
