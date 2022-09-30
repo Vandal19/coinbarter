@@ -1,25 +1,33 @@
-import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import { 
-  ActionIconsContainerDesktop, 
-  ActionIconsContainerMobile, 
-  MyList, 
-  NavBarContainer, 
-  NavBarHeader 
+import * as React from 'react';
+import { Breadcrumbs, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import {
+  ActionIconsContainerDesktop,
+  ActionIconsContainerMobile,
+  MyList,
+  NavBarContainer,
+  NavBarHeader,
+  NavBarCategories
 } from "../../styles/navbar";
 import Actions from "./actions";
 import SearchIcon from '@mui/icons-material/Search';
+import { Link } from "react-router-dom";
+import { Colors } from "../../styles/theme";
 
 
 export default function NavBarDesktop({ matches }) {
 
   return (
     <NavBarContainer>
-      <NavBarHeader>CoinBarter</NavBarHeader>
+      <NavBarHeader>
+      <Link to="/" style={{ textDecoration: "none", color: Colors.primary }}>CoinBarter</Link>
+      </NavBarHeader>
       <MyList type="row">
-        <ListItemText primary="Cell Phones" />
-        <ListItemText primary="Computers" />
-        <ListItemText primary="Gaming" />
-        <ListItemText primary="Television" />
+        <NavBarCategories>
+        <Link to="/cell-phones" style={{ textDecoration: "none", color: Colors.primary }}>Cell Phones</Link>
+        <Link to="/computers" style={{ textDecoration: "none", color: Colors.primary }}>Computers</Link>
+        <Link to="/gaming" style={{ textDecoration: "none", color: Colors.primary }}>Gaming</Link>
+        <Link to="/television" style={{ textDecoration: "none", color: Colors.primary }}>Television</Link>
+        </NavBarCategories>
         <ListItemButton>
           <ListItemIcon>
             <SearchIcon />
@@ -29,5 +37,5 @@ export default function NavBarDesktop({ matches }) {
       <Actions matches={matches}/>
     </NavBarContainer>
   );
-  
+
 }

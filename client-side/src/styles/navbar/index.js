@@ -1,8 +1,10 @@
-import { IconButton, List, Typography } from "@mui/material";
+import { Breadcrumbs, IconButton, List, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { Colors } from "../theme";
 import "@fontsource/fira-code";
+import Chip from '@mui/material/Chip'
+import { emphasize } from '@mui/material/styles';
 
 // container
 export const NavBarContainer = styled(Box)(() => ({
@@ -23,6 +25,14 @@ export const NavBarHeader = styled(Typography)(() => ({
   fontFamily: '"Fira Code", monospace',
   color: Colors.primary
 }));
+
+
+
+
+export const NavBarCategories = styled(Breadcrumbs)(({theme}) => ({
+  label: 'Catalog',
+  fontSize: '1.1em',
+}))
 
 // my list of items on navbar
 export const MyList = styled(List)(({ type }) => ({
