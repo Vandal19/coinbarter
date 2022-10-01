@@ -16,7 +16,11 @@ export const productsFetch = createAsyncThunk(
 
 const productsSlice = createSlice({
   name: 'products',
-  initialState,
+  initialState:{
+    value:{
+      
+    }
+  },
   reducers: {},
   extraReducers: {
     [productsFetch.pending]: (state, action) => {

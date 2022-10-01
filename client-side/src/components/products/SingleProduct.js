@@ -4,13 +4,14 @@ import { Product, ProductActionsWrapper, ProductFavButton, ProductImage, Product
 import ProductMeta from './ProductMeta'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 
+
 const SingleProduct = ({product, matches}) => {
 
   return (
     <>
-    <Product>
+    <Product >
       <ProductImage src={product.cover_image_url} />
-      <ProductMeta product={product} matches={matches} />
+      <ProductMeta id={product.id} product={product} matches={matches} />
       <ProductActionsWrapper>
         <Stack direction="row">
           <ProductFavButton isFav={0}>
