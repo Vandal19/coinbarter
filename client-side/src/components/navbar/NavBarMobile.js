@@ -9,7 +9,7 @@ import { useUIContext } from "../../context/ui";
 export default function NavBarMobile({ matches }) {
 
   // hook to close mobile menu drawer
-  const { setDrawerOpen } = useUIContext();
+  const { setDrawerOpen, setShowSearchBox } = useUIContext();
 
   return (
     <NavBarContainer>
@@ -20,7 +20,7 @@ export default function NavBarMobile({ matches }) {
         CoinBarter
       </NavBarHeader>
       <IconButton>
-          <SearchIcon />
+          <SearchIcon onClick={() => setShowSearchBox(true)} />
       </IconButton>
       <Actions matches={matches} />
     </NavBarContainer>
