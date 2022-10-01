@@ -17,6 +17,7 @@ import { NavBarCategories } from "./styles/navbar";
 import MobileMenu from "./components/drawer";
 import { UIProvider } from "./context/ui";
 import SearchBox from "./components/search";
+import LogIn from "./pages/Login";
 
 function App() {
   const [name, setName] = useState("");
@@ -52,6 +53,11 @@ function App() {
         <UIProvider>
           <NavBar />
           <Routes>
+            {/* Login Page*/}
+            <Route path="/login" element={<>
+            <LogIn />
+            </>} />
+
             {/* Home Page*/}
             <Route path="/" element={<>
             <Banner/>
