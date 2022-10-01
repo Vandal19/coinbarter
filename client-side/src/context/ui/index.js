@@ -24,7 +24,7 @@ export const UIProvider = ({ children }) => {
     showCart,
     setShowCart,
     count,
-    setCount
+    setCount,
     showSearchBox,
     setShowSearchBox
   }
