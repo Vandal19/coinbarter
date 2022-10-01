@@ -6,7 +6,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite'
 
 const SingleProduct = ({product, matches}) => {
 
-
   return (
     <>
     <Product>

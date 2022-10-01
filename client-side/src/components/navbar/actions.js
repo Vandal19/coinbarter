@@ -1,16 +1,19 @@
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import { color, Divider, ListItemButton, ListItemIcon } from "@mui/material";
+import { Badge, color, Divider, ListItemButton, ListItemIcon } from "@mui/material";
 import {
   ActionIconsContainerDesktop,
   ActionIconsContainerMobile,
   MyList
 } from "../../styles/navbar";
 import { Colors } from '../../styles/theme';
+import { useUIContext } from '../../context/ui';
 
 
 export default function Actions({ matches }) {
+
+  const { cart, setShowCart } = useUIContext();
 
   const Component = matches ? ActionIconsContainerMobile : ActionIconsContainerDesktop;
 
@@ -47,7 +50,9 @@ export default function Actions({ matches }) {
               color: matches && Colors.secondary
             }}
         >
-          <ShoppingCartIcon />
+          <Badge badgeContent={cart && cart.length} color="secondary">
+            <ShoppingCartIcon onClick={()=> setShowCart(true)}/>
+          </Badge>
         </ListItemIcon>
       </ListItemButton>
       <Divider orientation='vertical' flexItem />
