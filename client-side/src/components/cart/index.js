@@ -15,16 +15,24 @@ import { useUIContext } from "../../context/ui";
 import { Colors } from "../../styles/theme";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromCart } from "../../features/cartSlice";
 
 const Cart = () => {
-  const { cart, setShowCart, showCart, count, setCount } = useUIContext();
-  
+  const { setShowCart, showCart } = useUIContext();
+  const dispatch = useDispatch();
+
+  const cart = useSelector((state) => state.cart);
+
+  const handleRemoveFromCart = (product) => {
+    dispatch(removeFromCart(product))
+  }
 
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-  const cartContent = cart.map((item) => (
-    <Box key={item.id}>
+  const cartContent = cart.cartItems?.map((product) => (
+    <Box key={product.id}>
       <Box
         display="flex"
         alignItems="start"
@@ -40,24 +48,29 @@ const Cart = () => {
           variant="square"
         >
           <img
-            alt={item.title}
-            src={`${item.cover_image_url}?w=120&h=120&fit=crop&auto=format`}
-            srcSet={`${item.cover_image_url}?w=120&h=120&fit=crop&auto=format&dpr= 3x`}
+            alt={product.title}
+            src={`${product.cover_image_url}?w=120&h=120&fit=crop&auto=format`}
+            srcSet={`${product.cover_image_url}?w=120&h=120&fit=crop&auto=format&dpr= 3x`}
             sx={{objectFit: "contain"}}
           />
         </Avatar>
         <Box display="flex" flexDirection="column">
-          <Typography variant="h6">{item.brand_name}</Typography>
-          <Typography varirant="subtitle2">{item.description}</Typography>
+          <Typography variant="h6">{product.brand_name}</Typography>
+          <Typography varirant="subtitle2">{product.description}</Typography>
           <Typography sx={{display:'flex', alignItems:'center', alignContent:'flex-end', paddingTop:2}}>
-            <Button color={Colors.Black} onClick={()=> setCount(count-1)} sx = {{ fontSize: 25}} >-</Button>
-            <Typography>{count}</Typography>
-            <Button color={Colors.Black} onClick={()=> setCount(count+1)} sx = {{ fontSize: 25}} >+</Button>
+            <Box display="flex" flexDirection="row" alignItems="center">
+              <Button sx = {{ fontSize: 25}} >-</Button>
+              <Typography>{product.cartQuantity}</Typography>
+              <Button  sx = {{ fontSize: 25}} >+</Button>
+              <Button onClick={() => handleRemoveFromCart(product)} sx = {{ fontSize: 15}}>
+                Remove
+              </Button>
+            </Box>
           </Typography>
         </Box>
         <Box display="flex" alignItems={"flex-end"}>
         <Typography variant="body1" sx={{ mr: 2 }}>
-          ${item.price}
+          ${product.price * product.cartQuantity}
         </Typography>
         </Box>
       </Box>
@@ -74,7 +87,7 @@ const Cart = () => {
         sx: { width: 500, background: Colors.light_gray, borderRadius: 0 },
       }}
     >
-      {cart.length > 0 ?
+      {cart.cartItems.length > 0 ?
       <Box
         display="flex"
         justifyContent="center"
@@ -88,9 +101,16 @@ const Cart = () => {
         <Paper elevation={0} sx={{ p: 1, pl: 0.5 }}>
           {cartContent}
         </Paper>
-        <Button sx={{ mt:4 }} variant="contain">
-          Proceed to Payment
-        </Button>
+        <Box>
+          <Typography>Subtotal</Typography>
+          <Typography>Free Shipping</Typography>
+        </Box>
+        <Box sx={{ mt:4 }} variant="contain">
+          <Button>
+            Proceed to Payment
+          </Button>
+          <Button>Clear Cart</Button>
+        </Box>
       </Box>
       :
       <Box
