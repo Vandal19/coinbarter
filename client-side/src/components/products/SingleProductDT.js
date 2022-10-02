@@ -10,7 +10,8 @@ import {
 import ProductMeta from "./ProductMeta";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import useCart from "../../hooks/useCart";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from '../../features/cartSlice';
 
 
 
@@ -18,7 +19,13 @@ const SingleProductDT = ({ product, matches }) => {
   const [showOpt, setShowOpt] = useState(false);
   const { items, status } = useSelector(state => state.products )
 
-  const { addToCart, addToCartText } = useCart(product);
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product))
+  }
+
+  // const { addToCart, addToCartText } = useCart(product);
 
   const toggleMouse = (item, action) => {
     if (showOpt === true) {
@@ -42,8 +49,7 @@ const SingleProductDT = ({ product, matches }) => {
         <ProductImage src={product.cover_image_url} />
 
         {showOpt && (
-          <ProductAddToCart onClick={addToCart} show={showOpt} variant="contained">
-            {addToCartText}
+          <ProductAddToCart onClick={() => handleAddToCart(product)} show={showOpt} variant="contained">
           </ProductAddToCart>
         )}
         <ProductActionsWrapper show={showOpt}>
