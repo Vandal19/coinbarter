@@ -16,7 +16,7 @@ import { Colors } from "../../styles/theme";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart } from "../../features/cartSlice";
+import { addToCart, removeFromCart, decreaseCart } from "../../features/cartSlice";
 
 const Cart = () => {
   const { setShowCart, showCart } = useUIContext();
@@ -27,6 +27,16 @@ const Cart = () => {
   const handleRemoveFromCart = (product) => {
     dispatch(removeFromCart(product))
   }
+
+  const handleDecreaseCartQty = (product) => {
+    dispatch(decreaseCart(product))
+  }
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product))
+  }
+
+
 
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -50,7 +60,7 @@ const Cart = () => {
           <img
             alt={product.title}
             src={`${product.cover_image_url}?w=120&h=120&fit=crop&auto=format`}
-            srcSet={`${product.cover_image_url}?w=120&h=120&fit=crop&auto=format&dpr= 3x`}
+            srcSet={`${product.cover_image_url}?w=120&h=120&fit=crop&auto=format&dpr= 3.5x`}
             sx={{objectFit: "contain"}}
           />
         </Avatar>
@@ -59,9 +69,9 @@ const Cart = () => {
           <Typography varirant="subtitle2">{product.description}</Typography>
           <Typography sx={{display:'flex', alignItems:'center', alignContent:'flex-end', paddingTop:2}}>
             <Box display="flex" flexDirection="row" alignItems="center">
-              <Button sx = {{ fontSize: 25}} >-</Button>
+              <Button onClick={() => handleDecreaseCartQty(product)}sx = {{ fontSize: 25}} >-</Button>
               <Typography>{product.cartQuantity}</Typography>
-              <Button  sx = {{ fontSize: 25}} >+</Button>
+              <Button onClick={() => handleAddToCart(product)} sx = {{ fontSize: 25}} >+</Button>
               <Button onClick={() => handleRemoveFromCart(product)} sx = {{ fontSize: 15}}>
                 Remove
               </Button>
