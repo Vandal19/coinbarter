@@ -25,7 +25,7 @@ const SingleProductDT = ({ product, matches }) => {
     dispatch(addToCart(product))
   }
 
-  // const { addToCart, addToCartText } = useCart(product);
+  const { addToCartText } = useCart(product);
 
   const toggleMouse = (item, action) => {
     if (showOpt === true) {
@@ -50,6 +50,7 @@ const SingleProductDT = ({ product, matches }) => {
 
         {showOpt && (
           <ProductAddToCart onClick={() => handleAddToCart(product)} show={showOpt} variant="contained">
+            {addToCartText}
           </ProductAddToCart>
         )}
         <ProductActionsWrapper show={showOpt}>

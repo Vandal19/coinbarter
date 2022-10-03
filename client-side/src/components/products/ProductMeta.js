@@ -15,7 +15,7 @@ const ProductMeta = ({ id, matches }) => {
         {product.brand_name}
       </Typography>
       <Typography variant={matches ? 'caption' : 'body1'}>
-        ${product.price}
+        ${product.price.toFixed(2)}
       </Typography>
     </ProductMetaWrapper>
     </>

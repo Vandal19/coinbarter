@@ -26,7 +26,7 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(sumTotal());
-  }, [cart])
+  }, [cart, dispatch])
 
   const handleRemoveFromCart = (product) => {
     dispatch(removeFromCart(product))
@@ -86,7 +86,7 @@ const Cart = () => {
         </Box>
         <Box display="flex" alignItems="flex-end">
         <Typography variant="body1" sx={{ mr: 2 }}>
-          ${product.price * product.cartQuantity}
+          ${((product.price)).toFixed(2) * product.cartQuantity}
         </Typography>
         </Box>
       </Box>
@@ -123,7 +123,7 @@ const Cart = () => {
             <Typography color={Colors.black} sx = {{ fontSize: 15}}>Free Shipping* </Typography>
           </Box>
           <Box>
-            <Typography color={Colors.black}sx = {{ fontSize: 30}}>${cart.cartTotalAmount}</Typography>
+            <Typography color={Colors.black}sx = {{ fontSize: 30}}>${cart.cartTotalAmount.toFixed(2)}</Typography>
 
           </Box>
         </Box>
