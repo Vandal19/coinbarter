@@ -4,9 +4,9 @@ import { ProductMetaWrapper } from '../../styles/products'
 import { useSelector } from "react-redux";
 
 const ProductMeta = ({ id, matches }) => {
-  const { items, status } = useSelector(state => state.products )
+  const products = useSelector(state => state.value.products);
 
-  const product = items.find((value) => value.id === id)
+  const product = products.find((value) => value.id === id)
 
   return (
     <>
