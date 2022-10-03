@@ -1,5 +1,5 @@
 import { Stack } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Product,
   ProductActionsWrapper,
@@ -10,12 +10,22 @@ import {
 import ProductMeta from "./ProductMeta";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import useCart from "../../hooks/useCart";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from '../../features/cartSlice';
+
 
 
 const SingleProductDT = ({ product, matches }) => {
   const [showOpt, setShowOpt] = useState(false);
+  const { items, status } = useSelector(state => state.products )
 
-  const { addToCart, addToCartText } = useCart(product);
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product))
+  }
+
+  const { addToCartText } = useCart(product);
 
   const toggleMouse = (item, action) => {
     if (showOpt === true) {
@@ -25,16 +35,21 @@ const SingleProductDT = ({ product, matches }) => {
     return setShowOpt(true);
   };
 
+  useEffect(() => {
+    console.log("items", items)
+  }, [items])
+
+
   return (
     <>
       <Product onMouseEnter={toggleMouse} onMouseLeave={toggleMouse}>
-        <ProductImage src={product.cover_image_url} />
         <ProductFavButton isFav={0}>
           <FavoriteIcon />
         </ProductFavButton>
+        <ProductImage src={product.cover_image_url} />
 
         {showOpt && (
-          <ProductAddToCart onClick={addToCart} show={showOpt} variant="contained">
+          <ProductAddToCart onClick={() => handleAddToCart(product)} show={showOpt} variant="contained">
             {addToCartText}
           </ProductAddToCart>
         )}
@@ -42,7 +57,7 @@ const SingleProductDT = ({ product, matches }) => {
           <Stack direction="column"></Stack>
         </ProductActionsWrapper>
       </Product>
-        <ProductMeta product={product} matches={matches} />
+      <ProductMeta id={product.id} matches={matches} />
     </>
   );
 };

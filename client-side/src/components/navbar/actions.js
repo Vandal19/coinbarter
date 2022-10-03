@@ -9,11 +9,14 @@ import {
 } from "../../styles/navbar";
 import { Colors } from '../../styles/theme';
 import { useUIContext } from '../../context/ui';
+import { useSelector } from 'react-redux';
 
 
 export default function Actions({ matches }) {
 
-  const { cart, setShowCart } = useUIContext();
+  const { cartTotalQuantity } = useSelector(state => state.cart)
+
+  const { setShowCart } = useUIContext();
 
   const Component = matches ? ActionIconsContainerMobile : ActionIconsContainerDesktop;
 
@@ -50,8 +53,9 @@ export default function Actions({ matches }) {
               color: matches && Colors.secondary
             }}
         >
-          <Badge badgeContent={cart && cart.length} color="secondary">
-            <ShoppingCartIcon onClick={()=> setShowCart(true)}/>
+          <Badge badgeContent={cartTotalQuantity} color="secondary">
+            <ShoppingCartIcon onClick={()=> setShowCart(true)}>
+            </ShoppingCartIcon>
           </Badge>
         </ListItemIcon>
       </ListItemButton>
