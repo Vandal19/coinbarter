@@ -10,19 +10,23 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import React from "react";
+import { useEffect } from "react";
 import { useUIContext } from "../../context/ui";
 import { Colors } from "../../styles/theme";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart, removeFromCart, decreaseCart } from "../../features/cartSlice";
+import { addToCart, removeFromCart, decreaseCart, sumTotal } from "../../features/cartSlice";
 
 const Cart = () => {
   const { setShowCart, showCart } = useUIContext();
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    dispatch(sumTotal());
+  }, [cart])
 
   const handleRemoveFromCart = (product) => {
     dispatch(removeFromCart(product))
@@ -35,6 +39,8 @@ const Cart = () => {
   const handleAddToCart = (product) => {
     dispatch(addToCart(product))
   }
+
+
 
 
 
@@ -60,7 +66,7 @@ const Cart = () => {
           <img
             alt={product.title}
             src={`${product.cover_image_url}?w=120&h=120&fit=crop&auto=format`}
-            srcSet={`${product.cover_image_url}?w=120&h=120&fit=crop&auto=format&dpr= 3.5x`}
+            srcSet={`${product.cover_image_url}?w=120&h=120&fit=crop&auto=format&dpr= 3x`}
             sx={{objectFit: "contain"}}
           />
         </Avatar>
@@ -78,7 +84,7 @@ const Cart = () => {
             </Box>
           </Typography>
         </Box>
-        <Box display="flex" alignItems={"flex-end"}>
+        <Box display="flex" alignItems="flex-end">
         <Typography variant="body1" sx={{ mr: 2 }}>
           ${product.price * product.cartQuantity}
         </Typography>
@@ -111,9 +117,15 @@ const Cart = () => {
         <Paper elevation={0} sx={{ p: 1, pl: 0.5 }}>
           {cartContent}
         </Paper>
-        <Box>
-          <Typography>Subtotal</Typography>
-          <Typography>Free Shipping</Typography>
+        <Box display="flex" flexDirection="row" justifyContent="center" alignItems="flex-start"  >
+          <Box display="flex" flexDirection="column" sx={{ pr: 10, mr:10 }}>
+            <Typography color={Colors.black} sx = {{ fontSize: 35}}>Subtotal:</Typography>
+            <Typography color={Colors.black} sx = {{ fontSize: 15}}>Free Shipping* </Typography>
+          </Box>
+          <Box>
+            <Typography color={Colors.black}sx = {{ fontSize: 30}}>${cart.cartTotalAmount}</Typography>
+
+          </Box>
         </Box>
         <Box sx={{ mt:4 }} variant="contain">
           <Button>
