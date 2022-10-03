@@ -67,20 +67,11 @@ function App() {
           <Box display="flex" justifyContent={"center"} sx={{ p: 4 }}>
             <Typography variant="h4">Our Products</Typography>
           </Box>
-          <Products />
 
           </>} />
-            <Route path="/products" element={<>
+            <Route path="/products/:id" element={<>
               <Products />
             </>} />
-            {/* Cell-Phones Page*/}
-            <Route path="/cell-phones" element={<NavBarCategories/>} />
-            {/* Computer*/}
-            <Route path="/computers" element={<NavBarCategories/>} />
-            {/* Gaming*/}
-            <Route path="/gaming" element={<NavBarCategories/>} />
-            {/* Television*/}
-            <Route path="/television" element={<NavBarCategories/>} />
           </Routes>
           <Footer />
           <MobileMenu />
