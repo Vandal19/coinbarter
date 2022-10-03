@@ -1,20 +1,21 @@
 import React, { useState } from 'react'
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery, Container, Grid } from "@mui/material"
-import { products } from '../../data';
 import SingleProduct from './SingleProduct';
 import SingleProductDT from './SingleProductDT';
 import { useSelector, useDispatch } from 'react-redux';
+import useProductsData from '../../hooks/useProductsData';
 
 
 const Products = () => {
+  useProductsData();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('md'));
-  const { items, status } = useSelector(state => state.products )
+  const products = useSelector(state => state.value.products);
 
 
 
-  const renderProducts = items?.map((product) => (
+  const renderProducts = products?.map((product) => (
     <Grid item key={product.id} xs={2} sm={4} md={4} display="flex" flexDirection={"column"} alignItems="center">
       {matches ? (
       <SingleProduct product={product} matches={matches} />
@@ -24,7 +25,7 @@ const Products = () => {
     </Grid>
 
   ))
-console.log("items", items)
+  console.log("products", products)
   return (
 <Container>
   <Grid
