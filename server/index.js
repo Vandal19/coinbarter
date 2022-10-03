@@ -1,3 +1,4 @@
+require('dotenv').config( {path: './'} );
 const { addProduct } = require("./db/database");
 
 const express = require("express");
@@ -5,6 +6,7 @@ const app = express();
 const port = 8000;
 const cors = require("cors");
 const morgan = require("morgan");
+const axios = require('axios');
 
 const products = require("./products")
 
@@ -13,6 +15,111 @@ app.use(express.json());
 app.use(cors());
 app.use(morgan());
 
+// connect to routes
+const categoryRoutes = require('./routes/categoryRoutes');
+
+app.use('/products', categoryRoutes);
+
+
+// testing initialize
+app.get('/data', (req, res) => {
+  res.json({message: "Seems to work!"});
+});
+
+
+// get all categories
+app.get('/categories', (req, res) => {
+
+  // make the http GET request to Rainforest API
+  return axios.get(`https://api.rainforestapi.com/categories?api_key=${process.env.API_KEY}&domain=amazon.com`)
+    .then(response => {
+
+      // print the JSON response from Rainforest API
+      res.send(response.data.categories);
+
+    }).catch(error => {
+      // catch and print the error
+      console.log(error);
+    }); 
+});
+
+
+// get products within a certain category
+app.get('/products/categories/:category', (req, res) => {
+
+  // set up the request parameters
+  const params = {
+    api_key: "A2C043C57CB045B6925670BDDCCB00AC",
+    type: "category",
+    category_id: req.params.category,
+    amazon_domain: "amazon.com"
+  }
+
+  // make the http GET request to Rainforest API
+  return axios.get('https://api.rainforestapi.com/request', { params })
+    .then(response => {
+
+
+      // [product.category_id, product.brand_name, product.price, product.description, product.cover_image_url, product.create_date, product.update_date, product.stock]
+
+      const products = response.data.category_results;
+      for (let a of products) {
+
+        let randomStock = parseInt(Math.random() * 100);
+        
+        let productPrice = a.price ? a.price.raw : "not available";
+
+        const product = {
+          category_id: req.params.category,
+          brand_name: a.title,
+          price: productPrice,
+          cover_image_url: a.image,
+          create_date: new Date(Date.now()),
+          update_date: new Date(Date.now()),
+          stock: randomStock
+        }
+        addProduct(product);
+      }
+
+      // print the JSON response from Rainforest API
+      res.json(response.data.category_results);
+
+    }).catch(error => {
+      // catch and print the error
+      console.log(error);
+    })
+      
+});
+
+
+// get individual product data
+app.get('/products/:productID', (req, res) => {
+
+  // set up the request parameters
+  const params = {
+    api_key: "A2C043C57CB045B6925670BDDCCB00AC",
+    type: "product",
+    amazon_domain: "amazon.com",
+    asin: "B09LP9TM5L"
+  }
+
+  // make the http GET request to Rainforest API
+  return axios.get('https://api.rainforestapi.com/request', { params })
+  .then(response => {
+
+    // print the JSON response from Rainforest API
+    res.json(response.data.product.title);
+
+  }).catch(error => {
+    // catch and print the error
+    console.log(error);
+  })
+
+});
+
+
+
+// testing db connection to frontend
 app.get("/", cors(), async (req, res) => {
   res.send("This is working");
 });
