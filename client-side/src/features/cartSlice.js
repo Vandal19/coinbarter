@@ -65,6 +65,7 @@ const cartSlice = createSlice({
       );
       state.cartTotalQuantity = quantity;
       state.cartTotalAmount = total;
+      
     },
   },
 });
