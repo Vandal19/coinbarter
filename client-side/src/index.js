@@ -6,6 +6,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import productsReducer from "./features/productSlice";
 import cartReducer, { sumTotal } from './features/cartSlice';
+import { AuthProvider } from "./context/authProvider";
 
 const store = configureStore({
   reducer: {
@@ -20,11 +21,13 @@ store.dispatch(sumTotal());
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
+    {/* <AuthProvider> */}
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    {/* </AuthProvider> */}
   </React.StrictMode>
 );
 
