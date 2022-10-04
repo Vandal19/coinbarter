@@ -26,7 +26,7 @@ const SingleProduct = ({product, matches}) => {
           <ProductActionButton>
               <ShareIcon color="primary" />
             </ProductActionButton>
-          <ProductActionButton>
+          <ProductActionButton onClick={() => showProductDetailDialog()}>
             <FitScreenIcon color='primary' />
           </ProductActionButton>
         </Stack>
