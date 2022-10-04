@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
-import { addToFavorite } from "../../features/favoriteSlice";
+import { removeFromFavorite, clearFavorites } from "../../features/favoriteSlice";
 import { useUIContext } from "../../context/ui";
 import { Colors } from "../../styles/theme";
 import { useTheme } from "@mui/material/styles";
@@ -30,6 +30,14 @@ const Favorite = () => {
     dispatch(addToCart(product))
   }
 
+  const handleRemoveFromFavorite = (product) => {
+    dispatch(removeFromFavorite(product))
+  }
+
+  const handleClearFavorites = (product) => {
+    dispatch(clearFavorites(product))
+  }
+
   const isItemInCart = (id) => {
    for (let item of cart.cartItems) {
     if (item.id === id) return true
@@ -38,6 +46,7 @@ const Favorite = () => {
   }
 
   const favContent = favorite.favoriteItems?.map((product) => (
+
     <Box key={product.id}>
     <Box
       display="flex"
@@ -66,15 +75,18 @@ const Favorite = () => {
         </Typography>
       </Box>
       <Box display="flex" flexDirection="column" alignItems="flex-start">
-      <Typography variant="body1" sx={{ mr: 2 }}>
-        ${(product.price)}
-        {isItemInCart(product.id)
-        ?
-        <Typography sx = {{ fontSize: 15}} >In Cart</Typography>
-        :
-        <Button onClick={() => handleAddToCart(product)} sx = {{ fontSize: 12}} >Add to Cart</Button>
-        }
-      </Typography>
+        <Typography variant="body1" sx={{ mr: 2 }}>
+          <Box>
+            ${(product.price)}
+            {isItemInCart(product.id)
+            ?
+            <Typography sx = {{ fontSize: 15}} >In Cart</Typography>
+            :
+            <Button onClick={() => handleAddToCart(product)} sx = {{ fontSize: 12}} >Add to Cart</Button>
+            }
+          </Box>
+          <Button onClick={() => handleRemoveFromFavorite(product)} sx = {{ fontSize: 12}} >Remove from Favorites</Button>
+        </Typography>
       </Box>
     </Box>
     <Divider variant="inset" />
@@ -108,7 +120,7 @@ const Favorite = () => {
           <Button>
             Proceed to Cart
           </Button>
-          <Button>Clear Favorites</Button>
+          <Button onClick={handleClearFavorites}>Clear Favorites</Button>
         </Box>
       </Box>
       :
