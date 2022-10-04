@@ -16,7 +16,7 @@ export default function Actions({ matches }) {
 
   const { cartTotalQuantity } = useSelector(state => state.cart)
 
-  const { setShowCart } = useUIContext();
+  const { setShowCart, setShowFav } = useUIContext();
 
   const Component = matches ? ActionIconsContainerMobile : ActionIconsContainerDesktop;
 
@@ -36,7 +36,7 @@ export default function Actions({ matches }) {
               color: matches && Colors.secondary
             }}
         >
-          <FavoriteIcon />
+          <FavoriteIcon onClick={()=> setShowFav(true)}/>
         </ListItemIcon>
       </ListItemButton>
       <Divider orientation='vertical' flexItem />

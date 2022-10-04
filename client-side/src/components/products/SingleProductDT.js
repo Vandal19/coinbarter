@@ -12,6 +12,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import useCart from "../../hooks/useCart";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from '../../features/cartSlice';
+import { addToFavorite } from "../../features/favoriteSlice";
 
 
 
@@ -23,6 +24,10 @@ const SingleProductDT = ({ product, matches }) => {
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product))
+  }
+
+  const handleAddToFavorite = (product) => {
+    dispatch(addToFavorite(product))
   }
 
   const { addToCartText } = useCart(product);
@@ -43,7 +48,7 @@ const SingleProductDT = ({ product, matches }) => {
   return (
     <>
       <Product onMouseEnter={toggleMouse} onMouseLeave={toggleMouse}>
-        <ProductFavButton isFav={0}>
+        <ProductFavButton isFav={0} onClick={() => handleAddToFavorite(product)}>
           <FavoriteIcon />
         </ProductFavButton>
         {/* <ImageList > */}

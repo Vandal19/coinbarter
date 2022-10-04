@@ -1,29 +1,38 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  favItems: localStorage.getItem("favItems")
-  ? JSON.parse(localStorage.getItem("favItems"))
+  favoriteItems: localStorage.getItem("favoriteItems")
+  ? JSON.parse(localStorage.getItem("favoriteItems"))
   : [],
-cartTotalQuantity: 0,
+favoriteTotalQuantity: 0,
 }
 
-const favSlice = createSlice({
+const favoriteSlice = createSlice({
   name: "favorite",
   initialState,
   reducers: {
-    addToFav(state, action) {
-      const itemIndex = state.cartItems.findIndex(
+    addToFavorite(state, action) {
+      const itemIndex = state.favoriteItems.findIndex(
         (item) => item.id === action.payload.id
       );
       if (itemIndex >= 0) {
-        const tempProduct = { ...action.payload, cartQuantity: 1 };
-        state.cartItems.push(tempProduct);
-    }
-    localStorage.setItem("favItems", JSON.stringify(state.favUtens))
+        state.favoriteItems[itemIndex].favoriteQuantity += 1;
+      } else {
+        const tempProduct = { ...action.payload, favoriteQuantity: 1 };
+        state.favoriteItems.push(tempProduct);
+      }
+      localStorage.setItem("favoriteItems", JSON.stringify(state.favoriteItems))
+    },
+    removeFromFavorite(state, action) {
+      const updatedFavoriteItems = state.cartItems.filter(
+        (favoriteItem) => favoriteItem.id !== action.payload.id
+      );
+      state.favoriteItems = updatedFavoriteItems;
+      localStorage.setItem("favoriteItems", JSON.stringify(state.favoriteItems));
+    },
   }
-}
 })
 
-export const { addToFav } = favSlice.actions;
+export const { addToFavorite, removeFromFavorite } = favoriteSlice.actions;
 
-export default favSlice.reducer;
+export default favoriteSlice.reducer;

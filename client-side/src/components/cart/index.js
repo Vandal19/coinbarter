@@ -19,7 +19,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addToCart, removeFromCart, decreaseCart, sumTotal } from "../../features/cartSlice";
 
 const Cart = () => {
-  const { setShowCart, showCart } = useUIContext();
+  const { showCart, setShowCart } = useUIContext();
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
@@ -90,6 +90,7 @@ const Cart = () => {
     </Box>
   ));
 
+
   return (
     <Drawer
       open={showCart}
@@ -147,6 +148,8 @@ const Cart = () => {
       </Button>
     </Drawer>
   );
+
 };
+
 
 export default Cart;

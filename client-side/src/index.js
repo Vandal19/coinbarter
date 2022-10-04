@@ -6,13 +6,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import productsReducer from "./features/productSlice";
 import cartReducer, { sumTotal } from './features/cartSlice';
-import favReducer from "./features/favoriteSlice"
+import favoriteReducer from "./features/favoriteSlice"
 
 const store = configureStore({
   reducer: {
     products: productsReducer,
     cart: cartReducer,
-    fav: favReducer
+    favorite: favoriteReducer
   },
 });
 
