@@ -23,10 +23,10 @@ export default function NavBarDesktop({ matches }) {
       </NavBarHeader>
       <MyList type="row">
         <NavBarCategories>
-        <Link to="/products/2811119011" style={{ textDecoration: "none", color: Colors.primary }}>Cell Phones</Link>
-        <Link to="/products/541966" style={{ textDecoration: "none", color: Colors.primary }}>Computers</Link>
+        <Link to="/products/2407748011" style={{ textDecoration: "none", color: Colors.primary }}>Cell Phones</Link>
+        <Link to="/products/565108" style={{ textDecoration: "none", color: Colors.primary }}>Computers</Link>
         <Link to="/products/7926841011" style={{ textDecoration: "none", color: Colors.primary }}>Gaming</Link>
-        <Link to="/products/1266092011" style={{ textDecoration: "none", color: Colors.primary }}>Television</Link>
+        <Link to="/products/6463520011" style={{ textDecoration: "none", color: Colors.primary }}>Television</Link>
         </NavBarCategories>
         <ListItemButton>
           <ListItemIcon>
