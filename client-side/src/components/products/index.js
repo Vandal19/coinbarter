@@ -25,13 +25,11 @@ const Products = () => {
     </Grid>
 
   ))
-  console.log("products", products)
   return (
-<Container>
+<Container >
   <Grid
-  container
-  spacing={{ xs: 2, md: 3}}
-  justifyContent={"center"}
+  container spacing={{ xs: 2, md: 4}}
+  justifyContent="center"
   sx={{margin: '20px 4px 10px 4px'}}
   columns={{xs: 4, s: 8, md:12}}
   >

@@ -41,9 +41,6 @@ const Cart = () => {
   }
 
 
-
-
-
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -66,13 +63,12 @@ const Cart = () => {
           <img
             alt={product.title}
             src={`${product.cover_image_url}?w=120&h=120&fit=crop&auto=format`}
-            srcSet={`${product.cover_image_url}?w=120&h=120&fit=crop&auto=format&dpr= 3x`}
+            srcSet={`${product.cover_image_url}?w=120&h=120&fit=crop&auto=format&dpr= 2x`}
             sx={{objectFit: "contain"}}
           />
         </Avatar>
-        <Box display="flex" flexDirection="column">
-          <Typography variant="h6">{product.brand_name}</Typography>
-          <Typography varirant="subtitle2">{product.description}</Typography>
+        <Box display="flex" flexDirection="column" sx={{pr:4}}>
+          <Typography variant="subtitle2">{product.brand_name}</Typography>
           <Typography sx={{display:'flex', alignItems:'center', alignContent:'flex-end', paddingTop:2}}>
             <Box display="flex" flexDirection="row" alignItems="center">
               <Button onClick={() => handleDecreaseCartQty(product)}sx = {{ fontSize: 25}} >-</Button>
@@ -86,7 +82,7 @@ const Cart = () => {
         </Box>
         <Box display="flex" alignItems="flex-end">
         <Typography variant="body1" sx={{ mr: 2 }}>
-          ${((product.price)) * product.cartQuantity}
+          ${(product.price) * product.cartQuantity}
         </Typography>
         </Box>
       </Box>

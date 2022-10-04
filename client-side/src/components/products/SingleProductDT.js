@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { ImageList, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
   Product,
@@ -46,7 +46,9 @@ const SingleProductDT = ({ product, matches }) => {
         <ProductFavButton isFav={0}>
           <FavoriteIcon />
         </ProductFavButton>
-        <ProductImage src={product.cover_image_url} />
+        {/* <ImageList > */}
+          <ProductImage src={product.cover_image_url} />
+        {/* </ImageList> */}
 
         {showOpt && (
           <ProductAddToCart onClick={() => handleAddToCart(product)} show={showOpt} variant="contained">

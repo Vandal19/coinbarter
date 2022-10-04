@@ -11,7 +11,7 @@ const ProductMeta = ({ id, matches }) => {
   return (
     <>
     <ProductMetaWrapper  >
-      <Typography variant={matches ? 'h6' : 'h5'} lineHeight={2}>
+      <Typography variant={matches ? 'h6' : 'h5'} lineHeight={2} sx={{fontSize: 15}}>
         {product.brand_name}
       </Typography>
       <Typography variant={matches ? 'caption' : 'body1'}>
