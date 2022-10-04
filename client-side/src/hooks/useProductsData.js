@@ -22,7 +22,7 @@ const useProductsData = () => {
     if(id){
       getProducts(id)
     }
-  }, [id]);
+  }, [id, dispatch]);
 
 }
 
