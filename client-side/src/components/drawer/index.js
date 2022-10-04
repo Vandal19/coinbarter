@@ -25,23 +25,23 @@ export default function MobileMenu() {
       </DrawerCloseButton> )}
       <Drawer open={drawerOpen}>
         <List>
-          <ListItemButton>
+          <ListItemButton button component="a" href="/">
             <ListItemText>Home</ListItemText>
           </ListItemButton>
           <MiddleDivider />
-          <ListItemButton>
+          <ListItemButton button component="a" href="/products/2407748011">
             <ListItemText>Cell Phones</ListItemText>
           </ListItemButton>
           <MiddleDivider />
-          <ListItemButton>
+          <ListItemButton button component="a" href="/products/565108">
             <ListItemText>Computers</ListItemText>
           </ListItemButton>
           <MiddleDivider />
-          <ListItemButton>
+          <ListItemButton button component="a" href="/products/7926841011">
             <ListItemText>Gaming</ListItemText>
           </ListItemButton>
           <MiddleDivider />
-          <ListItemButton>
+          <ListItemButton button component="a" href="/products/6463520011">
             <ListItemText>Television</ListItemText>
           </ListItemButton>
         </List>
