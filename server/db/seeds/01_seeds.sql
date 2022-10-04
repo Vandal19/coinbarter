@@ -6,9 +6,9 @@ VALUES
 
 INSERT INTO categories (id, name)
 VALUES
-('2811119011', 'Cell Phones & Accessories'),
-('541966', 'Computers & Accessories'),
-('1266092011', 'Television & Video'),
+('2407748011', 'Cell Phones & Accessories'),
+('565108', 'Computers & Accessories'),
+('6463520011', 'Television & Video'),
 ('7926841011', 'Video Game Consoles & Accessories');
 
 
