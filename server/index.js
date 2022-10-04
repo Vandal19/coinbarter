@@ -49,7 +49,7 @@ app.get('/products/categories/:category', (req, res) => {
 
   // set up the request parameters
   const params = {
-    api_key: "A2C043C57CB045B6925670BDDCCB00AC",
+    api_key: "0CEB324D9F3949AE896B07885033BA92",
     type: "category",
     category_id: req.params.category,
     amazon_domain: "amazon.com"
@@ -72,7 +72,7 @@ app.get('/products/categories/:category', (req, res) => {
         const product = {
           category_id: req.params.category,
           brand_name: a.title,
-          price: productPrice,
+          price: productPrice.slice(1),
           cover_image_url: a.image,
           create_date: new Date(Date.now()),
           update_date: new Date(Date.now()),

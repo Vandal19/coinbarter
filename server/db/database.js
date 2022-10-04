@@ -15,8 +15,8 @@ const addProduct = async (
       RETURNING *;`,
         [product.category_id, product.brand_name, product.price, product.cover_image_url, product.create_date, product.update_date, product.stock]
     );
-    console.log(result)
-    // return result.rows;
+    // console.log(result);
+    return result.rows;
   } catch (error) {
     console.log(error)
   }
