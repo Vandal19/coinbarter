@@ -8,9 +8,9 @@ export const Product = styled(Box)(({ theme }) => ({
   justifyContent: "center",
   alignItems: "center",
   flexDirection: "column",
-  height: "100%",
-  width: "100%",
-  background: Colors.light_gray,
+  height: 500,
+  width: 300,
+  background: Colors.white,
   [theme.breakpoints.up("md")]: {
     position: "relative",
   },
@@ -18,9 +18,9 @@ export const Product = styled(Box)(({ theme }) => ({
 }));
 
 export const ProductImage = styled("img")(({ src, theme }) => ({
-  src: `url(${src})`,
-  width: "100%",
-  padding: '15px',
+  src: `url${src}?w=164&h=164&fit=crop&auto=format`,
+  srcSet: `url${src}?w=164&h=164&fit=crop&auto=format&dpr=2 3x`,
+  padding: "10px",
   [theme.breakpoints.down("md")]: {
     width: "80%",
     padding: '10px',

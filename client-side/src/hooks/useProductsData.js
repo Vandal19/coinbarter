@@ -14,7 +14,6 @@ const useProductsData = () => {
     const getProducts = (categoryId) => {
       axios.get(`/products/${categoryId}`)
       .then(result => {
-        console.log("RESULT:", result.data);
         dispatch(setProducts(result.data))
       })
     };
