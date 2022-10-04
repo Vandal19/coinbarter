@@ -11,7 +11,7 @@ const Products = () => {
   useProductsData();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down('md'));
-  const products = useSelector(state => state.value.products);
+  const products = useSelector(state => state.products.value.products);
 
 
 

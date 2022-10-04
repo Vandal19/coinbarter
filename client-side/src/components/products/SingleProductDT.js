@@ -17,7 +17,7 @@ import { addToCart } from '../../features/cartSlice';
 
 const SingleProductDT = ({ product, matches }) => {
   const [showOpt, setShowOpt] = useState(false);
-  const { items, status } = useSelector(state => state.products )
+  const products = useSelector(state => state.products.value.products);
 
   const dispatch = useDispatch();
 
@@ -36,8 +36,8 @@ const SingleProductDT = ({ product, matches }) => {
   };
 
   useEffect(() => {
-    console.log("items", items)
-  }, [items])
+    console.log("items", products)
+  }, [products])
 
 
   return (

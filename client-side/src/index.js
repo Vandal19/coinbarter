@@ -4,7 +4,7 @@ import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
-import productsReducer, { productsFetch } from "./features/productSlice";
+import productsReducer from "./features/productSlice";
 import cartReducer, { sumTotal } from './features/cartSlice';
 
 const store = configureStore({
@@ -14,7 +14,7 @@ const store = configureStore({
   },
 });
 
-store.dispatch(productsFetch());
+// store.dispatch(productsFetch());
 store.dispatch(sumTotal());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

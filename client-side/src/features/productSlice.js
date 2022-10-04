@@ -2,17 +2,17 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  items: [],
+  products: [],
   status: null
 }
 
-export const productsFetch = createAsyncThunk(
-  "products/productsFetch",
-  async () => {
-    const response = await axios.get("http://localhost:8000/products")
-    return response?.data
-  }
-)
+// export const productsFetch = createAsyncThunk(
+//   "products/productsFetch",
+//   async () => {
+//     const response = await axios.get("http://localhost:8000/products")
+//     return response?.data
+//   }
+// )
 
 const productsSlice = createSlice({
   name: 'products',
@@ -26,18 +26,18 @@ const productsSlice = createSlice({
       state.value.products = action.payload;
     }
   },
-  extraReducers: {
-    [productsFetch.pending]: (state, action) => {
-      state.status = "pending"
-    },
-    [productsFetch.fulfilled]: (state, action) => {
-      state.status = "success"
-      state.items = action.payload
-    },
-    [productsFetch.rejected]: (state, action) => {
-      state.status = "rejected"
-    }
-  }
+  // extraReducers: {
+  //   [productsFetch.pending]: (state, action) => {
+  //     state.status = "pending"
+  //   },
+  //   [productsFetch.fulfilled]: (state, action) => {
+  //     state.status = "success"
+  //     state.items = action.payload
+  //   },
+  //   [productsFetch.rejected]: (state, action) => {
+  //     state.status = "rejected"
+  //   }
+  // }
 })
 
 export const { setProducts } = productsSlice.actions

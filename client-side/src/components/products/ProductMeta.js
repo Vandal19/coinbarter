@@ -4,7 +4,7 @@ import { ProductMetaWrapper } from '../../styles/products'
 import { useSelector } from "react-redux";
 
 const ProductMeta = ({ id, matches }) => {
-  const products = useSelector(state => state.value.products);
+  const products = useSelector(state => state.products.value.products);
 
   const product = products.find((value) => value.id === id)
 
@@ -15,7 +15,7 @@ const ProductMeta = ({ id, matches }) => {
         {product.brand_name}
       </Typography>
       <Typography variant={matches ? 'caption' : 'body1'}>
-        ${product.price.toFixed(2)}
+        ${product.price}
       </Typography>
     </ProductMetaWrapper>
     </>

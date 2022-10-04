@@ -26,7 +26,7 @@ export default function NavBarDesktop({ matches }) {
         <Link to="/products/2811119011" style={{ textDecoration: "none", color: Colors.primary }}>Cell Phones</Link>
         <Link to="/products/541966" style={{ textDecoration: "none", color: Colors.primary }}>Computers</Link>
         <Link to="/products/7926841011" style={{ textDecoration: "none", color: Colors.primary }}>Gaming</Link>
-        <Link to="/prooducts/1266092011" style={{ textDecoration: "none", color: Colors.primary }}>Television</Link>
+        <Link to="/products/1266092011" style={{ textDecoration: "none", color: Colors.primary }}>Television</Link>
         </NavBarCategories>
         <ListItemButton>
           <ListItemIcon>
