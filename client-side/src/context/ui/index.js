@@ -11,6 +11,7 @@ export const UIProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
 
+  const [showFav, setShowFav] = useState(false);
 
   // states for search bar
   const [showSearchBox, setShowSearchBox] = useState(false);
@@ -23,7 +24,9 @@ export const UIProvider = ({ children }) => {
     showCart,
     setShowCart,
     showSearchBox,
-    setShowSearchBox
+    setShowSearchBox,
+    showFav,
+    setShowFav
   }
 
   return <UIContext.Provider value={value} >{children}</UIContext.Provider>

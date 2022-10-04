@@ -18,6 +18,7 @@ import { UIProvider } from "./context/ui";
 import Cart from "./components/cart";
 import SearchBox from "./components/search";
 import LogIn from "./pages/Login";
+import Favorite from "./components/favorites"
 
 
 function App() {
@@ -75,6 +76,7 @@ function App() {
           </Routes>
           <Footer />
           <MobileMenu />
+          <Favorite />
           <Cart />
           <SearchBox />
         </UIProvider>

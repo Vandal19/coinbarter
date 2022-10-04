@@ -16,10 +16,10 @@ import { Colors } from "../../styles/theme";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart, removeFromCart, decreaseCart, sumTotal } from "../../features/cartSlice";
+import { addToCart, removeFromCart, decreaseCart, clearCart, sumTotal } from "../../features/cartSlice";
 
 const Cart = () => {
-  const { setShowCart, showCart } = useUIContext();
+  const { showCart, setShowCart } = useUIContext();
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
@@ -38,6 +38,10 @@ const Cart = () => {
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product))
+  }
+
+  const handleClearCart = (product) => {
+    dispatch(clearCart(product))
   }
 
 
@@ -90,6 +94,7 @@ const Cart = () => {
     </Box>
   ));
 
+
   return (
     <Drawer
       open={showCart}
@@ -127,7 +132,7 @@ const Cart = () => {
           <Button>
             Proceed to Payment
           </Button>
-          <Button>Clear Cart</Button>
+          <Button onClick={handleClearCart}>Clear Cart</Button>
         </Box>
       </Box>
       :
@@ -147,6 +152,8 @@ const Cart = () => {
       </Button>
     </Drawer>
   );
+
 };
+
 
 export default Cart;
