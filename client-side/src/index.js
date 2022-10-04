@@ -6,7 +6,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import productsReducer from "./features/productSlice";
 import cartReducer, { sumTotal } from './features/cartSlice';
-import favoriteReducer from "./features/favoriteSlice"
+import favoriteReducer, { sumQuantity } from "./features/favoriteSlice"
 
 const store = configureStore({
   reducer: {
@@ -18,6 +18,7 @@ const store = configureStore({
 
 // store.dispatch(productsFetch());
 store.dispatch(sumTotal());
+store.dispatch(sumQuantity());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

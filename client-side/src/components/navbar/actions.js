@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 export default function Actions({ matches }) {
 
   const { cartTotalQuantity } = useSelector(state => state.cart)
+  const { favoriteTotalQuantity } = useSelector(state => state.favorite)
 
   const { setShowCart, setShowFav } = useUIContext();
 
@@ -36,7 +37,9 @@ export default function Actions({ matches }) {
               color: matches && Colors.secondary
             }}
         >
+          <Badge badgeContent={favoriteTotalQuantity} color="secondary">
           <FavoriteIcon onClick={()=> setShowFav(true)}/>
+          </Badge>
         </ListItemIcon>
       </ListItemButton>
       <Divider orientation='vertical' flexItem />

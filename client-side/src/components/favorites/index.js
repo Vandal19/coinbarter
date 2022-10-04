@@ -10,9 +10,10 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
+import { useEffect } from "react";
 import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromFavorite, clearFavorites } from "../../features/favoriteSlice";
+import { removeFromFavorite, clearFavorites, sumQuantity } from "../../features/favoriteSlice";
 import { useUIContext } from "../../context/ui";
 import { Colors } from "../../styles/theme";
 import { useTheme } from "@mui/material/styles";
@@ -25,6 +26,10 @@ const Favorite = () => {
   const favorite = useSelector((state) => state.favorite)
   const cart = useSelector((state) => state.cart);
   const theme = useTheme();
+
+  useEffect(() => {
+    dispatch(sumQuantity());
+  }, [favorite, dispatch])
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product))
