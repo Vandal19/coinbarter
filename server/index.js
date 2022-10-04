@@ -7,6 +7,7 @@ const port = 8000;
 const cors = require("cors");
 const morgan = require("morgan");
 const axios = require('axios');
+const bcrypt = require("bcrypt")
 
 const products = require("./products")
 
@@ -40,7 +41,7 @@ app.get('/categories', (req, res) => {
     }).catch(error => {
       // catch and print the error
       console.log(error);
-    }); 
+    });
 });
 
 
@@ -66,7 +67,7 @@ app.get('/products/categories/:category', (req, res) => {
       for (let a of products) {
 
         let randomStock = parseInt(Math.random() * 100);
-        
+
         let productPrice = a.price ? a.price.raw : "not available";
 
         const product = {
@@ -88,7 +89,7 @@ app.get('/products/categories/:category', (req, res) => {
       // catch and print the error
       console.log(error);
     })
-      
+
 });
 
 

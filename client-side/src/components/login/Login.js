@@ -14,7 +14,9 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useRef, useState, useEffect, useContext } from 'react';
-import { AuthContext, AuthProvider } from '../context/authProvider';
+import { AuthContext, AuthProvider } from '../../context/authProvider';
+import { useFormik } from "formik";
+import * as Yup from "yup"
 
 const axios = require('axios');
 
@@ -22,6 +24,23 @@ const theme = createTheme();
 
 export default function LogIn() {
 
+  const formik = useFormik({
+    initialValues: {username: "", password: ""},
+    validationSchema: Yup.object({
+      username: Yup.string()
+      .required("Username required!")
+      .min(6, "Username too short!")
+      .max(30, "Username too long"),
+      password: Yup.string()
+      .required("Password required!")
+      .min(6, "Password too short!")
+      .max(30, "Password too long"),
+    }),
+    onSubmit: (values, actions) => {
+      alert(JSON.stringify(values, null, 2));
+      actions.resetForm();
+    }
+  });
   // auth state for global context
   const { setAuth } = useContext(AuthContext)
 
@@ -48,7 +67,7 @@ export default function LogIn() {
     const data = new FormData(event.currentTarget);
 
     try {
-      const response = await axios.post('/login', 
+      const response = await axios.post('/login',
         JSON.stringify({user, pwd}),
         // {
         //   headers: { 'Content=Type': 'application/json'},
@@ -79,16 +98,16 @@ export default function LogIn() {
       email: data.get('email'),
       password: data.get('password'),
     });
-    
+
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container component="main" sx={{ height: '90vh' }}>
         <CssBaseline />
         <Grid
           item
-          xs={false}
+          xs={3}
           sm={4}
           md={7}
           sx={{
@@ -113,7 +132,7 @@ export default function LogIn() {
                 <a href="#">Go to Home</a>
               </p>
             </Grid>
-            
+
           ) : (
 
             <Grid item xs={12} sm={8} md={5}  square>
@@ -129,9 +148,9 @@ export default function LogIn() {
                 <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                   <LockOutlinedIcon />
                 </Avatar>
-                <p  
-                  ref={errRef} 
-                  className={errMsg ? "errmsg" : "offscreen"} 
+                <p
+                  ref={errRef}
+                  className={errMsg ? "errmsg" : "offscreen"}
                   aria-live="assertive">
                     {errMsg}
                 </p>
@@ -184,7 +203,7 @@ export default function LogIn() {
                       </Link>
                     </Grid>
                   </Grid>
-                  
+
                 </Box>
               </Box>
             </Grid>
