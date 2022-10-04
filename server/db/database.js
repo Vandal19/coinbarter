@@ -15,7 +15,6 @@ const addProduct = async (
       RETURNING *;`,
         [product.category_id, product.brand_name, product.price, product.cover_image_url, product.create_date, product.update_date, product.stock]
     );
-    // console.log(result);
     return result.rows;
   } catch (error) {
     console.log(error)
@@ -24,9 +23,9 @@ const addProduct = async (
 
 // functions to query database based on different categories or filter by price
     // for each category
-      // cell phones: product.category_id = 2811119011
-      // computers: product.category_id = 541966
-      // television: product.category_id = 1266092011
+      // cell phones: product.category_id = 2407748011
+      // computers: product.category_id = 565108
+      // television: product.category_id = 6463520011
       // gaming: product.category_id = 7926841011
     // for search term or title
 
@@ -45,41 +44,7 @@ const getProductsForCategory = async (category_id) => {
   }
 }
 
-// const getComputers = async () => {
-//   try {
-//     const result = await db.query(
-//       `SELECT * FROM products WHERE category_id='541966';`
-//     );
-//     console.log(result)
-//     return result.rows;
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
 
-// const getTelevision = async () => {
-//   try {
-//     const result = await db.query(
-//       `SELECT * FROM products WHERE category_id='7926841011';`
-//     );
-//     console.log(result)
-//     return result.rows;
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-
-// const getGaming = async () => {
-//   try {
-//     const result = await db.query(
-//       `SELECT * FROM products WHERE category_id='1266092011';`
-//     );
-//     console.log(result)
-//     return result.rows;
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
 
 
 module.exports = {
