@@ -6,9 +6,12 @@ import {
   ProductFavButton,
   ProductImage,
   ProductAddToCart,
+  ProductActionButton,
 } from "../../styles/products";
 import ProductMeta from "./ProductMeta";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import FitScreenIcon from '@mui/icons-material/FitScreen';
+import ShareIcon from '@mui/icons-material/Share';
 import useCart from "../../hooks/useCart";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from '../../features/cartSlice';
@@ -61,7 +64,14 @@ const SingleProductDT = ({ product, matches }) => {
           </ProductAddToCart>
         )}
         <ProductActionsWrapper show={showOpt}>
-          <Stack direction="column"></Stack>
+          <Stack direction="column">
+            <ProductActionButton>
+              <ShareIcon color="primary" />
+            </ProductActionButton>
+            <ProductActionButton>
+              <FitScreenIcon color="primary" />
+            </ProductActionButton>
+          </Stack>
         </ProductActionsWrapper>
       </Product>
       <ProductMeta id={product.id} matches={matches} />
