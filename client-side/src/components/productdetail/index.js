@@ -9,6 +9,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import { useDispatch } from "react-redux";
+import { addToFavorite } from "../../features/favoriteSlice";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 function slideTransition(props) {
   return <Slide direction="down" {...props} />
@@ -29,6 +32,12 @@ const ProductDetailInfoWrapper = styled(Box)(() => ({
 }));
 
 export default function ProductDetail({open, onClose, product}) {
+
+  const dispatch = useDispatch();
+
+  const handleAddToFavorite = (product) => {
+    dispatch(addToFavorite(product))
+  }
 
   // displays for desktop and mobile
   const theme = useTheme();
@@ -74,20 +83,31 @@ export default function ProductDetail({open, onClose, product}) {
               alignItems="center"
               justifyContent="space-between">
                 <ProductIncDec />
-              <Button variant="contained">Add to Cart</Button>
             </Box>
             <Box
               display="flex"
               alignitems="center"
+              justifyContent="space-between"
               sx={{ mt: 4, color: Colors.light }}>
-                <FavoriteIcon sx={{ mr: 2 }} />
+              <Button variant="contained" 
+                      fullWidth={true}
+                      sx={{ mr: 1 }}
+                      isFav={0} onClick={() => handleAddToFavorite(product)}
+                      startIcon={<FavoriteIcon />}>
                 Add to Favorites
+              </Button>
+              <Button variant="contained"
+                      fullWidth={true}
+                      sx={{ ml: 1 }}
+                      startIcon={<ShoppingCartIcon />}>
+                Add to Cart
+              </Button>
             </Box>
             <Box
               sx={{ mt: 4, color: Colors.light }}>
                 <FacebookIcon />
-                <TwitterIcon sx={{ pl: theme.spacing(4) }} />
-                <InstagramIcon sx={{ pl: theme.spacing(4) }} />
+                <TwitterIcon sx={{ pl: theme.spacing(3) }} />
+                <InstagramIcon sx={{ pl: theme.spacing(3) }} />
             </Box>
           </ProductDetailInfoWrapper>
         </ProductDetailWrapper>
