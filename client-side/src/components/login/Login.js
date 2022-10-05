@@ -185,7 +185,7 @@ export default function LogIn() {
                       as={Form}
                       component="form"
                       sx={{ mt: 1 }}
-                      // onSubmit={formik.handleSubmit}
+                      onSubmit={formik.handleSubmit}
                     >
                       <Field
                         as={TextField}
@@ -198,9 +198,9 @@ export default function LogIn() {
                         autoComplete="email"
                         autoFocus
                         // ref={userRef}
-                        // error={formik.touched.email && Boolean(formik.errors.email)}
-                        // helperText={formik.touched.email && formik.errors.email}
-                        // {...formik.getFieldProps("email")}
+                        error={formik.touched.email && Boolean(formik.errors.email)}
+                        helperText={formik.touched.email && formik.errors.email}
+                        {...formik.getFieldProps("email")}
                       />
                       <Field
                         as={TextField}
@@ -212,16 +212,16 @@ export default function LogIn() {
                         type="password"
                         id="password"
                         autoComplete="current-password"
-                        // error={formik.touched.password && Boolean(formik.errors.password)}
-                        // helperText={formik.touched.password && formik.errors.password}
-                        // {...formik.getFieldProps("password")}
+                        error={formik.touched.password && Boolean(formik.errors.password)}
+                        helperText={formik.touched.password && formik.errors.password}
+                        {...formik.getFieldProps("password")}
                       />
-                      {/* <Field
+                      <Field
                         as={FormControlLabel}
                         name="remember"
                         control={<Checkbox name="checkedB" color="primary" />}
                         label="Remember me"
-                      /> */}
+                      />
 
                       <Button
                         type="submit"
