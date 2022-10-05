@@ -63,7 +63,8 @@ export default function ProductDetail({open, onClose, product}) {
         <Box
           display={'flex'}
           alignItems="center"
-          justifyContent={"center"}>
+          justifyContent={"space-between"}
+          sx={{ ml: 6, mr: 6 }}>
           Product Title
           <IconButton onClick={onClose}>
             <CloseIcon />
