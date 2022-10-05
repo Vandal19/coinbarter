@@ -6,19 +6,27 @@ import {
   ProductFavButton,
   ProductImage,
   ProductAddToCart,
+  ProductActionButton,
 } from "../../styles/products";
 import ProductMeta from "./ProductMeta";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import FitScreenIcon from '@mui/icons-material/FitScreen';
+import ShareIcon from '@mui/icons-material/Share';
 import useCart from "../../hooks/useCart";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from '../../features/cartSlice';
 import { addToFavorite } from "../../features/favoriteSlice";
+import useDialogModal from '../../hooks/useDialogModal'
+import ProductDetail from '../productdetail'
 
 
 
 const SingleProductDT = ({ product, matches }) => {
   const [showOpt, setShowOpt] = useState(false);
   const products = useSelector(state => state.products.value.products);
+
+  // hook to open and close product details dialog
+  const [ProductDetailDialog, showProductDetailDialog, closeProductDetailDialog] = useDialogModal(ProductDetail);
 
   const dispatch = useDispatch();
 
@@ -61,10 +69,18 @@ const SingleProductDT = ({ product, matches }) => {
           </ProductAddToCart>
         )}
         <ProductActionsWrapper show={showOpt}>
-          <Stack direction="column"></Stack>
+          <Stack direction="column">
+            <ProductActionButton>
+              <ShareIcon color="primary" />
+            </ProductActionButton>
+            <ProductActionButton onClick={() => showProductDetailDialog()}>
+              <FitScreenIcon color="primary" />
+            </ProductActionButton>
+          </Stack>
         </ProductActionsWrapper>
       </Product>
       <ProductMeta id={product.id} matches={matches} />
+      <ProductDetailDialog product={product} />
     </>
   );
 };
