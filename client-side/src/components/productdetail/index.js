@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogTitle, IconButton, Slide, Typography, useMediaQuery, Button } from "@mui/material";
+import { Dialog, DialogContent, DialogTitle, IconButton, Slide, Typography, useMediaQuery, Button, Divider } from "@mui/material";
 import { Box, styled } from "@mui/system";
 import { Colors } from "../../styles/theme";
 import CloseIcon from '@mui/icons-material/Close';
@@ -77,12 +77,16 @@ export default function ProductDetail({open, onClose, product}) {
             <ProductImage src={product.cover_image_url} />
           </Product>
           <ProductDetailInfoWrapper>
-            <Typography variant="subtitle">SKU 123</Typography>
-            <Typography variant="subtitle">Availability: {product.stock} in stock</Typography>
             <Typography sx={{ lineHeight: 2 }} variant="h5">
               {product.brand_name}
             </Typography>
-            <Typography variant="body">
+            {/* <Typography variant="subtitle">SKU 123</Typography> */}
+            <Typography variant="subtitle2">Availability: {product.stock} in stock</Typography>
+            <Divider  sx={{ mt: 2, mb: 2 }} />
+            <Typography 
+              variant="h7"
+              sx={{ fontWeight: 500 }}>
+              About This Item: <br />
               {product.brand_name}
             </Typography>
             <Box
