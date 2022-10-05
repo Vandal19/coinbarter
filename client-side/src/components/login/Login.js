@@ -25,34 +25,12 @@ const theme = createTheme();
 
 export default function LogIn() {
 
-  const formik = useFormik({
-    initialValues: {email: "", password: "", remember: false},
-    validationSchema: Yup.object({
-      email: Yup.string()
-      .email('Please enter valid email')
-      .required("Email required!")
-      .min(6, "Email too short!")
-      .max(30, "Email too long"),
-      password: Yup.string()
-      .required("Password is required!")
-      .min(6, "Password should be of minimum 6 characters length!")
-      .max(30, "Password too long"),
-    }),
-    onSubmit: (values, actions) => {
-      // alert(JSON.stringify(values, null, 2));
-      setTimeout(() => {
-
-        actions.resetForm();
-        actions.setSubmitting(false)
-      }, 2000)
-    }
-  });
   // auth state for global context
   // const { setAuth } = useContext(AuthContext)
 
   // references
-  const userRef = useRef();
-  const errRef = useRef();
+  // const userRef = useRef();
+  // const errRef = useRef();
 
   // states
   const [user, setUser] = useState('');
@@ -129,7 +107,7 @@ export default function LogIn() {
         {/* display success page if logged in, else display login page */}
         <>
           {success ? (
-            <Grid item xs={12} sm={8} md={5}  square>
+            <Grid item xs={12} sm={8} md={5} >
               <Typography component="h1" variant="h5">
                   You are Logged In!
               </Typography>
@@ -141,7 +119,7 @@ export default function LogIn() {
 
           ) : (
 
-            <Grid item xs={12} sm={8} md={5}  square>
+            <Grid item xs={12} sm={8} md={5} >
               <Box
                 sx={{
                   my: 8,
@@ -155,7 +133,7 @@ export default function LogIn() {
                   <LockOutlinedIcon />
                 </Avatar>
                 <p
-                  ref={errRef}
+                  // ref={errRef}
                   className={errMsg ? "errmsg" : "offscreen"}
                   aria-live="assertive">
                     {errMsg}
@@ -163,9 +141,26 @@ export default function LogIn() {
                 <Typography component="h1" variant="h5">
                   Log in
                 </Typography>
-                <Formik initialValues={formik.initialValues} onSubmit={formik.handleSubmit} validationScheme={formik.validationSchema}>
-                  {(actions) =>(
-                    <Form component="form" sx={{ mt: 1 }}>
+                <Formik initialValues={{email: "", password: "", remember: false}}
+                onSubmit={(values, actions) => {
+                  setTimeout(() => {
+                    actions.resetForm();
+                    actions.setSubmitting(false)
+                    }, 2000)
+                  }}
+                validationSchema={Yup.object({
+                  email: Yup.string()
+                  .email('Please enter valid email')
+                  .required("Email required!")
+                  .min(6, "Email too short!")
+                  .max(30, "Email too long"),
+                  password: Yup.string()
+                  .required("Password is required!")
+                  .min(6, "Password should be of minimum 6 characters length!")
+                  .max(30, "Password too long"),
+                })}>
+                  {(formik) =>(
+                    <Form as={Form} component="form" sx={{ mt: 1 }}>
                   <Field as={TextField}
                     margin="normal"
                     required
@@ -175,10 +170,7 @@ export default function LogIn() {
                     name="email"
                     autoComplete="email"
                     autoFocus
-                    ref={userRef}
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
+                    // ref={userRef}
                     error={formik.touched.email && Boolean(formik.errors.email)}
                     helperText={formik.touched.email && formik.errors.email}
                     {...formik.getFieldProps("email")}
@@ -192,9 +184,6 @@ export default function LogIn() {
                     type="password"
                     id="password"
                     autoComplete="current-password"
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
                     error={formik.touched.password && Boolean(formik.errors.password)}
                     helperText={formik.touched.password && formik.errors.password}
                     {...formik.getFieldProps("password")}
@@ -208,9 +197,10 @@ export default function LogIn() {
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
-                    disabled={actions.isSubmitting}
+                    // disabled={formik.onSubmit}
                   >
-                    {actions.isSubmitting ? "Loading" : "Login"}
+                    {/* {formik.onSubmit ? "Loading" : "Login"} */}
+                    Login
                   </Button>
                   <Grid container>
                     <Grid item xs>
