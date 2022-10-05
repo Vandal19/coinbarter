@@ -44,10 +44,22 @@ const getProductsForCategory = async (category_id) => {
   }
 }
 
+const getUserByEmail = async(email) => {
+  try {
+    const result = await db.query("SELECT * FROM users WHERE email=$1", [email]);
+    console.log("results", result)
+    return result.rows[0]
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 
 
 
 module.exports = {
   addProduct,
-  getProductsForCategory
+  getProductsForCategory,
+  getUserByEmail
 }
