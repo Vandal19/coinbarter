@@ -11,6 +11,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import { useDispatch } from "react-redux";
 import { addToFavorite } from "../../features/favoriteSlice";
+import { addToCart } from '../../features/cartSlice';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 function slideTransition(props) {
@@ -35,8 +36,14 @@ export default function ProductDetail({open, onClose, product}) {
 
   const dispatch = useDispatch();
 
+  // add item to favorites
   const handleAddToFavorite = (product) => {
     dispatch(addToFavorite(product))
+  }
+
+  // add item to cart
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product))
   }
 
   // displays for desktop and mobile
@@ -99,6 +106,7 @@ export default function ProductDetail({open, onClose, product}) {
               <Button variant="contained"
                       fullWidth={true}
                       sx={{ ml: 1 }}
+                      onClick={() => handleAddToCart(product)}
                       startIcon={<ShoppingCartIcon />}>
                 Add to Cart
               </Button>
