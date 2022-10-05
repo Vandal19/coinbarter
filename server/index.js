@@ -10,10 +10,14 @@ const axios = require('axios');
 const bcrypt = require("bcrypt")
 
 const products = require("./products")
+const userRoutes = require("./routes/userRoutes")
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors({}));
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}));
 app.use(morgan());
 
 // connect to routes
@@ -148,6 +152,9 @@ app.post("/products", async (req, res) => {
   await addProduct(product);
   // console.log("product", product)
 });
+
+// Login authentication
+app.use("/auth", userRoutes)
 
 app.listen(port, () => {
   console.log(`listening on http://localhost:${port}`);
