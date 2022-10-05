@@ -143,10 +143,25 @@ export default function LogIn() {
                 </Typography>
                 <Formik initialValues={{email: "", password: "", remember: false}}
                 onSubmit={(values, actions) => {
-                  setTimeout(() => {
-                    actions.resetForm();
-                    actions.setSubmitting(false)
-                    }, 2000)
+                  const vals = {...values}
+                  actions.resetForm();
+                    fetch("http://localhost:8000/auth/login", {
+                      method: "POST",
+                      credentials: "include",
+                      headers: {
+                        "Content-Type": "application/json"
+                      },
+                      body: JSON.stringify(vals),
+                    }).catch(response => {
+                      if (!response || !response.ok || response.status >= 400) {
+                        return;
+                      }
+                      return response.json
+                    })
+                    .then(data => {
+                      if (!data) return;
+                      console.log(data)
+                    })
                   }}
                 validationSchema={Yup.object({
                   email: Yup.string()

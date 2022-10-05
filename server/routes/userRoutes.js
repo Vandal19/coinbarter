@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const axios = require('axios');
 const bcrypt = require("bcrypt")
-const pool = require("../db")
 const Yup = require("yup")
 
 const formSchema = Yup.object({
@@ -19,9 +18,18 @@ const formSchema = Yup.object({
 
 router.post("/login", async (req, res) => {
   const formData = req.body;
-  await formSchema(validateForm(formData));
+  formSchema.validate(formData)
+  .then(valid => {
+    if (valid) {
+      console.log("form is good")
+  }})
+  .catch(err => {
+    console.log("error", error)
+  })
 })
 
 router.post("/signup", async (req, res) => {
 
 })
+
+module.exports = router;
