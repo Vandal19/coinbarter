@@ -4,6 +4,11 @@ import { Colors } from "../../styles/theme";
 import CloseIcon from '@mui/icons-material/Close';
 import { useTheme } from "@emotion/react";
 import { Product, ProductImage } from "../../styles/products";
+import ProductIncDec from "../ui";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import InstagramIcon from '@mui/icons-material/Instagram';
 
 function slideTransition(props) {
   return <Slide direction="down" {...props} />
@@ -63,7 +68,27 @@ export default function ProductDetail({open, onClose, product}) {
             <Typography variant="body">
               {product.brand_name}
             </Typography>
-            
+            <Box
+              sx={{ mt: 4 }}
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between">
+                <ProductIncDec />
+              <Button variant="contained">Add to Cart</Button>
+            </Box>
+            <Box
+              display="flex"
+              alignitems="center"
+              sx={{ mt: 4, color: Colors.light }}>
+                <FavoriteIcon sx={{ mr: 2 }} />
+                Add to Favorites
+            </Box>
+            <Box
+              sx={{ mt: 4, color: Colors.light }}>
+                <FacebookIcon />
+                <TwitterIcon sx={{ pl: theme.spacing(4) }} />
+                <InstagramIcon sx={{ pl: theme.spacing(4) }} />
+            </Box>
           </ProductDetailInfoWrapper>
         </ProductDetailWrapper>
       </DialogContent>
