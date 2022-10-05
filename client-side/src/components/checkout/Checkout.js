@@ -1,15 +1,23 @@
 import React from 'react'
 import { useState } from 'react';
 import { Container, Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button } from '@mui/material';
+import AddressForm from './AddressForm';
+import PaymentForm from './PaymentForm';
 
 
 // manage steps for checkout
 const steps = ['Shipping address', 'Payment details'];
 
+
 export default function Checkout() {
-  
+
   // states to move through steps for checkout
   const [activeStep, setActiveStep] = useState(0);
+
+  // confirmation msg
+  const Confirmation = () => (
+    <div>Confirmation</div>
+  );
 
   // render different components based on which step user is on
   const Form = () => activeStep === 0 
