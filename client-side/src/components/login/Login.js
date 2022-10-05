@@ -143,7 +143,7 @@ export default function LogIn() {
                 </Typography>
                 <Formik initialValues={{email: "", password: "", remember: false}}
                 onSubmit={(values, actions) => {
-                  const vals = {...values}
+                  const vals = {...values.value}
                   actions.resetForm();
                     fetch("http://localhost:8000/auth/login", {
                       method: "POST",
