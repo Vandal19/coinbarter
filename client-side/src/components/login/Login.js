@@ -15,8 +15,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useRef, useState, useEffect, useContext } from 'react';
 import { AuthContext, AuthProvider } from '../../context/authProvider';
-import { useFormik } from "formik";
+import { useFormik, Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup"
+import { getFormLabelUtilityClasses } from '@mui/material';
 
 const axios = require('axios');
 
@@ -25,24 +26,29 @@ const theme = createTheme();
 export default function LogIn() {
 
   const formik = useFormik({
-    initialValues: {username: "", password: ""},
+    initialValues: {email: "", password: "", remember: false},
     validationSchema: Yup.object({
-      username: Yup.string()
-      .required("Username required!")
-      .min(6, "Username too short!")
-      .max(30, "Username too long"),
+      email: Yup.string()
+      .email('Please enter valid email')
+      .required("Email required!")
+      .min(6, "Email too short!")
+      .max(30, "Email too long"),
       password: Yup.string()
-      .required("Password required!")
-      .min(6, "Password too short!")
+      .required("Password is required!")
+      .min(6, "Password should be of minimum 6 characters length!")
       .max(30, "Password too long"),
     }),
     onSubmit: (values, actions) => {
-      alert(JSON.stringify(values, null, 2));
-      actions.resetForm();
+      // alert(JSON.stringify(values, null, 2));
+      setTimeout(() => {
+
+        actions.resetForm();
+        actions.setSubmitting(false)
+      }, 2000)
     }
   });
   // auth state for global context
-  const { setAuth } = useContext(AuthContext)
+  // const { setAuth } = useContext(AuthContext)
 
   // references
   const userRef = useRef();
@@ -54,52 +60,52 @@ export default function LogIn() {
   const [errMsg, setErrMsg] = useState('');
   const [success, setSuccess] = useState(false);
 
-  useEffect(() => {
-    userRef.current.focus();
-  }, [])
+  // useEffect(() => {
+  //   userRef.current.focus();
+  // }, [])
 
-  useEffect(() => {
-    setErrMsg('');
-  }, [user, pwd])
+  // useEffect(() => {
+  //   setErrMsg('');
+  // }, [user, pwd])
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
 
-    try {
-      const response = await axios.post('/login',
-        JSON.stringify({user, pwd}),
-        // {
-        //   headers: { 'Content=Type': 'application/json'},
-        //   withCredentials: true
-        // }
-      );
-      // const accessToken = response?.data?.accessToken;
-      // const roles = response?.data?.roles;
-      // setAuth({ user, pwd, roles, accessToken });
-      setUser('');
-      setPwd('');
-      setSuccess(true);
-    } catch (err) {
-      if(!err?.response) {
-        setErrMsg('No Server Response');
-      } else if (err.response?.status === 400) {
-        setErrMsg('Missing Username or Password');
-      } else if (err.response?.status === 401) {
-        setErrMsg('Unauthorized User');
-      } else {
-        setErrMsg('Login Failed');
-      }
-    }
+  //   try {
+  //     const response = await axios.post('/login',
+  //       JSON.stringify({user, pwd}),
+  //       // {
+  //       //   headers: { 'Content=Type': 'application/json'},
+  //       //   withCredentials: true
+  //       // }
+  //     );
+  //     // const accessToken = response?.data?.accessToken;
+  //     // const roles = response?.data?.roles;
+  //     // setAuth({ user, pwd, roles, accessToken });
+  //     setUser('');
+  //     setPwd('');
+  //     setSuccess(true);
+  //   } catch (err) {
+  //     if(!err?.response) {
+  //       setErrMsg('No Server Response');
+  //     } else if (err.response?.status === 400) {
+  //       setErrMsg('Missing Username or Password');
+  //     } else if (err.response?.status === 401) {
+  //       setErrMsg('Unauthorized User');
+  //     } else {
+  //       setErrMsg('Login Failed');
+  //     }
+  //   }
 
-    setSuccess(false);
+  //   setSuccess(false);
 
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  //   console.log({
+  //     email: data.get('email'),
+  //     password: data.get('password'),
+  //   });
 
-  };
+  // };
 
   return (
     <ThemeProvider theme={theme}>
@@ -157,8 +163,10 @@ export default function LogIn() {
                 <Typography component="h1" variant="h5">
                   Log in
                 </Typography>
-                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-                  <TextField
+                <Formik initialValues={formik.initialValues} onSubmit={formik.handleSubmit} validationScheme={formik.validationSchema}>
+                  {(actions) =>(
+                    <Form component="form" sx={{ mt: 1 }}>
+                  <Field as={TextField}
                     margin="normal"
                     required
                     fullWidth
@@ -168,10 +176,14 @@ export default function LogIn() {
                     autoComplete="email"
                     autoFocus
                     ref={userRef}
-                    value={user}
-                    onChange={(e) => setUser(e.target.value)}
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={formik.touched.email && Boolean(formik.errors.email)}
+                    helperText={formik.touched.email && formik.errors.email}
+                    {...formik.getFieldProps("email")}
                   />
-                  <TextField
+                  <Field as={TextField}
                     margin="normal"
                     required
                     fullWidth
@@ -180,16 +192,25 @@ export default function LogIn() {
                     type="password"
                     id="password"
                     autoComplete="current-password"
-                    value={pwd}
-                    onChange={(e) => setPwd(e.target.value)}
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={formik.touched.password && Boolean(formik.errors.password)}
+                    helperText={formik.touched.password && formik.errors.password}
+                    {...formik.getFieldProps("password")}
                   />
+                  <Field as={FormControlLabel} name='remember' control={
+                    <Checkbox name="checkedB" color="primary"/>}
+                      label="Remember me"/>
+
                   <Button
                     type="submit"
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
+                    disabled={actions.isSubmitting}
                   >
-                    Log In
+                    {actions.isSubmitting ? "Loading" : "Login"}
                   </Button>
                   <Grid container>
                     <Grid item xs>
@@ -203,8 +224,9 @@ export default function LogIn() {
                       </Link>
                     </Grid>
                   </Grid>
-
-                </Box>
+                    </Form>
+                  ) }
+                </Formik>
               </Box>
             </Grid>
           )}
