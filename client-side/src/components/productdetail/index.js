@@ -113,9 +113,9 @@ export default function ProductDetail({open, onClose, product}) {
             </Box>
             <Box
               sx={{ mt: 4, color: Colors.light }}>
-                <FacebookIcon />
-                <TwitterIcon sx={{ pl: theme.spacing(3) }} />
-                <InstagramIcon sx={{ pl: theme.spacing(3) }} />
+                <FacebookIcon href="https://www.facebook.com/"/>
+                <TwitterIcon sx={{ pl: theme.spacing(3) }} href="https://www.twitter.com/"/>
+                <InstagramIcon sx={{ pl: theme.spacing(3) }} href="https://www.instagram.com/"/>
             </Box>
           </ProductDetailInfoWrapper>
         </ProductDetailWrapper>
