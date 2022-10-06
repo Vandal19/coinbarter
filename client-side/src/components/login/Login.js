@@ -140,29 +140,15 @@ export default function LogIn() {
                 <Formik
                   initialValues={{ email: "", password: "", remember: false }}
                   onSubmit={(values, actions) => {
-                    const vals = { ...values };
                     actions.resetForm();
-                    fetch("http://localhost:8000/auth/login", {
-                      method: "POST",
-                      credentials: "include",
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                      body: JSON.stringify(vals),
-                    })
-                      .catch((response) => {
-                        if (
-                          !response ||
-                          !response.ok ||
-                          response.status >= 400
-                        ) {
-                          return;
-                        }
-                        return response.json;
-                      })
+                    axios
+                      .post("/auth/login", { ...values })
                       .then((data) => {
                         if (!data) return;
-                        console.log(data);
+                        console.log("data", data);
+                      })
+                      .catch((err) => {
+                        console.log(err);
                       });
                   }}
                   validationSchema={Yup.object({
@@ -198,7 +184,9 @@ export default function LogIn() {
                         autoComplete="email"
                         autoFocus
                         // ref={userRef}
-                        error={formik.touched.email && Boolean(formik.errors.email)}
+                        error={
+                          formik.touched.email && Boolean(formik.errors.email)
+                        }
                         helperText={formik.touched.email && formik.errors.email}
                         {...formik.getFieldProps("email")}
                       />
@@ -212,8 +200,13 @@ export default function LogIn() {
                         type="password"
                         id="password"
                         autoComplete="current-password"
-                        error={formik.touched.password && Boolean(formik.errors.password)}
-                        helperText={formik.touched.password && formik.errors.password}
+                        error={
+                          formik.touched.password &&
+                          Boolean(formik.errors.password)
+                        }
+                        helperText={
+                          formik.touched.password && formik.errors.password
+                        }
                         {...formik.getFieldProps("password")}
                       />
                       <Field
