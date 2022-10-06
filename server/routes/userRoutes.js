@@ -4,7 +4,7 @@ const validateForm = require("../controllers/validateForm");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const pool = require("../db/database");
-const getUserByEmail = require("../db/database");
+const { getUserByEmail } = require("../db/database");
 
 router.post("/login", async (req, res) => {
   validateForm(req, res);

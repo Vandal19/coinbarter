@@ -18,11 +18,25 @@ import { AuthContext, AuthProvider } from "../../context/authProvider";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { getFormLabelUtilityClasses } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../features/userSlice";
 
 const axios = require("axios");
 
 const theme = createTheme();
 export default function LogIn() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem('user'));
+    if (userData) {
+      dispatch(login(userData))
+    }
+  }, [dispatch])
+
+  const user = useSelector((state) => state.user.users)
+  console.log("user", user)
   // auth state for global context
   // const { setAuth } = useContext(AuthContext)
 
@@ -31,8 +45,8 @@ export default function LogIn() {
   // const errRef = useRef();
 
   // states
-  const [user, setUser] = useState("");
-  const [pwd, setPwd] = useState("");
+  // const [user, setUser] = useState("");
+  // const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
@@ -137,6 +151,7 @@ export default function LogIn() {
                 <Typography component="h1" variant="h5">
                   Log in
                 </Typography>
+                <Typography>{user?.email}</Typography>
                 <Formik
                   initialValues={{ email: "", password: "", remember: false }}
                   onSubmit={(values, actions) => {
@@ -144,8 +159,9 @@ export default function LogIn() {
                     axios
                       .post("/auth/login", { ...values })
                       .then((data) => {
-                        if (!data) return;
+                        // if (!data) return;
                         console.log("data", data);
+                        dispatch(login({...user.data}))
                       })
                       .catch((err) => {
                         console.log(err);
