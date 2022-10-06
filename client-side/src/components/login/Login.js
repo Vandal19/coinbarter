@@ -20,12 +20,13 @@ import * as Yup from "yup";
 import { getFormLabelUtilityClasses } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../features/userSlice";
+import { useNavigate } from 'react-router'
 
 const axios = require("axios");
 
 const theme = createTheme();
 export default function LogIn() {
-
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export default function LogIn() {
     }
   }, [dispatch])
 
-  const user = useSelector((state) => state.user.users)
+  const user = useSelector((state) => state.user.user)
   console.log("user", user)
   // auth state for global context
   // const { setAuth } = useContext(AuthContext)
@@ -161,7 +162,9 @@ export default function LogIn() {
                       .then((data) => {
                         // if (!data) return;
                         console.log("data", data);
-                        dispatch(login({...user.data}))
+                        dispatch(login({...data.data}))
+                        localStorage.setItem("user", JSON.stringify(data.data));
+                        navigate("/")
                       })
                       .catch((err) => {
                         console.log(err);
