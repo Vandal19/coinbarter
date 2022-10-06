@@ -21,20 +21,13 @@ import { getFormLabelUtilityClasses } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../features/userSlice";
 import { useNavigate } from 'react-router'
+import { useUserData } from "../../hooks/useUserData"
 
 const axios = require("axios");
 
 const theme = createTheme();
 export default function LogIn() {
-  const navigate = useNavigate()
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem('user'));
-    if (userData) {
-      dispatch(login(userData))
-    }
-  }, [dispatch])
+  const { loginAuth } = useUserData();
 
   const user = useSelector((state) => state.user.user)
   console.log("user", user)
@@ -155,20 +148,9 @@ export default function LogIn() {
                 <Typography>{user?.email}</Typography>
                 <Formik
                   initialValues={{ email: "", password: "", remember: false }}
-                  onSubmit={(values, actions) => {
+                  onSubmit={async (values, actions) => {
                     actions.resetForm();
-                    axios
-                      .post("/auth/login", { ...values })
-                      .then((data) => {
-                        // if (!data) return;
-                        console.log("data", data);
-                        dispatch(login({...data.data}))
-                        localStorage.setItem("user", JSON.stringify(data.data));
-                        navigate("/")
-                      })
-                      .catch((err) => {
-                        console.log(err);
-                      });
+                    await loginAuth({...values})
                   }}
                   validationSchema={Yup.object({
                     email: Yup.string()
