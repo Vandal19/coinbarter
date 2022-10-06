@@ -4,8 +4,15 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { useForm, FormProvider } from 'react-hook-form';
+
+// import FormInput from './CustomTextField';
 
 export default function AddressForm() {
+
+  // methods to run form using react hook form
+  const methods = useForm();
+
   return (
     <>
       <Typography variant="h6" gutterBottom>
