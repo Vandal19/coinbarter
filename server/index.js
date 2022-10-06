@@ -7,13 +7,31 @@ const port = 8000;
 const cors = require("cors");
 const morgan = require("morgan");
 const axios = require('axios');
+const bcrypt = require("bcrypt")
+const session = require("express-session")
 
 const products = require("./products")
+const userRoutes = require("./routes/userRoutes")
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}));
 app.use(morgan());
+app.use(session({
+  secret: process.env.COOKIE_SECRET,
+  credentials: true,
+  name: "session-id",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: process.env.ENVIRONMENT === "production",
+    httpOnly: true,
+    sameSite: process.env.ENVIRONMENT === "production" ? "none" : "lax"
+  }
+}))
 
 // connect to routes
 const categoryRoutes = require('./routes/categoryRoutes');
@@ -40,7 +58,7 @@ app.get('/categories', (req, res) => {
     }).catch(error => {
       // catch and print the error
       console.log(error);
-    }); 
+    });
 });
 
 
@@ -66,7 +84,7 @@ app.get('/products/categories/:category', (req, res) => {
       for (let a of products) {
 
         let randomStock = parseInt(Math.random() * 100);
-        
+
         let productPrice = a.price ? a.price.raw : "not available";
 
         const product = {
@@ -88,7 +106,7 @@ app.get('/products/categories/:category', (req, res) => {
       // catch and print the error
       console.log(error);
     })
-      
+
 });
 
 
@@ -147,6 +165,9 @@ app.post("/products", async (req, res) => {
   await addProduct(product);
   // console.log("product", product)
 });
+
+// Login authentication
+app.use("/auth", userRoutes)
 
 app.listen(port, () => {
   console.log(`listening on http://localhost:${port}`);
