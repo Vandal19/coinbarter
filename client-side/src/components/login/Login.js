@@ -30,7 +30,7 @@ export default function LogIn() {
   const { loginAuth } = useUserData();
 
   const user = useSelector((state) => state.user.user)
-  console.log("user", user)
+  // console.log("user", user)
   // auth state for global context
   // const { setAuth } = useContext(AuthContext)
 
