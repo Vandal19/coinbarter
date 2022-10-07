@@ -10,7 +10,7 @@ import { Box } from "@mui/system";
 
 // import FormInput from './CustomTextField';
 
-export default function AddressForm() {
+export default function AddressForm({ next }) {
 
   // methods to run form using react hook form
   const methods = useForm();
@@ -20,6 +20,7 @@ export default function AddressForm() {
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
+
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
@@ -57,9 +58,9 @@ export default function AddressForm() {
         <Grid item xs={12}>
           <TextField
             required
-            id="address1"
-            name="address1"
-            label="Address line 1"
+            id="address"
+            name="address"
+            label="Address line"
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"
@@ -112,7 +113,7 @@ export default function AddressForm() {
             control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
             label="Use this address for payment details"
           />
-        </Grid>
+        </Grid> 
         <br />
         <Grid item xs={12}>
           <Box
@@ -130,7 +131,8 @@ export default function AddressForm() {
             <Button variant='contained'
                     fullWidth={true}
                     sx={{ mr: 1 }} 
-                    type='submit'>
+                    type='submit'
+                    onClick={next}>
               Next
             </Button>
           </Box>
