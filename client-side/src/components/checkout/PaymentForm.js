@@ -4,8 +4,10 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { Button } from '@mui/material';
+import { Box } from "@mui/system";
 
-export default function PaymentForm() {
+export default function PaymentForm({backStep}) {
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -58,6 +60,24 @@ export default function PaymentForm() {
             control={<Checkbox color="secondary" name="saveCard" value="yes" />}
             label="Remember credit card details for next time"
           />
+        </Grid>
+        <br />
+        <Grid item xs={12}>
+          <Box
+                display="flex"
+                alignitems="center"
+                fullWidth={true}
+                justifyContent="space-between"
+                sx={{ mt: 2 }}>
+            <Button variant='contained'
+                    fullWidth={true}
+                    sx={{ mr: 1 }} 
+                    type='submit'
+                    onClick={backStep}
+                    >
+                Back
+            </Button>
+          </Box>
         </Grid>
       </Grid>
     </>
