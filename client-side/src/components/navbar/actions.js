@@ -2,6 +2,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import {
+  Box,
   Button,
   Badge,
   color,
@@ -148,11 +149,18 @@ export default function Actions({ matches }) {
               anchorEl={anchor}
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "bottom" }}
+              // display="flex" flexDirection='row'
             >
             {user ? (
+              <Box display="flex" flexDirection='column' alignItems="center">
+              <Button>My Orders</Button>
               <Button onClick={(e) => logoutAuth(e)}>Logout</Button>
+              </Box>
             ) : (
+              <Box display="flex" flexDirection='column' alignItems="center">
               <Button onClick={(e) => login(e)}>Login</Button>
+              <Button>Register</Button>
+              </Box>
             )}
             </Popover>
           </ListItemIcon>
