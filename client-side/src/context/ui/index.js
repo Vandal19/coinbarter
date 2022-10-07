@@ -16,6 +16,9 @@ export const UIProvider = ({ children }) => {
   // states for search bar
   const [showSearchBox, setShowSearchBox] = useState(false);
 
+  const [anchor, setAnchor] = useState(null);
+  const [open, setOpen] = useState(false)
+
   const value = {
     drawerOpen,
     setDrawerOpen,
@@ -26,7 +29,10 @@ export const UIProvider = ({ children }) => {
     showSearchBox,
     setShowSearchBox,
     showFav,
-    setShowFav
+    setShowFav,
+    anchor,
+    setAnchor,
+    open, setOpen
   }
 
   return <UIContext.Provider value={value} >{children}</UIContext.Provider>

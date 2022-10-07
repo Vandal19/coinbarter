@@ -18,7 +18,7 @@ import { UIProvider } from "./context/ui";
 import Cart from "./components/cart";
 import ItemsInCart from "./components/cart/cartItems";
 import SearchBox from "./components/search";
-import LogIn from "./pages/Login";
+import LogIn from "../src/components/login/Login";
 import Favorite from "./components/favorites"
 import Checkout from "./components/checkout/Checkout.js";
 
@@ -67,7 +67,7 @@ function App() {
             <Banner/>
             <Slider/>
 
-          <Box display="flex" justifyContent={"center"} sx={{ p: 4 }}>
+          <Box display="flex" justifyContent="center" sx={{ p: 4 }}>
             <Typography variant="h4">Our Products</Typography>
           </Box>
 
