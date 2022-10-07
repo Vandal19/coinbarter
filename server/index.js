@@ -12,6 +12,7 @@ const session = require("express-session")
 
 const products = require("./products")
 const userRoutes = require("./routes/userRoutes")
+const favoriteRoutes = require("./routes/favoriteRoutes")
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -37,6 +38,10 @@ app.use(session({
 const categoryRoutes = require('./routes/categoryRoutes');
 
 app.use('/products', categoryRoutes);
+app.use('/favorites', favoriteRoutes)
+
+// Login authentication
+app.use("/auth", userRoutes)
 
 
 // testing initialize
@@ -166,8 +171,7 @@ app.post("/products", async (req, res) => {
   // console.log("product", product)
 });
 
-// Login authentication
-app.use("/auth", userRoutes)
+
 
 app.listen(port, () => {
   console.log(`listening on http://localhost:${port}`);

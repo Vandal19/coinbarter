@@ -11,11 +11,17 @@ const favoriteSlice = createSlice({
   name: "favorite",
   initialState,
   reducers: {
-    addToFavorite(state, action) {
-      const itemInCart = state.favoriteItems.find(
+    isItemInFavorite(state, action) {
+       state.favoriteItems.find(
         (item) => item.id === action.payload.id
       );
-      if (itemInCart) {
+      localStorage.setItem("favoriteItems", JSON.stringify(state.favoriteItems))
+    },
+    addToFavorite(state, action) {
+      const itemInFavorite = state.favoriteItems.find(
+        (item) => item.id === action.payload.id
+      );
+      if (itemInFavorite) {
         state.favoriteItems.favoriteQuantity ++;
       } else {
         const tempProduct = { ...action.payload, favoriteQuantity: 1 };
@@ -51,6 +57,6 @@ const favoriteSlice = createSlice({
   }
 })
 
-export const { addToFavorite, removeFromFavorite, clearFavorites, sumQuantity } = favoriteSlice.actions;
+export const { isItemInFavorite, addToFavorite, removeFromFavorite, clearFavorites, sumQuantity } = favoriteSlice.actions;
 
 export default favoriteSlice.reducer;
