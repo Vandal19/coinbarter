@@ -1,3 +1,5 @@
+// SHOW ITEMS IN CART -- OUTSIDE OF DRAWER
+
 import {
   Avatar,
   Button,
@@ -18,7 +20,7 @@ import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, removeFromCart, decreaseCart, clearCart, sumTotal } from "../../features/cartSlice";
 
-const Cart = () => {
+const ItemsInCart = () => {
   const { showCart, setShowCart } = useUIContext();
   const dispatch = useDispatch();
 
@@ -90,70 +92,99 @@ const Cart = () => {
         </Typography>
         </Box>
       </Box>
-      <Divider variant="inset" />
+      <Divider sx={{ mt: 1, mb: 1 }} />
     </Box>
   ));
 
 
   return (
-    <Drawer
-      open={showCart}
-      onClose={() => setShowCart(false)}
-      anchor="right"
-      PaperProps={{
-        sx: { width: 500, background: Colors.light_gray, borderRadius: 0 },
-      }}
-    >
-      {cart.cartItems.length > 0 ?
-      <Box
-        display="flex"
-        justifyContent="center"
-        flexDirection="column"
-        alignItems="center"
-        sx={{ p: 4 }}
-      >
-        <Typography variant="h4" color={Colors.black}>
-          Your Cart
-        </Typography>
-        <Paper elevation={0} sx={{ p: 1, pl: 0.5 }}>
-          {cartContent}
-        </Paper>
-        <Box display="flex" flexDirection="row" justifyContent="center" alignItems="flex-start"  >
-          <Box display="flex" flexDirection="column" sx={{ pr: 10, mr:10 }}>
-            <Typography color={Colors.black} sx = {{ fontSize: 35}}>Subtotal:</Typography>
-            <Typography color={Colors.black} sx = {{ fontSize: 15}}>Free Shipping* </Typography>
-          </Box>
-          <Box>
-            <Typography color={Colors.black}sx = {{ fontSize: 30}}>${cart.cartTotalAmount}</Typography>
+    <Grid container xs={12}  columns={2}>
+      <Paper variant="outlined"
+              sx={{ mb: 1, my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
 
+        {/* render below if there are items in cart */}
+        {cart.cartItems.length > 0 ?
+
+        <Box
+          display="flex"
+          justifyContent="center"
+          flexDirection="column"
+          alignItems="center"
+        >
+          <Typography variant="h4" color={Colors.black} align="center">
+            Order Summary
+          </Typography>
+          <Paper elevation={0} sx={{ p: 1, pl: 0.5 }}>
+            {cartContent}
+          </Paper>
+
+          <Grid item xs={12}>
+            <Box 
+              display="flex" 
+              flexDirection="row" 
+              justifyContent="space-between" 
+              alignItems="flex-start">
+              <Box 
+                display="flex" 
+                flexDirection="column" 
+                justifyContent="space-between" 
+                sx={{ pr: 25, mr:20 }}>
+                  <Typography 
+                    color={Colors.black} 
+                    sx = {{ fontSize: 20}}>
+                      Subtotal:
+                  </Typography>
+                  <Typography 
+                    color={Colors.black} 
+                    sx = {{ fontSize: 20}}>
+                      Shipping: 
+                  </Typography>
+              </Box>
+              <Box>
+                  <Typography 
+                    color={Colors.black} 
+                    sx = {{ fontSize: 20}}>
+                      ${cart.cartTotalAmount}
+                  </Typography>
+                  <Typography 
+                    color={Colors.black} 
+                    sx = {{ fontSize: 20}}>
+                      Free
+                  </Typography>
+              </Box>
+            </Box>
+          </Grid>
+          
+          <Box sx={{ mt: 2 }} variant="contain">
+            {/* <Button href="/checkout">
+              Proceed to Payment
+            </Button> */}
+            <Button variant='contained'
+                    fullWidth={true}
+                    sx={{ mr: 1 }} onClick={handleClearCart}>
+                      Clear Cart
+            </Button>
           </Box>
         </Box>
-        <Box sx={{ mt:4 }} variant="contain">
-          <Button href="/checkout">
-            Proceed to Payment
-          </Button>
-          <Button onClick={handleClearCart}>Clear Cart</Button>
-        </Box>
-      </Box>
-      :
-      <Box
-        display="flex"
-        justifyContent="center"
-        flexDirection="column"
-        alignItems="center"
-        sx={{p:4}}
-      >
-        <Typography variant="h4" color={Colors.primary}>
-          Your cart is empty!
-        </Typography>
-      </Box> }
-      <Button onClick={()=> setShowCart(false)}>
-        Close
-      </Button>
-    </Drawer>
+
+        // render below if cart is empty
+        :
+        <Box
+          display="flex"
+          justifyContent="center"
+          flexDirection="column"
+          alignItems="center"
+          sx={{p:4}}
+        >
+          <Typography variant="h4" color={Colors.primary}>
+            Your cart is empty!
+          </Typography>
+        </Box> }
+     </Paper> 
+    </Grid>
   );
 
-};
+}
 
 
-export default Cart;
+export default ItemsInCart;
