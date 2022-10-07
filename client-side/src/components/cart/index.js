@@ -129,7 +129,7 @@ const Cart = () => {
           </Box>
         </Box>
         <Box sx={{ mt:4 }} variant="contain">
-          <Button href="/checkout">
+          <Button>
             Proceed to Payment
           </Button>
           <Button onClick={handleClearCart}>Clear Cart</Button>
