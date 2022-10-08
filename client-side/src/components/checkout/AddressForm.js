@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { useForm, FormProvider } from 'react-hook-form';
+// import { useForm, FormProvider } from 'react-hook-form';
 import { Button } from '@mui/material';
 import { Box } from "@mui/system";
 
@@ -15,7 +15,7 @@ import { Box } from "@mui/system";
 export default function AddressForm({ next }) {
 
   // methods to run form using react hook form
-  const methods = useForm();
+  // const methods = useForm();
 
   return (
     <>
@@ -115,7 +115,7 @@ export default function AddressForm({ next }) {
             control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
             label="Use this address for payment details"
           />
-        </Grid> 
+        </Grid>
         <br />
         <Grid item xs={12}>
           <Box
@@ -124,7 +124,7 @@ export default function AddressForm({ next }) {
                 fullWidth={true}
                 justifyContent="space-between"
                 sx={{ mt: 2 }}>
-            <Button variant='outlined' 
+            <Button variant='outlined'
                     fullWidth={true}
                     sx={{ mr: 1 }}
                     href="/cart">
@@ -132,7 +132,7 @@ export default function AddressForm({ next }) {
             </Button>
             <Button variant='contained'
                     fullWidth={true}
-                    sx={{ mr: 1 }} 
+                    sx={{ mr: 1 }}
                     type='submit'
                     onClick={next}>
               Next
