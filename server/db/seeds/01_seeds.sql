@@ -11,4 +11,8 @@ VALUES
 ('6463520011', 'Television & Video'),
 ('7926841011', 'Video Game Consoles & Accessories');
 
+INSERT INTO favorites (user_id, listing_id)
+VALUES
+(2, 33)
+
 

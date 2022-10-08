@@ -2,6 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: null,
+  products: null,
+  favorite: null,
+  cart: null
 };
 
 const userSlice = createSlice({
@@ -13,7 +16,7 @@ const userSlice = createSlice({
       localStorage.setItem("user", JSON.stringify(state.user));
     },
     logout(state, action) {
-      state.user = null;
+      state.user = null
       localStorage.removeItem("user", JSON.stringify(state.user));
     },
   },

@@ -55,11 +55,55 @@ const getUserByEmail = async(email) => {
   }
 }
 
+// Favorites page
+const addToFavorites = async(listingId) => {
+  try {
+    const result = await db.query(`
+      INSERT INTO favorites(user_id, product_id, favorite)
+      VALUES ($1, $2, true);`, [listingId]);
+    return result
+
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+const loadFavorites = async(id) => {
+  try {
+    const result = await db.query(`
+      SELECT products.* FROM products
+      JOIN favorites ON favorites.listing_id = products.id
+      WHERE favorites.user_id = $1;
+    `, [id]);
+    return result.rows;
+
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+const checkIfFavoriteExists = async(id) => {
+  try {
+    const result = await db.query(`
+      SELECT products.* FROM products
+      JOIN favorites ON favorites.listing_id = products.id
+      WHERE favorites.user_id = $1;
+   `, [id]);
+
+    return result.rows;
+  } catch (error) {
+    console.log(error)
+  }
+};
+
 
 
 
 module.exports = {
   addProduct,
   getProductsForCategory,
-  getUserByEmail
+  getUserByEmail,
+  addToFavorites,
+  loadFavorites,
+  checkIfFavoriteExists
 }
