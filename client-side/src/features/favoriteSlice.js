@@ -10,7 +10,7 @@ const favoriteTotalQuantity =
   ? JSON.parse(localStorage.getItem("favoriteTotalQuantity"))
   : 0;
 
-const setItemFunc = (favoriteItem, totalFavoriteQuantity) => {
+const setItemFunc = (favoriteItem, favoriteTotalQuantity) => {
   localStorage.setItem("favoriteItems", JSON.stringify(favoriteItem));
   localStorage.setItem("favoriteTotalQuantity", JSON.stringify(favoriteTotalQuantity));
 }
@@ -49,7 +49,7 @@ const favoriteSlice = createSlice({
 
       if (itemInFavorite) {
         state.favoriteItems = state.favoriteItems.filter((item) => item.id !== action.payload.id)
-        state.favoriteTotalQuantity = state.favoriteTotalQuantity - state.favoriteItems
+        state.favoriteTotalQuantity--
        };
         setItemFunc(
           state.favoriteItems.map((item) => item),
