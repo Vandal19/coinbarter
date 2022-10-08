@@ -7,8 +7,8 @@ const port = 8000;
 const cors = require("cors");
 const morgan = require("morgan");
 const axios = require('axios');
-const bcrypt = require("bcrypt")
-const session = require("express-session")
+// const bcrypt = require("bcrypt")
+// const session = require("express-session")
 
 const products = require("./products")
 const userRoutes = require("./routes/userRoutes")
@@ -21,18 +21,18 @@ app.use(cors({
   credentials: true
 }));
 app.use(morgan());
-app.use(session({
-  secret: process.env.COOKIE_SECRET,
-  credentials: true,
-  name: "session-id",
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: process.env.ENVIRONMENT === "production",
-    httpOnly: true,
-    sameSite: process.env.ENVIRONMENT === "production" ? "none" : "lax"
-  }
-}))
+// app.use(session({
+//   secret: process.env.COOKIE_SECRET,
+//   credentials: true,
+//   name: "session-id",
+//   resave: false,
+//   saveUninitialized: false,
+//   cookie: {
+//     secure: process.env.ENVIRONMENT === "production",
+//     httpOnly: true,
+//     sameSite: process.env.ENVIRONMENT === "production" ? "none" : "lax"
+//   }
+// }))
 
 // connect to routes
 const categoryRoutes = require('./routes/categoryRoutes');

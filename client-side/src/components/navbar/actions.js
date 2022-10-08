@@ -23,12 +23,14 @@ import { Colors } from "../../styles/theme";
 import { useUIContext } from "../../context/ui";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../features/userSlice";
+import { clearFavorites } from "../../features/favoriteSlice";
 import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 export default function Actions({ matches }) {
   const navigate = useNavigate();
   const { cartTotalQuantity } = useSelector((state) => state.cart);
-  const { favoriteTotalQuantity } = useSelector((state) => state.favorite);
+  const { favoriteTotalQuantity, clearFavorites } = useSelector((state) => state.favorite);
   const user = useSelector((state) => state.user.user);
   const { setShowCart, setShowFav, anchor, setAnchor, open, setOpen } =
     useUIContext();
@@ -51,11 +53,15 @@ export default function Actions({ matches }) {
 
   const dispatch = useDispatch();
 
-  const logoutAuth = (e) => {
-    e.preventDefault();
-    dispatch(logout());
-    navigate("/");
-  };
+
+  const logoutAuth = () => {
+      dispatch(logout());
+      // localStorage.clear();
+      navigate("/");
+    }
+
+
+
 
   const login = () => {
     navigate("/login");

@@ -21,7 +21,7 @@ import LogIn from "../src/components/login/Login";
 import Favorite from "./components/favorites"
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from "./features/userSlice";
-import { sumQuantity, isItemInFavorite } from './features/favoriteSlice'
+import { sumQuantity, isItemInFavorite, addToFavorite } from './features/favoriteSlice'
 
 
 
@@ -72,7 +72,7 @@ function App() {
       console.log(error);
     }
   }
-  favoriteData()
+
   return (
     <ThemeProvider theme={theme}>
       <Container

@@ -25,7 +25,20 @@ const favoriteSlice = createSlice({
   initialState,
   reducers: {
     isItemInFavorite(state, action) {
-       state.favoriteItems = action.payload.id
+      state.favoriteItems = action.payload
+      // state.favoriteTotalQuantity = action.payload
+      const itemInFavorite = state.favoriteItems.find(
+        (item) => item.id === action.payload.id
+      );
+      if (!itemInFavorite) {
+        state.favoriteTotalQuantity ++
+      }
+
+
+      setItemFunc(
+        state.favoriteItems.map((item) => item),
+        state.favoriteTotalQuantity
+      )
     },
     addToFavorite(state, action) {
       const newItem = action.payload
