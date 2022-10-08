@@ -47,7 +47,7 @@ function App() {
         const myFavorites = await axios.post(`/favorites/${user.id}`)
         console.log("myfavorite", myFavorites.data)
         // const parseData = JSON.stringify(localStorage.getItem(myFavorites))
-        // dispatch(isItemInFavorite(myFavorites))
+        dispatch(isItemInFavorite(myFavorites.data))
 
 
       } catch (error) {
@@ -72,7 +72,7 @@ function App() {
       console.log(error);
     }
   }
-
+  favoriteData()
   return (
     <ThemeProvider theme={theme}>
       <Container
