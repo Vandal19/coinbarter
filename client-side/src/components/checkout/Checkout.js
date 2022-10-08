@@ -15,7 +15,7 @@ const steps = ['Shipping address', 'Payment details'];
 export default function Checkout() {
 
   // states to move through steps for checkout
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(0);
   // states to capture shipping data
   const [shippingData, setShippingData] = useState({});
 
