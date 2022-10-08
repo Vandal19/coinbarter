@@ -16,14 +16,14 @@ import { NavBarCategories } from "./styles/navbar";
 import MobileMenu from "./components/drawer";
 import { UIProvider } from "./context/ui";
 import Cart from "./components/cart";
+import ItemsInCart from "./components/cart/cartItems";
 import SearchBox from "./components/search";
 import LogIn from "../src/components/login/Login";
 import Favorite from "./components/favorites"
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from "./features/userSlice";
 import { sumQuantity, isItemInFavorite, addToFavorite } from './features/favoriteSlice'
-
-
+import Checkout from "./components/checkout/Checkout.js";
 
 function App() {
   const [name, setName] = useState("");
@@ -103,6 +103,17 @@ function App() {
             <Route path="/products/:id" element={<>
               <Products />
             </>} />
+
+            {/* Login Page*/}
+            <Route path="/checkout" element={<>
+            <Checkout />
+            </>} />
+
+            {/* FOR TESTING -- Cart Page*/}
+            <Route path="/cart" element={<>
+            <ItemsInCart />
+            </>} />
+
           </Routes>
           <Footer />
           <MobileMenu />
