@@ -55,27 +55,28 @@ export default function PaymentForm({backStep}) {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="saveCard" value="yes" />}
-            label="Remember credit card details for next time"
-          />
-        </Grid>
         <br />
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ mt: 2 }}>
           <Box
                 display="flex"
                 alignitems="center"
                 fullWidth={true}
                 justifyContent="space-between"
                 sx={{ mt: 2 }}>
-            <Button variant='contained'
+            <Button variant='outlined'
                     fullWidth={true}
                     sx={{ mr: 1 }} 
                     type='submit'
                     onClick={backStep}
                     >
                 Back
+            </Button>
+            <Button variant='contained'
+                    fullWidth={true}
+                    sx={{ mr: 1 }} 
+                    type='submit'
+                    >
+              Pay Now
             </Button>
           </Box>
         </Grid>
