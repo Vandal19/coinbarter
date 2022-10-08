@@ -4,9 +4,10 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { useForm, FormProvider } from 'react-hook-form';
+// import { useForm, FormProvider } from 'react-hook-form';
 import { Button } from '@mui/material';
 import { Box } from "@mui/system";
+import { useState, useEffect } from 'react';
 
 // import FormInput from './CustomTextField';
 
@@ -15,7 +16,27 @@ import { Box } from "@mui/system";
 export default function AddressForm({ next }) {
 
   // methods to run form using react hook form
-  const methods = useForm();
+  // const methods = useForm();
+
+  const [values, setValues] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    address: "",
+    city: "",
+    state: "",
+    zip: "",
+    country: ""
+  });
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const submitForm = (event) => {
+    event.preventDefault();
+    // then send new setValues obj to backend using axios post
+  }
 
   return (
     <>
@@ -23,7 +44,7 @@ export default function AddressForm({ next }) {
         Shipping address
       </Typography>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={3} component="form" onSubmit={submitForm}>
         <Grid item xs={12} sm={6}>
           <TextField
             required
@@ -33,6 +54,8 @@ export default function AddressForm({ next }) {
             fullWidth
             autoComplete="given-name"
             variant="standard"
+            value={values.firstName}
+            onChange={handleChange('firstName')}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -44,6 +67,8 @@ export default function AddressForm({ next }) {
             fullWidth
             autoComplete="family-name"
             variant="standard"
+            value={values.lastName}
+            onChange={handleChange('lastName')}
           />
         </Grid>
         <Grid item xs={12}>
@@ -55,6 +80,8 @@ export default function AddressForm({ next }) {
             fullWidth
             autoComplete="email"
             variant="standard"
+            value={values.email}
+            onChange={handleChange('email')}
           />
         </Grid>
         <Grid item xs={12}>
@@ -66,6 +93,8 @@ export default function AddressForm({ next }) {
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"
+            value={values.address}
+            onChange={handleChange('address')}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -77,6 +106,8 @@ export default function AddressForm({ next }) {
             fullWidth
             autoComplete="shipping address-level2"
             variant="standard"
+            value={values.city}
+            onChange={handleChange('city')}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -86,6 +117,8 @@ export default function AddressForm({ next }) {
             label="State/Province/Region"
             fullWidth
             variant="standard"
+            value={values.state}
+            onChange={handleChange('state')}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -97,6 +130,8 @@ export default function AddressForm({ next }) {
             fullWidth
             autoComplete="shipping postal-code"
             variant="standard"
+            value={values.zip}
+            onChange={handleChange('zip')}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -108,6 +143,8 @@ export default function AddressForm({ next }) {
             fullWidth
             autoComplete="shipping country"
             variant="standard"
+            value={values.country}
+            onChange={handleChange('country')}
           />
         </Grid>
         <br />
