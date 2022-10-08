@@ -30,7 +30,7 @@ export default function Actions({ matches }) {
   const { cartTotalQuantity } = useSelector((state) => state.cart);
   const { favoriteTotalQuantity } = useSelector((state) => state.favorite);
   const user = useSelector((state) => state.user.user);
-  console.log("user", user);
+  console.log("user", favoriteTotalQuantity);
   const { setShowCart, setShowFav, anchor, setAnchor, open, setOpen } =
     useUIContext();
 

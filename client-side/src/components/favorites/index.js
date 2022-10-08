@@ -13,13 +13,15 @@ import {
 import { useEffect } from "react";
 import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromFavorite, clearFavorites, sumQuantity } from "../../features/favoriteSlice";
+import { removeFromFavorite, clearFavorites } from "../../features/favoriteSlice";
 import { useUIContext } from "../../context/ui";
 import { Colors } from "../../styles/theme";
 import { useTheme } from "@mui/material/styles";
 import { addToCart } from "../../features/cartSlice";
+import { useUserData } from "../../hooks/useUserData";
 
 const Favorite = () => {
+
   const { showFav, setShowFav } = useUIContext();
   const dispatch = useDispatch();
 
@@ -27,9 +29,9 @@ const Favorite = () => {
   const cart = useSelector((state) => state.cart);
   const theme = useTheme();
 
-  useEffect(() => {
-    dispatch(sumQuantity());
-  }, [favorite, dispatch])
+  // useEffect(() => {
+  //   dispatch(sumQuantity());
+  // }, [favorite, dispatch])
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product))
@@ -107,7 +109,7 @@ const Favorite = () => {
         sx: { width: 500, background: Colors.light_gray, borderRadius: 0 },
       }}
     >
-      {favorite.favoriteItems.length > 0 ?
+      {favorite?.favoriteItems?.length > 0 ?
       <Box
         display="flex"
         justifyContent="center"

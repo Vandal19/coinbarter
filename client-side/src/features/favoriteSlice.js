@@ -1,10 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  favoriteItems: localStorage.getItem("favoriteItems")
+const favoriteItems =
+  localStorage.getItem("favoriteItems") !== null
   ? JSON.parse(localStorage.getItem("favoriteItems"))
-  : [],
-favoriteTotalQuantity: 0,
+  : [];
+
+const favoriteTotalQuantity =
+  localStorage.getItem("favoriteTotalQuantity") !== null
+  ? JSON.parse(localStorage.getItem("favoriteTotalQuantity"))
+  : 0;
+
+const setItemFunc = (favoriteItem, totalFavoriteQuantity) => {
+  localStorage.setItem("favoriteItems", JSON.stringify(favoriteItem));
+  localStorage.setItem("favoriteTotalQuantity", JSON.stringify(favoriteTotalQuantity));
+}
+
+const initialState = {
+  favoriteItems: favoriteItems,
+  favoriteTotalQuantity: favoriteTotalQuantity,
 }
 
 const favoriteSlice = createSlice({
@@ -12,51 +25,48 @@ const favoriteSlice = createSlice({
   initialState,
   reducers: {
     isItemInFavorite(state, action) {
-       state.favoriteItems.find(
-        (item) => item.id === action.payload.id
-      );
-      localStorage.setItem("favoriteItems", JSON.stringify(state.favoriteItems))
+       state.favoriteItems = action.payload.id
     },
     addToFavorite(state, action) {
+      const newItem = action.payload
       const itemInFavorite = state.favoriteItems.find(
-        (item) => item.id === action.payload.id
+        (item) => item.id === newItem.id
       );
       if (itemInFavorite) {
-        state.favoriteItems.favoriteQuantity ++;
+        itemInFavorite.favoriteQuantity ++;
       } else {
-        const tempProduct = { ...action.payload, favoriteQuantity: 1 };
+        const tempProduct = { ...newItem, favoriteQuantity: 1 };
         state.favoriteItems.push(tempProduct);
+        state.favoriteTotalQuantity ++
       }
-      localStorage.setItem("favoriteItems", JSON.stringify(state.favoriteItems))
+      setItemFunc(
+        state.favoriteItems.map((item) => item),
+        state.favoriteTotalQuantity
+      )
     },
     removeFromFavorite(state, action) {
-      const updatedFavoriteItems = state.favoriteItems.filter(
-        (favoriteItem) => favoriteItem.id !== action.payload.id
-      );
-      state.favoriteItems = updatedFavoriteItems;
-      localStorage.setItem("favoriteItems", JSON.stringify(state.favoriteItems));
+      const itemInFavorite = state.favoriteItems.find((item) => item.id === action.payload.id)
+
+      if (itemInFavorite) {
+        state.favoriteItems = state.favoriteItems.filter((item) => item.id !== action.payload.id)
+        state.favoriteTotalQuantity = state.favoriteTotalQuantity - state.favoriteItems
+       };
+        setItemFunc(
+          state.favoriteItems.map((item) => item),
+          state.favoriteTotalQuantity
+        )
     },
     clearFavorites(state, action) {
       state.favoriteItems = [];
-      localStorage.setItem("favoriteItems", JSON.stringify(state.favoriteItems));
+      state.favoriteTotalQuantity = [];
+      setItemFunc(
+        state.favoriteItems.map((item) => item),
+        state.favoriteTotalQuantity
+      )
     },
-    sumQuantity(state, action) {
-      let { quantity } = state.favoriteItems.reduce(
-        (favoriteTotal, favoriteItem) => {
-          const {favoriteQuantity} = favoriteItem
-
-          favoriteTotal.quantity += favoriteQuantity
-
-          return favoriteTotal
-        },
-        {
-          quantity: 0}
-      );
-      state.favoriteTotalQuantity = quantity;
-    }
   }
 })
 
-export const { isItemInFavorite, addToFavorite, removeFromFavorite, clearFavorites, sumQuantity } = favoriteSlice.actions;
+export const { isItemInFavorite, addToFavorite, removeFromFavorite, clearFavorites } = favoriteSlice.actions;
 
 export default favoriteSlice.reducer;

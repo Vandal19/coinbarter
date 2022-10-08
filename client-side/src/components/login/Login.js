@@ -27,7 +27,7 @@ const axios = require("axios");
 
 const theme = createTheme();
 export default function LogIn() {
-  const { loginAuth } = useUserData();
+  const { loginAuth , favData } = useUserData();
 
   const user = useSelector((state) => state.user.user)
   // console.log("user", user)
@@ -151,6 +151,7 @@ export default function LogIn() {
                   onSubmit={async (values, actions) => {
                     actions.resetForm();
                     await loginAuth({...values})
+                    // await favData({...values})
                   }}
                   validationSchema={Yup.object({
                     email: Yup.string()

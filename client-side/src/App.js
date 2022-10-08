@@ -19,17 +19,47 @@ import Cart from "./components/cart";
 import SearchBox from "./components/search";
 import LogIn from "../src/components/login/Login";
 import Favorite from "./components/favorites"
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from "./features/userSlice";
+import { sumQuantity, isItemInFavorite } from './features/favoriteSlice'
+
 
 
 function App() {
   const [name, setName] = useState("");
   const [home, setHome] = useState("");
 
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user)
+
   useEffect(() => {
-    axios.get("http://localhost:8000/home").then((res) => {
-      setHome(res.data);
-    });
-  }, []);
+    // axios.get("http://localhost:8000/home").then((res) => {
+    //   setHome(res.data);
+    // });
+
+    const userData = JSON.parse(localStorage.getItem('user'));
+    if (userData) {
+      dispatch(login(userData))
+    }
+
+    const favoriteData = async () => {
+      try {
+        const myFavorites = await axios.post(`/favorites/${user.id}`)
+        console.log("myfavorite", myFavorites.data)
+        // const parseData = JSON.stringify(localStorage.getItem(myFavorites))
+        // dispatch(isItemInFavorite(myFavorites))
+
+
+      } catch (error) {
+        console.log(error.response);
+      }
+    }
+    if(user?.id){
+      favoriteData();
+    }
+
+    // console.log("favData", favoriteData)
+  }, [dispatch, user?.id])
 
   async function postName(e) {
     e.preventDefault();
