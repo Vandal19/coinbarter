@@ -147,12 +147,6 @@ export default function AddressForm({ next }) {
             onChange={handleChange('country')}
           />
         </Grid>
-        <Grid item xs={12}>
-          <FormControlLabel
-            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-            label="Use this address for payment details"
-          />
-        </Grid>
         <br />
         <Grid item xs={12} sx={{ mt: 2 }}>
           <Box
