@@ -30,11 +30,17 @@ const favoriteSlice = createSlice({
       const itemInFavorite = state.favoriteItems.find(
         (item) => item.id === action.payload.id
       );
-      if (!itemInFavorite) {
-        state.favoriteTotalQuantity ++
+      console.log("action", action.payload)
+      if (itemInFavorite) {
+        const updatedFavState = state.favoriteItems = state.favoriteItems.filter((item) => item.id !== action.payload.id)
+        state.favoriteItems = updatedFavState
+      } else {
+        const updatedFavState = state.favoriteItems.filter((item) => item.id !== action.payload.id)
+        state.favoriteItems = updatedFavState
+        console.log(state.favoriteItems)
+        state.favoriteQuantity = state.favoriteItems.length
+        state.favoriteTotalQuantity = state.favoriteQuantity
       }
-
-
       setItemFunc(
         state.favoriteItems.map((item) => item),
         state.favoriteTotalQuantity
@@ -71,7 +77,7 @@ const favoriteSlice = createSlice({
     },
     clearFavorites(state, action) {
       state.favoriteItems = [];
-      state.favoriteTotalQuantity = [];
+      state.favoriteTotalQuantity = null
       setItemFunc(
         state.favoriteItems.map((item) => item),
         state.favoriteTotalQuantity
