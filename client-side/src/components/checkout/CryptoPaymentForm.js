@@ -29,6 +29,9 @@ export default function CryptoPaymentForm({}) {
   
     console.log("debug:", { amount, destinationAddr });
 
+    // reset state displaying error msg
+    setError("");
+
     event.preventDefault();
   
     try {
