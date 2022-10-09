@@ -21,11 +21,14 @@ const startPayment = async ({ setError, setTxs, ether, addr }) => {
 
     // ask user for permission to connect with metamask wallet
     await window.ethereum.send("eth_requestAccounts");
+
     // establish connection with eth provider to send tx
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
+
     // validate receiving addr
     ethers.utils.getAddress(addr);
+    
     // create the tx; to which addr & how much eth (converted to wei)
     const tx = await signer.sendTransaction({
       to: addr,
@@ -42,6 +45,10 @@ const startPayment = async ({ setError, setTxs, ether, addr }) => {
 
 
 export default function PaymentForm({backStep}) {
+
+  // hooks to set amount and destination addr
+  // const [amount, setAmount] = useState(0);
+  // const [destinationAddr, setDestinationAddr] = useState("");
 
   // states for error and capture tx
   const [error, setError] = useState();

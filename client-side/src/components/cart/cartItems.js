@@ -129,6 +129,7 @@ const ItemsInCart = () => {
         sx={{ mb: 1, my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 },  }}
       >
         {/* render below if there are items in cart */}
+        
         {cart.cartItems.length > 0 ? (
           <Box
             display="flex"

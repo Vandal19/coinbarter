@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import { Box, Grid, Container, Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button } from '@mui/material';
 import { Colors } from "../../styles/theme";
 import AddressForm from './AddressForm';
-import PaymentForm from './PaymentForm';
+// import PaymentForm from './PaymentForm';
+import CryptoPaymentForm from './CryptoPaymentForm';
 import { useSelector, useDispatch } from "react-redux";
 
 import ItemsInCart from '../cart/cartItems';
@@ -16,7 +17,7 @@ const steps = ['Shipping address', 'Payment details'];
 export default function Checkout() {
 
   // states to move through steps for checkout
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(0);
   // states to capture shipping data
   const [shippingData, setShippingData] = useState({});
 
@@ -35,7 +36,7 @@ export default function Checkout() {
   const cart = useSelector((state) => state.cart);
   // cart = {cartItems, cartTotalQuantity, cartTotalAmount}
   const cartOrder = cart.cartTotalQuantity;
-  console.log("orders in cart:", cartOrder);
+  // console.log("orders in cart:", cartOrder);
 
 
   // move through checkout steps
@@ -57,7 +58,7 @@ export default function Checkout() {
   // render different components based on which step user is on
   const Form = () => activeStep === 0
     ? <AddressForm next={next} />
-    : <PaymentForm backStep={backStep} />
+    : <CryptoPaymentForm backStep={backStep} />
 
   return (
     <>
