@@ -18,9 +18,12 @@ export default function CryptoPaymentForm({}) {
   // hooks to set amount and destination addr
   const [amount, setAmount] = useState();
   const [destinationAddr, setDestinationAddr] = useState("");
+  // states for error msg and capture tx
+  const [error, setError] = useState("");
+  const [txs, setTxs] = useState([]);
 
 
-  // ({ setError, setTxs, ether, addr })
+  // ({ setError, setTxs, amount, destinationAddr })
   // initialize connection with metamask wallet
   const startPayment = async ( event ) => {
   
@@ -53,19 +56,14 @@ export default function CryptoPaymentForm({}) {
       console.log({ amount, destinationAddr });
       console.log("tx", tx);
     //   // add tx hash id to TxList to display tx id to user
-    //   setTxs([tx]);
+      setTxs([tx]);
     } catch (error) {
-      // setError(error.message);
+      setError(error.reason);
       console.log({error});
     }
   };
 
-
-
-  // states for error and capture tx
-  // const [error, setError] = useState();
-  // const [txs, setTxs] = useState([]);
-
+  
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   //   const data = new FormData(e.target);
@@ -133,8 +131,8 @@ export default function CryptoPaymentForm({}) {
           </Box>
         </Grid>
         <Grid item xs={12} sx={{ mt: 1 }}>
-        {/* <ErrorMessage message={error} /> */}
-        {/* <TxList txs={txs} /> */}
+        <ErrorMessage message={error} />
+        <TxList txs={txs} />
         </Grid>
       </Grid>
     </>
