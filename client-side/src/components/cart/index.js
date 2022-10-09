@@ -17,8 +17,9 @@ import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, removeFromCart, decreaseCart, clearCart, sumTotal } from "../../features/cartSlice";
+import CartItem from "./cartItem"
 
-const Cart = (props) => {
+const Cart = () => {
   // const { id, category_id, brand_name, cover_image_url, price, create_date, update_date, stock, quantity, totalPrice } = props.product
   const { showCart, setShowCart } = useUIContext();
   const dispatch = useDispatch();
@@ -30,18 +31,6 @@ const Cart = (props) => {
     dispatch(sumTotal());
   }, [cart, dispatch])
 
-  const handleRemoveFromCart = (product) => {
-    dispatch(removeFromCart(product))
-  }
-
-  const handleDecreaseCartQty = (product) => {
-    dispatch(decreaseCart(product))
-  }
-
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product))
-  }
-
   const handleClearCart = (product) => {
     dispatch(clearCart(product))
   }
@@ -49,52 +38,6 @@ const Cart = (props) => {
 
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
-
-  const cartContent = cart.cartItems?.map((product) => (
-    <Box key={product.id}>
-      <Box
-        display="flex"
-        alignItems="start"
-        justifyContent="space-between"
-        sx={{ pt: 2, pb: 2 }}
-      >
-        <Avatar
-          sx={{
-            width: 150,
-            height: 150,
-            backgroundColor: "transparent",
-          }}
-          variant="square"
-        >
-          <img
-            alt={product.title}
-            src={`${product.cover_image_url}?w=120&h=120&fit=crop&auto=format`}
-            srcSet={`${product.cover_image_url}?w=120&h=120&fit=crop&auto=format&dpr= 2x`}
-            sx={{objectFit: "contain"}}
-          />
-        </Avatar>
-        <Box display="flex" flexDirection="column" sx={{pr:4}}>
-          <Typography variant="subtitle2">{product.brand_name}</Typography>
-          <Typography sx={{display:'flex', alignItems:'center', alignContent:'flex-end', paddingTop:2}}>
-            <Box display="flex" flexDirection="row" alignItems="center">
-              <Button onClick={() => handleDecreaseCartQty(product)}sx = {{ fontSize: 25}} >-</Button>
-              <Typography>{product.cartQuantity}</Typography>
-              <Button onClick={() => handleAddToCart(product)} sx = {{ fontSize: 25}} >+</Button>
-              <Button onClick={() => handleRemoveFromCart(product)} sx = {{ fontSize: 15}}>
-                Remove
-              </Button>
-            </Box>
-          </Typography>
-        </Box>
-        <Box display="flex" alignItems="flex-end">
-        <Typography variant="body1" sx={{ mr: 2 }}>
-          ${(product.price) * product.cartQuantity}
-        </Typography>
-        </Box>
-      </Box>
-      <Divider variant="inset" />
-    </Box>
-  ));
 
 
   return (
@@ -118,7 +61,8 @@ const Cart = (props) => {
           Your Cart
         </Typography>
         <Paper elevation={0} sx={{ p: 1, pl: 0.5 }}>
-          {cartContent}
+        {/* {cart?.cartItems?.map((product, index) => ( */}
+          <CartItem  />
         </Paper>
         <Box display="flex" flexDirection="row" justifyContent="center" alignItems="flex-start"  >
           <Box display="flex" flexDirection="column" sx={{ pr: 10, mr:10 }}>

@@ -18,11 +18,38 @@ import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
 import ItemsInCart from "../cart/cartItems";
+import { addToCart, removeFromCart, decreaseCart, clearCart, sumTotal } from "../../features/cartSlice";
 
-const OrderSummary = () => {
+const OrderSummary = (product) => {
+  // const { id, category_id, brand_name, cover_image_url, price, create_date, update_date, stock, quantity, totalPrice } = props.product
   const dispatch = useDispatch();
-
   const cart = useSelector((state) => state.cart);
+  console.log("product", cart)
+  // const cartTotalAmount = useSelector((state) => state.cart.cartTotalAmount)
+
+
+  // useEffect(() => {
+  //   // dispatch(addToCart())
+  //   dispatch(sumTotal());
+  // }, [cart, dispatch])
+
+  // useEffect(() => {
+  //   const cartData = JSON.parse(localStorage.getItem('cartItems'));
+  // //   console.log("cart4", cart)
+  //     if (cartData) {
+  //       dispatch(addToCart(cart))
+  //     }
+
+  // }, [cart, dispatch])
+
+        //  dispatch(addToCart(cart))
+
+  // const handleAllCart = (product) => {
+  //   dispatch(addToCart(product))
+  // }
+  // console.log("cart56", handleAllCart)
+
+    // console.log("cart2", cart)
 
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -58,7 +85,7 @@ const OrderSummary = () => {
               >
                 Proceed to Checkout
               </Button>
-            <ItemsInCart />
+              <ItemsInCart />
             </Box>
           </>
         ) : (
