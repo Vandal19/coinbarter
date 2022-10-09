@@ -136,14 +136,6 @@ const ItemsInCart = () => {
             flexDirection="column"
             alignItems="center"
           >
-          <Button
-            sx={{ mb: 2 }}
-            variant="contained"
-            href="/checkout"
-            alignItems="center"
-          >
-            Proceed to Checkout
-          </Button>
             <Typography variant="h4" color={Colors.black} align="center">
               Order Summary
             </Typography>
