@@ -39,7 +39,7 @@ const ItemsInCart = () => {
   }
 
   const handleAddToCart = (product) => {
-    dispatch(addToCart(product))
+    dispatch(addToCart({product}))
   }
 
   const handleClearCart = (product) => {
@@ -119,42 +119,42 @@ const ItemsInCart = () => {
           </Paper>
 
           <Grid item xs={12}>
-            <Box 
-              display="flex" 
-              flexDirection="row" 
-              justifyContent="space-between" 
+            <Box
+              display="flex"
+              flexDirection="row"
+              justifyContent="space-between"
               alignItems="flex-start">
-              <Box 
-                display="flex" 
-                flexDirection="column" 
-                justifyContent="space-between" 
+              <Box
+                display="flex"
+                flexDirection="column"
+                justifyContent="space-between"
                 sx={{ pr: 25, mr:20 }}>
-                  <Typography 
-                    color={Colors.black} 
+                  <Typography
+                    color={Colors.black}
                     sx = {{ fontSize: 20}}>
                       Subtotal:
                   </Typography>
-                  <Typography 
-                    color={Colors.black} 
+                  <Typography
+                    color={Colors.black}
                     sx = {{ fontSize: 20}}>
-                      Shipping: 
+                      Shipping:
                   </Typography>
               </Box>
               <Box>
-                  <Typography 
-                    color={Colors.black} 
+                  <Typography
+                    color={Colors.black}
                     sx = {{ fontSize: 20}}>
                       ${cart.cartTotalAmount}
                   </Typography>
-                  <Typography 
-                    color={Colors.black} 
+                  <Typography
+                    color={Colors.black}
                     sx = {{ fontSize: 20}}>
                       Free
                   </Typography>
               </Box>
             </Box>
           </Grid>
-          
+
           <Box sx={{ mt: 2 }} variant="contain">
             {/* <Button href="/checkout">
               Proceed to Payment
@@ -180,7 +180,7 @@ const ItemsInCart = () => {
             Your cart is empty!
           </Typography>
         </Box> }
-     </Paper> 
+     </Paper>
     </Grid>
   );
 

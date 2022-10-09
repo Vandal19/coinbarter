@@ -90,12 +90,13 @@ app.get('/products/categories/:category', (req, res) => {
 
         let randomStock = parseInt(Math.random() * 100);
 
-        let productPrice = a.price ? a.price.raw : "not available";
+        let removeCommaProductPrice = a.price.raw.replaceAll(',', '')
+        let productPrice = a.price ? removeCommaProductPrice.slice(1) : "not available";
 
         const product = {
           category_id: req.params.category,
           brand_name: a.title,
-          price: productPrice.slice(1),
+          price: productPrice,
           cover_image_url: a.image,
           create_date: new Date(Date.now()),
           update_date: new Date(Date.now()),
