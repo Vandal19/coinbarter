@@ -131,10 +131,13 @@ const Cart = (props) => {
           </Box>
         </Box>
         <Box sx={{ mt:4 }} variant="contain">
-          <Button href="/checkout">
-            Proceed to Payment
-          </Button>
           <Button onClick={handleClearCart}>Clear Cart</Button>
+          <Button href="/order-summary" >
+            <Typography variant='contained'
+                    fullWidth={true}  align="center" style={{ wordWrap: "break-word" }}>
+            Proceed to Order Summary
+            </Typography>
+          </Button>
         </Box>
       </Box>
       :

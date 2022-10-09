@@ -164,8 +164,8 @@ export default function AddressForm({ next }) {
             <Button variant='outlined'
                     fullWidth={true}
                     sx={{ mr: 1 }}
-                    href="/cart">
-              Back to Cart
+                    href="/order-summary">
+              Back to Order Summary
             </Button>
             <Button variant='contained'
                     fullWidth={true}

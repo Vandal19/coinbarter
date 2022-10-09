@@ -110,7 +110,7 @@ function App() {
             </>} />
 
             {/* FOR TESTING -- Cart Page*/}
-            <Route path="/cart" element={<>
+            <Route path="/order-summary" element={<>
             <ItemsInCart />
             </>} />
 
