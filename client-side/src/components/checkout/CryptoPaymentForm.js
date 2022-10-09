@@ -13,7 +13,7 @@ import TxList from './TxList';
 
 
 
-export default function CryptoPaymentForm({}) {
+export default function CryptoPaymentForm({backStep, nextStep}) {
 
   // hooks to set amount and destination addr
   const [amount, setAmount] = useState();
@@ -59,8 +59,13 @@ export default function CryptoPaymentForm({}) {
       });
       console.log({ amount, destinationAddr });
       console.log("tx", tx);
-    //   // add tx hash id to TxList to display tx id to user
+      // add tx hash id to TxList to display tx id to user
       setTxs([tx]);
+
+      // move to order confirmation step after 10 seconds
+      setTimeout(() => {
+        nextStep();
+      }, 10000)
     } catch (error) {
       setError(error.reason);
       console.log({error});
@@ -116,14 +121,14 @@ export default function CryptoPaymentForm({}) {
                 fullWidth={true}
                 justifyContent="space-between"
                 sx={{ mt: 2 }}>
-            {/* <Button variant='outlined'
+            <Button variant='outlined'
                     fullWidth={true}
                     sx={{ mr: 1 }} 
                     type='submit'
                     onClick={backStep}
                     >
                 Back
-            </Button> */}
+            </Button>
             <Button variant='contained'
                     fullWidth={true}
                     sx={{ mr: 1 }} 
