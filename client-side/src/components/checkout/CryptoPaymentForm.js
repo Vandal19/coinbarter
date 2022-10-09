@@ -43,7 +43,8 @@ export default function CryptoPaymentForm({}) {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
   
-    //   const network = await provider.getNetwork();
+      // get testnet network
+      const network = await provider.getNetwork();
   
       // validate destination addr
       ethers.utils.getAddress(destinationAddr);
@@ -63,7 +64,7 @@ export default function CryptoPaymentForm({}) {
     }
   };
 
-  
+
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   //   const data = new FormData(e.target);
