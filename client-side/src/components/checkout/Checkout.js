@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { Grid, Container, Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button } from '@mui/material';
+import { Box, Grid, Container, Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button } from '@mui/material';
+import { Colors } from "../../styles/theme";
 import AddressForm from './AddressForm';
 // import PaymentForm from './PaymentForm';
 import CryptoPaymentForm from './CryptoPaymentForm';
@@ -24,9 +25,9 @@ export default function Checkout() {
   // useEffect(() => {
   //   const generateToken = async () => {
   //     try {
-        
+
   //     } catch (error) {
-        
+
   //     }
   //   }
   // }, []);
@@ -55,14 +56,16 @@ export default function Checkout() {
   );
 
   // render different components based on which step user is on
-  const Form = () => activeStep === 0 
+  const Form = () => activeStep === 0
     ? <AddressForm next={next} />
     : <CryptoPaymentForm backStep={backStep} />
 
   return (
     <>
+        {cart.cartItems.length > 0 ?
       <Grid container component="main" columns={16} spacing={3}
             sx={{ mb: 10, height: '100vh' }}>
+          <>
         <Grid item xs={8}>
           <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
             <Typography component="h1" variant="h4" align="center">
@@ -82,7 +85,28 @@ export default function Checkout() {
         <Grid item xs={8}>
           <ItemsInCart />
         </Grid>
+          </>
       </Grid>
+      :
+      <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+      height= "250px"
+      width= "1100px"
+      sx={{p:10, m:10}}
+    >
+      <Typography variant="h4" color={Colors.primary}>
+        Your cart is empty. Please return to homepage to continue shopping!
+      </Typography>
+      <Button variant='contained'
+                fullWidth={true}
+                sx={{ mr: 1 }} href="/">
+                  Continue Shopping
+        </Button>
+    </Box>
+      }
     </>
   );
 }

@@ -18,11 +18,13 @@ import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, removeFromCart, decreaseCart, clearCart, sumTotal } from "../../features/cartSlice";
 
-const Cart = () => {
+const Cart = (props) => {
+  // const { id, category_id, brand_name, cover_image_url, price, create_date, update_date, stock, quantity, totalPrice } = props.product
   const { showCart, setShowCart } = useUIContext();
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
+  const cartTotalAmount = useSelector((state) => state.cart.cartTotalAmount)
 
   useEffect(() => {
     dispatch(sumTotal());
@@ -124,15 +126,18 @@ const Cart = () => {
             <Typography color={Colors.black} sx = {{ fontSize: 15}}>Free Shipping* </Typography>
           </Box>
           <Box>
-            <Typography color={Colors.black}sx = {{ fontSize: 30}}>${cart.cartTotalAmount}</Typography>
+            <Typography color={Colors.black}sx = {{ fontSize: 30}}>${cartTotalAmount}</Typography>
 
           </Box>
         </Box>
         <Box sx={{ mt:4 }} variant="contain">
-          <Button href="/checkout">
-            Proceed to Payment
-          </Button>
           <Button onClick={handleClearCart}>Clear Cart</Button>
+          <Button href="/order-summary" >
+            <Typography variant='contained'
+                    fullWidth={true}  align="center" style={{ wordWrap: "break-word" }}>
+            Proceed to Order Summary
+            </Typography>
+          </Button>
         </Box>
       </Box>
       :

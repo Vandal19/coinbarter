@@ -30,7 +30,7 @@ import { useEffect } from "react";
 export default function Actions({ matches }) {
   const navigate = useNavigate();
   const { cartTotalQuantity } = useSelector((state) => state.cart);
-  const { favoriteTotalQuantity, clearFavorites } = useSelector((state) => state.favorite);
+  const { favoriteTotalQuantity } = useSelector((state) => state.favorite);
   const user = useSelector((state) => state.user.user);
   const { setShowCart, setShowFav, anchor, setAnchor, open, setOpen } =
     useUIContext();
@@ -55,9 +55,11 @@ export default function Actions({ matches }) {
 
 
   const logoutAuth = () => {
+    localStorage.clear();
+      dispatch(clearFavorites())
       dispatch(logout());
-      // localStorage.clear();
       navigate("/");
+      console.log("logout", logoutAuth)
     }
 
 

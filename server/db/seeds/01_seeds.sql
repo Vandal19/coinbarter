@@ -13,6 +13,6 @@ VALUES
 
 INSERT INTO favorites (user_id, listing_id)
 VALUES
-(2, 33)
+(2, 66)
 
 

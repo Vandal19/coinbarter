@@ -147,6 +147,12 @@ export default function AddressForm({ next }) {
             onChange={handleChange('country')}
           />
         </Grid>
+        <Grid item xs={12}>
+          <FormControlLabel
+            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
+            label="Use this address for payment details"
+          />
+        </Grid>
         <br />
         <Grid item xs={12} sx={{ mt: 2 }}>
           <Box
@@ -155,15 +161,15 @@ export default function AddressForm({ next }) {
                 fullWidth={true}
                 justifyContent="space-between"
                 sx={{ mt: 2 }}>
-            <Button variant='outlined' 
+            <Button variant='outlined'
                     fullWidth={true}
                     sx={{ mr: 1 }}
-                    href="/cart">
-              Back to Cart
+                    href="/order-summary">
+              Back to Order Summary
             </Button>
             <Button variant='contained'
                     fullWidth={true}
-                    sx={{ mr: 1 }} 
+                    sx={{ mr: 1 }}
                     type='submit'
                     onClick={next}>
               Next
