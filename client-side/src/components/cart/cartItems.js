@@ -112,7 +112,7 @@ const ItemsInCart = () => {
           alignItems="center"
         >
           <Typography variant="h4" color={Colors.black} align="center">
-            Order Summary
+            Your Order
           </Typography>
           <Paper elevation={0} sx={{ p: 1, pl: 0.5 }}>
             {cartContent}
