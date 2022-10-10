@@ -40,13 +40,18 @@ const orderSlice = createSlice({
       console.log("payload", orderQuantity)
       state.orderTotalQuantity = orderQuantity
       state.orderTotalAmount = state.orderTotalQuantity * price
-
       setItemFunc(
       state.orderItems.map((item) => item),
       state.orderTotalQuantity,
       state.orderTotalAmount
       );
     },
+    createOrder(state, action) {
+      state.orderItems = action.payload
+      setItemFunc(
+        state.orderItems.map((item) => item),
+      );
+    }
     // orderTotal(state, action) {
     //   let { total, quantity } = state.orderItems.reduce(
     //     (orderTotal, orderItem) => {

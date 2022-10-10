@@ -77,6 +77,7 @@ const favoriteSlice = createSlice({
     },
     clearFavorites(state, action) {
       state.favoriteItems = [];
+      state.favoriteQuantity = null
       state.favoriteTotalQuantity = null
       setItemFunc(
         state.favoriteItems.map((item) => item),
