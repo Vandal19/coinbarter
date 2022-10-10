@@ -41,7 +41,7 @@ const GetEthPrice = () => {
             <CardMedia
               component="img"
               image={data[0].image}
-              sx={{}}
+              sx={{ width: "150px", p: "1rem", mx: 1, mt: 1}}
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
@@ -53,11 +53,11 @@ const GetEthPrice = () => {
 
                 {data[0].price_change_percentage_24h < 0 ? (
                   <Typography variant="body2" color="red">
-                    <SouthEastIcon fontSize='small'/>{data[0].price_change_percentage_24h.toFixed(2)}%
+                    <SouthEastIcon fontSize='small'/> - {data[0].price_change_percentage_24h.toFixed(2)}%
                   </Typography>
                 ) : (
                   <Typography variant="body2" color="green">
-                    <NorthEastIcon fontSize='small'/>{data[0].price_change_percentage_24h.toFixed(2)}%
+                    <NorthEastIcon fontSize='small'/> + {data[0].price_change_percentage_24h.toFixed(2)}%
                   </Typography>
                 )}
 
@@ -70,6 +70,7 @@ const GetEthPrice = () => {
             <CardMedia
               component="img"
               image={data[1].image}
+              sx={{ width: "150px", p: "1rem", mx: 1, mt: 1}}
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
@@ -81,11 +82,11 @@ const GetEthPrice = () => {
 
                 {data[1].price_change_percentage_24h < 0 ? (
                   <Typography variant="body2" color="red">
-                    <SouthEastIcon fontSize='small'/>{data[1].price_change_percentage_24h.toFixed(2)}%
+                    <SouthEastIcon fontSize='small'/> - {data[1].price_change_percentage_24h.toFixed(2)}%
                   </Typography>
                 ) : (
                   <Typography variant="body2" color="green">
-                    <NorthEastIcon fontSize='small'/>{data[1].price_change_percentage_24h.toFixed(2)}%
+                    <NorthEastIcon fontSize='small'/> + {data[1].price_change_percentage_24h.toFixed(2)}%
                   </Typography>
                 )}
 
@@ -98,6 +99,7 @@ const GetEthPrice = () => {
             <CardMedia
               component="img"
               image={data[2].image}
+              sx={{ width: "150px", p: "1rem", mx: 1, mt: 1}}
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
@@ -109,11 +111,11 @@ const GetEthPrice = () => {
 
                 {data[2].price_change_percentage_24h < 0 ? (
                   <Typography variant="body2" color="red">
-                    <SouthEastIcon fontSize='small'/>{data[2].price_change_percentage_24h.toFixed(2)}%
+                    <SouthEastIcon fontSize='small'/> - {data[2].price_change_percentage_24h.toFixed(2)}%
                   </Typography>
                 ) : (
                   <Typography variant="body2" color="green">
-                    <NorthEastIcon fontSize='small'/>{data[2].price_change_percentage_24h.toFixed(2)}%
+                    <NorthEastIcon fontSize='small'/> + {data[2].price_change_percentage_24h.toFixed(2)}%
                   </Typography>
                 )}
 
