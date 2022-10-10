@@ -17,39 +17,20 @@ import { Colors } from "../../styles/theme";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
-import ItemsInCart from "../cart/cartItems";
-import { addToCart, removeFromCart, decreaseCart, clearCart, sumTotal } from "../../features/cartSlice";
+import { sumTotal, clearCart } from "../../features/cartSlice";
+import CartItem from "../cart/cartItem";
 
 const OrderSummary = (product) => {
-  // const { id, category_id, brand_name, cover_image_url, price, create_date, update_date, stock, quantity, totalPrice } = props.product
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  console.log("product", cart)
-  // const cartTotalAmount = useSelector((state) => state.cart.cartTotalAmount)
 
+  useEffect(() => {
+    dispatch(sumTotal());
+  }, [cart, dispatch]);
 
-  // useEffect(() => {
-  //   // dispatch(addToCart())
-  //   dispatch(sumTotal());
-  // }, [cart, dispatch])
-
-  // useEffect(() => {
-  //   const cartData = JSON.parse(localStorage.getItem('cartItems'));
-  // //   console.log("cart4", cart)
-  //     if (cartData) {
-  //       dispatch(addToCart(cart))
-  //     }
-
-  // }, [cart, dispatch])
-
-        //  dispatch(addToCart(cart))
-
-  // const handleAllCart = (product) => {
-  //   dispatch(addToCart(product))
-  // }
-  // console.log("cart56", handleAllCart)
-
-    // console.log("cart2", cart)
+  const handleClearCart = (product) => {
+    dispatch(clearCart(product));
+  };
 
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -77,15 +58,74 @@ const OrderSummary = (product) => {
               alignItems="center"
 
             >
+              <Box display="flex"
+              direction="row"
+              >
+                            <Button
+                sx={{ mr: 1 }}
+                variant="contained"
+                href="/"
+                alignItems="center"
+              >
+                Continue Shopping
+              </Button>
               <Button
-                sx={{ mb: 2 }}
+                sx={{ ml:1 }}
                 variant="contained"
                 href="/checkout"
                 alignItems="center"
               >
                 Proceed to Checkout
               </Button>
-              <ItemsInCart />
+
+              </Box>
+              <CartItem />
+            </Box>
+            <Grid item xs={12}>
+              <Box
+                display="flex"
+                flexDirection="row"
+                justifyContent="space-between"
+                alignItems="flex-start"
+              >
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="space-between"
+                  sx={{ pr: 25, mr: 20 }}
+                >
+                  <Typography color={Colors.black} sx={{ fontSize: 20 }}>
+                    Subtotal:
+                  </Typography>
+                  <Typography color={Colors.black} sx={{ fontSize: 20 }}>
+                    Shipping:
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography color={Colors.black} sx={{ fontSize: 20 }}>
+                    ${cart.cartTotalAmount}
+                  </Typography>
+                  <Typography color={Colors.black} sx={{ fontSize: 20 }}>
+                    Free
+                  </Typography>
+                </Box>
+              </Box>
+            </Grid>
+
+            <Box sx={{ mt: 2 }} variant="contain"               display="flex"
+              justifyContent="center"
+              flexDirection="column"
+              alignItems="center">
+              {/* <Button href="/checkout">
+              Proceed to Payment
+            </Button> */}
+
+              <Button
+                variant="contained"
+                onClick={handleClearCart}
+              >
+                Clear Cart
+              </Button>
             </Box>
           </>
         ) : (
