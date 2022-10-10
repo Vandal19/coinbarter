@@ -53,13 +53,41 @@ export default function Checkout() {
 
   // confirmation msg
   const Confirmation = () => (
-    <div>Confirmation</div>
+    <>
+      <Typography variant="h6" gutterBottom>
+          Thank you for your purchase!
+      </Typography>
+      <Grid container spacing={3} component="form">
+        <br />
+        <Grid item xs={12} sx={{ mt: 2 }}>
+          <Box
+                display="flex"
+                alignitems="center"
+                fullWidth={true}
+                justifyContent="space-between"
+                sx={{ mt: 2 }}>
+            <Button variant='outlined'
+                    fullWidth={true}
+                    sx={{ mr: 1 }}
+                    href="/">
+              Back to Home
+            </Button>
+            <Button variant='contained'
+                    fullWidth={true}
+                    sx={{ mr: 1 }}
+                    href="/order-summary">
+              View My Order
+            </Button>
+          </Box>
+        </Grid>
+      </Grid>
+    </>
   );
 
   // render different components based on which step user is on
   const Form = () => activeStep === 0
     ? <AddressForm next={next} />
-    : <CryptoPaymentForm backStep={backStep} />
+    : <CryptoPaymentForm backStep={backStep} nextStep={nextStep}/>
 
   return (
     <>
