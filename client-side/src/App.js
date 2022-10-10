@@ -22,7 +22,8 @@ import LogIn from "../src/components/login/Login";
 import Favorite from "./components/favorites"
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from "./features/userSlice";
-import { sumQuantity, isItemInFavorite, addToFavorite } from './features/favoriteSlice'
+import { isItemInFavorite } from './features/favoriteSlice'
+import { orderDetails } from "./features/orderSlice"
 import Checkout from "./components/checkout/Checkout.js";
 import OrderSummary from "./components/checkout/OrdersSummary.js"
 import MyOrders from "./components/checkout/MyOrders";
@@ -56,8 +57,22 @@ function App() {
         console.log(error.response);
       }
     }
+
+    const ordersData = async () => {
+      try {
+        const myOrders = await axios.post(`/my-orders/${user.id}`)
+        console.log("myOrders", myOrders.data)
+        // const parseData = JSON.stringify(localStorage.getItem(myFavorites))
+        dispatch(orderDetails(myOrders.data))
+
+
+      } catch (error) {
+        console.log(error.response);
+      }
+    }
     if(user?.id){
       favoriteData();
+      ordersData();
     }
 
     // console.log("favData", favoriteData)

@@ -8,6 +8,7 @@ import productsReducer from "./features/productSlice";
 import cartReducer, {sumTotal} from './features/cartSlice';
 import favoriteReducer from "./features/favoriteSlice"
 import userReducer from "./features/userSlice";
+import orderReducer from "./features/orderSlice"
 
 
 const store = configureStore({
@@ -15,7 +16,8 @@ const store = configureStore({
     products: productsReducer,
     cart: cartReducer,
     favorite: favoriteReducer,
-    user: userReducer
+    user: userReducer,
+    order: orderReducer
   },
 });
 

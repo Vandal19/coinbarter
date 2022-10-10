@@ -33,7 +33,7 @@ const MyOrders = () => {
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <Container maxWidth="lg" >
+    <Container maxWidth="xl" >
       <Grid
         item
         xs={12}
@@ -42,29 +42,29 @@ const MyOrders = () => {
         flexDirection="column"
         alignItems="center"
       >
-        <Typography>Orders</Typography>
+        <Typography fontSize="35px">Orders</Typography>
       </Grid>
       <Divider />
       <Box display="flex" justifyContent="center">
-        <Grid container spacing={2}>
-          <Grid item xs={4}>
-            <Typography>Item</Typography>
+        <Grid container spacing={1.5} >
+          <Grid item xs={8.5} display="flex" justifyContent="center" alignItems='flex-start'>
+            <Typography fontSize="25px">Item</Typography>
           </Grid>
-          <Grid item xs={2}>
-            <Typography>Price</Typography>
+          <Grid item xs={1}>
+            <Typography fontSize="25px">Price</Typography>
           </Grid>
-          <Grid item xs={2}>
-            <Typography>Qty</Typography>
+          <Grid item xs={1}>
+            <Typography fontSize="25px">Qty</Typography>
           </Grid>
-          <Grid item xs={2}>
-            <Typography>Amount</Typography>
+          <Grid item xs={1.5}>
+            <Typography fontSize="25px">Amount</Typography>
           </Grid>
         </Grid>
       </Box>
 
       <Paper
         variant="outlined"
-        sx={{ mb: 1, my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
+        sx={{ mb: 21, my: { xs: 3, md: 2 } }}
       >
         <Box
           display="flex"
