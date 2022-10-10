@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ItemsInCart from '../cart/cartItems';
 
 
+
 // manage steps for checkout
 const steps = ['Shipping address', 'Payment details'];
 

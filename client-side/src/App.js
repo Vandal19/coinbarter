@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from "./features/userSlice";
 import { sumQuantity, isItemInFavorite, addToFavorite } from './features/favoriteSlice'
 import Checkout from "./components/checkout/Checkout.js";
+import OrderSummary from "./components/checkout/OrdersSummary.js"
 
 function App() {
   const [name, setName] = useState("");
@@ -111,7 +112,7 @@ function App() {
 
             {/* FOR TESTING -- Cart Page*/}
             <Route path="/order-summary" element={<>
-            <ItemsInCart />
+            <OrderSummary />
             </>} />
 
           </Routes>
