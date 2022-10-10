@@ -33,7 +33,7 @@ const MyOrders = () => {
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" >
       <Grid
         item
         xs={12}

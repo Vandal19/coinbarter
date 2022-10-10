@@ -10,9 +10,7 @@ const axios = require('axios');
 // const bcrypt = require("bcrypt")
 // const session = require("express-session")
 
-const products = require("./products")
-const userRoutes = require("./routes/userRoutes")
-const favoriteRoutes = require("./routes/favoriteRoutes")
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -36,9 +34,14 @@ app.use(morgan());
 
 // connect to routes
 const categoryRoutes = require('./routes/categoryRoutes');
+const products = require("./products")
+const userRoutes = require("./routes/userRoutes")
+const favoriteRoutes = require("./routes/favoriteRoutes")
+const orderRoutes = require("./routes/orderRoutes")
 
 app.use('/products', categoryRoutes);
-app.use('/favorites', favoriteRoutes)
+app.use('/favorites', favoriteRoutes);
+app.use('/my-orders', orderRoutes);
 
 // Login authentication
 app.use("/auth", userRoutes)
