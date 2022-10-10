@@ -25,6 +25,7 @@ import { login } from "./features/userSlice";
 import { sumQuantity, isItemInFavorite, addToFavorite } from './features/favoriteSlice'
 import Checkout from "./components/checkout/Checkout.js";
 import OrderSummary from "./components/checkout/OrdersSummary.js"
+import MyOrders from "./components/checkout/MyOrders";
 
 function App() {
   const [name, setName] = useState("");
@@ -113,6 +114,11 @@ function App() {
             {/* FOR TESTING -- Cart Page*/}
             <Route path="/order-summary" element={<>
             <OrderSummary />
+            </>} />
+
+            {/* FOR TESTING -- My Orders Page*/}
+            <Route path="/my-orders" element={<>
+            <MyOrders />
             </>} />
 
           </Routes>

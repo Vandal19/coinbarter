@@ -160,7 +160,7 @@ export default function Actions({ matches }) {
             >
             {user ? (
               <Box display="flex" flexDirection='column' alignItems="center">
-              <Button>My Orders</Button>
+              <Button href="/my-orders">My Orders</Button>
               <Button onClick={(e) => logoutAuth(e)}>Logout</Button>
               </Box>
             ) : (
