@@ -8,7 +8,9 @@ import CryptoPaymentForm from './CryptoPaymentForm';
 import { useSelector, useDispatch } from "react-redux";
 
 import ItemsInCart from '../cart/cartItems';
-
+import GetEthPrice from './GetEthPrice';
+import CartItem from '../cart/cartItem';
+import OrderSummary from './OrdersSummary';
 
 
 // manage steps for checkout
@@ -75,7 +77,8 @@ export default function Checkout() {
             <Button variant='contained'
                     fullWidth={true}
                     sx={{ mr: 1 }}
-                    href="/order-summary">
+                    href="/my-orders"
+                    onClick>
               View My Order
             </Button>
           </Box>
@@ -93,10 +96,10 @@ export default function Checkout() {
     <>
         {cart.cartItems.length > 0 ?
       <Grid container component="main" columns={16} spacing={3}
-            sx={{ mb: 10, height: '100vh' }}>
+            sx={{ mb: 50, height: '100vh' }}>
           <>
         <Grid item xs={8}>
-          <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+          <Paper variant="outlined" sx={{ mt: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
             <Typography component="h1" variant="h4" align="center">
               Checkout
             </Typography>
@@ -113,6 +116,9 @@ export default function Checkout() {
         </Grid>
         <Grid item xs={8}>
           <ItemsInCart />
+        </Grid>
+        <Grid item xs={8}>
+          <GetEthPrice />
         </Grid>
           </>
       </Grid>
@@ -139,23 +145,3 @@ export default function Checkout() {
     </>
   );
 }
-
-
-{/* return (
-  <>
-    <div className={classes.toolbar}/>
-    <main className={classes.layout}>
-      <Paper className={classes.paper}>
-        <Typography variant="h4" align="center">Checkout</Typography>
-        <Stepper activeStep={activeStep} className={classes.stepper}>
-          {steps.map((step) => {
-            <Step key={step}>
-              <StepLabel>{step}</StepLabel>
-            </Step>
-          })}
-        </Stepper>
-      </Paper>
-    </main>
-  </>
-)
-} */}
