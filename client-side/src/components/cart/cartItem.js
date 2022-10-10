@@ -40,6 +40,19 @@ const CartItem = () => {
   };
 
   return cart.cartItems?.map((product) => (
+    // <Grid container xs={12} columns={2}>
+
+    //   <Paper
+    //     variant="outlined"
+    //     sx={{ mb: 1, my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 },  }}
+    //   >
+    //      <Box
+    //         display="flex"
+    //         justifyContent="center"
+    //         flexDirection="column"
+    //         alignItems="center"
+    //       >
+
     <Box key={product.id}>
       <Box
         display="flex"
@@ -101,9 +114,12 @@ const CartItem = () => {
           </Typography>
         </Box>
       </Box>
-      <Divider variant="inset" />
+      <Divider  />
     </Box>
+    // </Box>
+    // </Paper>
+    // </Grid>
   ));
 };
 
-export default CartItem
+export default CartItem;
