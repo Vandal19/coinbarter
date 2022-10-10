@@ -8,6 +8,7 @@ import productsReducer from "./features/productSlice";
 import cartReducer, {sumTotal} from './features/cartSlice';
 import favoriteReducer from "./features/favoriteSlice"
 import userReducer from "./features/userSlice";
+import orderReducer, {orderTotal} from "./features/orderSlice"
 
 
 const store = configureStore({
@@ -15,11 +16,13 @@ const store = configureStore({
     products: productsReducer,
     cart: cartReducer,
     favorite: favoriteReducer,
-    user: userReducer
+    user: userReducer,
+    order: orderReducer
   },
 });
 
 store.dispatch(sumTotal());
+// store.dispatch(orderTotal)
 // store.dispatch(sumQuantity());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

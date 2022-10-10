@@ -23,6 +23,9 @@ import CartItem from "../cart/cartItem";
 const OrderSummary = (product) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const order = useSelector((state) => state.order.orderItems);
+
+  console.log("order", order);
 
   useEffect(() => {
     dispatch(sumTotal());
