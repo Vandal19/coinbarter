@@ -96,6 +96,19 @@ const checkIfFavoriteExists = async(id) => {
   }
 };
 
+const loadOrders = async(id) => {
+try {
+  const result = await db.query(`
+  SELECT * FROM orders
+  JOIN products ON orders.listing_id = products.id
+  WHERE orders.user_id = $1;
+`, [id]);
+return result.rows;
+} catch (error) {
+  console.log(error)
+}
+}
+console.log("orders", loadOrders)
 
 
 
@@ -105,5 +118,6 @@ module.exports = {
   getUserByEmail,
   addToFavorites,
   loadFavorites,
-  checkIfFavoriteExists
+  checkIfFavoriteExists,
+  loadOrders,
 }
