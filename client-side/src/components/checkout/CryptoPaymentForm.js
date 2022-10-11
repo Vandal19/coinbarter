@@ -38,7 +38,7 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
   const order = useSelector((state) => state.order);
   console.log("cart", cart);
 
-  const cartItems = [...cart.cartItems]
+  const cartItems = [...cart.cartItems, ...order.orderItems]
   console.log("cart2", cartItems)
 
   // Code to send data to the backend
@@ -165,7 +165,7 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
             }}
           />
         </Grid>
-        
+
         <br />
         <Grid item xs={12} sx={{ mt: 2 }}>
           <Box
