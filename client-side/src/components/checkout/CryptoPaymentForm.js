@@ -1,3 +1,4 @@
+
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -19,10 +20,14 @@ import { useEffect } from "react";
 import Cart from "../cart";
 import { createOrder } from "../../features/orderSlice";
 
-export default function CryptoPaymentForm({ backStep, nextStep }) {
+// set to admin_coinbarter
+const DEFAULT_DESTINATION_ADDR = "0xE1096fBC80a1968d1A0ADbd29C2c76595A44954B";
+
+export default function CryptoPaymentForm({backStep, nextStep}) {
+
   // hooks to set amount and destination addr
   const [amount, setAmount] = useState();
-  const [destinationAddr, setDestinationAddr] = useState("");
+  const [destinationAddr, setDestinationAddr] = useState(DEFAULT_DESTINATION_ADDR);
   // states for error msg and capture tx
   const [error, setError] = useState("");
   const [txs, setTxs] = useState([]);
@@ -106,6 +111,7 @@ export default function CryptoPaymentForm({ backStep, nextStep }) {
     }
   };
 
+
   // const placeOrderHandler = (e) => {
   //   const updatedOrderItems = cart
   //   order = updatedOrderItems
@@ -142,6 +148,9 @@ export default function CryptoPaymentForm({ backStep, nextStep }) {
               setDestinationAddr(event.target.value);
             }}
           />
+          <Typography variant="body2" sx={{fontStyle: 'italic', color: 'red'}}>
+            * destination address has been set to CoinBarter wallet
+          </Typography>
         </Grid>
         <Grid item xs={12}>
           <TextField
@@ -156,7 +165,7 @@ export default function CryptoPaymentForm({ backStep, nextStep }) {
             }}
           />
         </Grid>
-
+        
         <br />
         <Grid item xs={12} sx={{ mt: 2 }}>
           <Box

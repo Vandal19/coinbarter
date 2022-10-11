@@ -1,16 +1,16 @@
+// CART ITEMS RENDERED IN CHECKOUT PAGE FROM CARTITEMS.JS
+
 import React from 'react'
-import { useState, useEffect } from 'react';
-import { Box, Grid, Container, Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button } from '@mui/material';
+import { useState, } from 'react';
+import { Box, Grid,  Paper, Stepper, Step, StepLabel, Typography,   Button } from '@mui/material';
 import { Colors } from "../../styles/theme";
 import AddressForm from './AddressForm';
 // import PaymentForm from './PaymentForm';
 import CryptoPaymentForm from './CryptoPaymentForm';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import ItemsInCart from '../cart/cartItems';
 import GetEthPrice from './GetEthPrice';
-import CartItem from '../cart/cartItem';
-import OrderSummary from './OrdersSummary';
 
 
 // manage steps for checkout
@@ -96,10 +96,13 @@ export default function Checkout() {
     <>
         {cart.cartItems.length > 0 ?
       <Grid container component="main" columns={16} spacing={3}
-            sx={{ mb: 50, height: '100vh' }}>
+            sx={{ mb: 40, height: '100vh' }}>
           <>
+        <Grid item xs={16}>
+          <GetEthPrice />
+        </Grid>
         <Grid item xs={8}>
-          <Paper variant="outlined" sx={{ mt: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+          <Paper variant="outlined" sx={{ mb: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
             <Typography component="h1" variant="h4" align="center">
               Checkout
             </Typography>
@@ -116,9 +119,6 @@ export default function Checkout() {
         </Grid>
         <Grid item xs={8}>
           <ItemsInCart />
-        </Grid>
-        <Grid item xs={8}>
-          <GetEthPrice />
         </Grid>
           </>
       </Grid>

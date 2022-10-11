@@ -1,19 +1,11 @@
+// INDIVIDUAL CART ITEM COMPONENTS RENDERED IN CART/INDEX.JS
+
 import {
   Avatar,
   Button,
   Divider,
-  Drawer,
-  Grid,
-  ImageList,
-  ImageListItem,
-  Paper,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
-import { useEffect } from "react";
-import { useUIContext } from "../../context/ui";
-import { Colors } from "../../styles/theme";
-import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -40,18 +32,6 @@ const CartItem = () => {
   };
 
   return cart.cartItems?.map((product) => (
-    // <Grid container xs={12} columns={2}>
-
-    //   <Paper
-    //     variant="outlined"
-    //     sx={{ mb: 1, my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 },  }}
-    //   >
-    //      <Box
-    //         display="flex"
-    //         justifyContent="center"
-    //         flexDirection="column"
-    //         alignItems="center"
-    //       >
 
     <Box key={product.id}>
       <Box
