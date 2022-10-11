@@ -1663,6 +1663,11 @@
   "resolved" "https://registry.npmjs.org/@fontsource/fira-code/-/fira-code-4.5.11.tgz"
   "version" "4.5.11"
 
+"@fontsource/inter@^4.5.13":
+  "integrity" "sha512-nABtF6jNZZHrotLRiGBByhG7NKJGJHgMbX5W8v6C/7nSdyiWtMRfZX7AMIECDLYGUOEArZDeVO/SbkgwKLrLJw=="
+  "resolved" "https://registry.npmjs.org/@fontsource/inter/-/inter-4.5.13.tgz"
+  "version" "4.5.13"
+
 "@humanwhocodes/config-array@^0.10.4":
   "integrity" "sha512-XVVDtp+dVvRxMoxSiSfasYaG02VEe1qH5cKgMQJWhol6HwzbcqoCMJi8dAGoYAO57jhUyhI6cWuRiTcRaDaYug=="
   "resolved" "https://registry.npmjs.org/@humanwhocodes/config-array/-/config-array-0.10.5.tgz"
