@@ -1,3 +1,5 @@
+// CART ITEMS RENDERED IN CHECKOUT PAGE FROM CARTITEMS.JS
+
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { Box, Grid, Container, Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button } from '@mui/material';
@@ -96,7 +98,7 @@ export default function Checkout() {
     <>
         {cart.cartItems.length > 0 ?
       <Grid container component="main" columns={16} spacing={3}
-            sx={{ mb: 50, height: '100vh' }}>
+            sx={{ mb: 40, height: '100vh' }}>
           <>
         <Grid item xs={16}>
           <GetEthPrice />
