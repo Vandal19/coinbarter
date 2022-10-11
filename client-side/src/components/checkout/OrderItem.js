@@ -33,8 +33,8 @@ const OrderItem = () => {
 
   return order.orderItems?.map((product) => (
     <Container maxWidth="xl" key={product.id}>
-      <Box display="flex" justifyContent="center" flexDirection="row">
-        <Grid container spacing={1}>
+      <Box display="flex" justifyContent="center" flexDirection="row" >
+        <Grid container spacing={1} sx={{pb:3}}>
           <Grid item xs={1.5}>
             <Avatar
               sx={{
@@ -47,28 +47,29 @@ const OrderItem = () => {
               <img
                 alt={product.title}
                 src={`${product.cover_image_url}?w=60&h=60&fit=crop&auto=format`}
-                srcSet={`${product.cover_image_url}?w=60&h=60&fit=crop&auto=format&dpr= 3x`}
+                srcSet={`${product.cover_image_url}?w=60&h=60&fit=crop&auto=format&dpr= 2x`}
                 sx={{ objectFit: "contain" }}
               />
             </Avatar>
           </Grid>
-            <Grid item xs={7}>
+            <Grid item xs={7} display="flex" direction="row" justifyContent="flex-start" alignItems='center'>
               <Typography fontSize="20px">{product.brand_name}</Typography>
             </Grid>
             <Divider orientation="vertical"/>
-          <Grid item xs={1} display="flex" direction="row" justifyContent="center" alignItems='flex-start'>
+          <Grid item xs={1} display="flex" direction="row" justifyContent="center" alignItems='center'>
             <Typography fontSize="20px">${product.price}</Typography>
           </Grid>
           <Divider orientation="vertical"/>
-          <Grid item xs={1} display="flex" direction="row" justifyContent="center" alignItems='flex-start'>
+          <Grid item xs={1} display="flex" direction="row" justifyContent="center" alignItems='center'>
             <Typography fontSize="20px">{product.cartQuantity}</Typography>
           </Grid>
           <Divider orientation="vertical"/>
-          <Grid item xs={1} display="flex" direction="row" justifyContent="center" alignItems='flex-start'>
+          <Grid item xs={1} display="flex" direction="row" justifyContent="center" alignItems='center'>
             <Typography fontSize="20px">${product.price * product.cartQuantity}</Typography>
           </Grid>
         </Grid>
       </Box>
+      <Divider />
     </Container>
 
     // <Box key={product.id}>
