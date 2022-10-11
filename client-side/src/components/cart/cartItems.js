@@ -1,35 +1,25 @@
-// SHOW ITEMS IN CART -- OUTSIDE OF DRAWER
+// CART ITEMS RENDERED IN CHECKOUT PAGE 
 
 import {
-  Avatar,
   Button,
   Divider,
-  Drawer,
   Grid,
-  ImageList,
-  ImageListItem,
   Paper,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
 import { useEffect } from "react";
-import { useUIContext } from "../../context/ui";
 import { Colors } from "../../styles/theme";
-import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  addToCart,
-  removeFromCart,
-  decreaseCart,
   clearCart,
   sumTotal,
 } from "../../features/cartSlice";
-import GetEthPrice from "../checkout/GetEthPrice";
 import CartItem from "../cart/cartItem";
 
+import fetch from 'sync-fetch';
+
 const ItemsInCart = () => {
-  const { showCart, setShowCart } = useUIContext();
   const dispatch = useDispatch();
 
   const cart = useSelector((state) => state.cart);
@@ -38,24 +28,23 @@ const ItemsInCart = () => {
     dispatch(sumTotal());
   }, [cart, dispatch]);
 
-  const handleRemoveFromCart = (product) => {
-    dispatch(removeFromCart(product));
-  };
-
-  const handleDecreaseCartQty = (product) => {
-    dispatch(decreaseCart(product));
-  };
-
-  const handleAddToCart = (product) => {
-    dispatch(addToCart({ product }));
-  };
-
   const handleClearCart = (product) => {
     dispatch(clearCart(product));
   };
 
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("md"));
+  // get eth/usd exchange rate 
+  const ccURL = 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD&api_key={524745d7a0665f7b239ce12f2cd467fd8928a0dda89f1589e95b1cc59a03ec0a}'
+  // call crypto price data from cryptocompare api
+  function getEthFx() {
+    let ethFx;
+    const response = fetch(ccURL);
+    ethFx = response.json();
+    return ethFx;
+    }
+  let ethFx = getEthFx();
+  // console.log("ethFx", ethFx);
+  // ethusd fx
+  const ethToUsd = ethFx.USD;
 
   // calculate tax rate of 12%
   const tax = 0.12;
@@ -65,78 +54,15 @@ const ItemsInCart = () => {
   const orderTax = ((cart.cartTotalAmount) * (tax));
   const orderTotal = ((cartSubtotal) + (orderTax) + (shippingFee)).toFixed(2);
 
-  // const cartContent = cart.cartItems?.map((product) => (
-  //   <Box key={product.id}>
-  //     <Box
-  //       display="flex"
-  //       alignItems="start"
-  //       justifyContent="space-between"
-  //       sx={{ pt: 2, pb: 2 }}
-  //     >
-  //       <Avatar
-  //         sx={{
-  //           width: 150,
-  //           height: 150,
-  //           backgroundColor: "transparent",
-  //         }}
-  //         variant="square"
-  //       >
-  //         <img
-  //           alt={product.title}
-  //           src={`${product.cover_image_url}?w=120&h=120&fit=crop&auto=format`}
-  //           srcSet={`${product.cover_image_url}?w=120&h=120&fit=crop&auto=format&dpr= 2x`}
-  //           sx={{ objectFit: "contain" }}
-  //         />
-  //       </Avatar>
-  //       <Box display="flex" flexDirection="column" sx={{ pr: 4 }}>
-  //         <Typography variant="subtitle2">{product.brand_name}</Typography>
-  //         <Typography
-  //           sx={{
-  //             display: "flex",
-  //             alignItems: "center",
-  //             alignContent: "flex-end",
-  //             paddingTop: 2,
-  //           }}
-  //         >
-  //           <Box display="flex" flexDirection="row" alignItems="center">
-  //             <Button
-  //               onClick={() => handleDecreaseCartQty(product)}
-  //               sx={{ fontSize: 25 }}
-  //             >
-  //               -
-  //             </Button>
-  //             <Typography>{product.cartQuantity}</Typography>
-  //             <Button
-  //               onClick={() => handleAddToCart(product)}
-  //               sx={{ fontSize: 25 }}
-  //             >
-  //               +
-  //             </Button>
-  //             <Button
-  //               onClick={() => handleRemoveFromCart(product)}
-  //               sx={{ fontSize: 15 }}
-  //             >
-  //               Remove
-  //             </Button>
-  //           </Box>
-  //         </Typography>
-  //       </Box>
-  //       <Box display="flex" alignItems="flex-end">
-  //         <Typography variant="body1" sx={{ mr: 2 }}>
-  //           ${product.price * product.cartQuantity}
-  //         </Typography>
-  //       </Box>
-  //     </Box>
-  //     <Divider sx={{ mt: 1, mb: 1 }} />
-  //   </Box>
-  // ));
+  // payment total in ETH
+  const paymentTotal = ((orderTotal) / (ethToUsd)).toFixed(4);
 
   return (
     <Grid container xs={12} columns={2}>
 
       <Paper
         variant="outlined"
-        sx={{ mb: 1, my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 },  }}
+        sx={{ mb: { xs: 3, md: 6 }, p: { xs: 2, md: 3 }  }}
       >
         {/* render below if there are items in cart */}
         
@@ -161,12 +87,7 @@ const ItemsInCart = () => {
                 justifyContent="space-between"
                 alignItems="flex-start"
                 >
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  justifyContent="space-between"
-                  sx={{ pr: 20, mr: 20 }}
-                  >
+                <Grid item justifyContent="space-between">
                   <Typography color={Colors.black} sx={{ fontSize: 18 }}>
                     Subtotal:
                   </Typography>
@@ -176,18 +97,18 @@ const ItemsInCart = () => {
                   <Typography color={Colors.black} sx={{ fontSize: 18 }}>
                     Tax:
                   </Typography>
-                </Box>
-                <Box>
-                  <Typography color={Colors.black} sx={{ fontSize: 18 }}>
+                </Grid>
+                <Grid item justifyContent="space-between">
+                  <Typography color={Colors.black} sx={{ fontSize: 18 }} align="right">
                     USD ${cart.cartTotalAmount}
                   </Typography>
-                  <Typography color={Colors.black} sx={{ fontSize: 18 }}>
+                  <Typography color={Colors.black} sx={{ fontSize: 18 }} align="right">
                     USD $10
                   </Typography>
-                  <Typography color={Colors.black} sx={{ fontSize: 18 }}>
+                  <Typography color={Colors.black} sx={{ fontSize: 18 }} align="right">
                     USD ${((cart.cartTotalAmount) * (tax)).toFixed(2)}
                   </Typography>
-                </Box>
+                </Grid>
               </Box>
 
               <Divider sx={{ mt: 1, mb: 1 }} />
@@ -202,23 +123,38 @@ const ItemsInCart = () => {
                   display="flex"
                   flexDirection="column"
                   justifyContent="space-between"
-                  sx={{ pr: 20, mr: 20 }}
+                  sx={{ pr: 16, mr: 20 }}
                   >
                     <Typography color={Colors.black} sx={{ fontSize: 18 }}>
                       Order Total:
                     </Typography>
-                  </Box>
-                  <Box>
                     <Typography color={Colors.black} sx={{ fontSize: 18 }}>
-                      USD ${orderTotal}
+                      ETH/USD Exchange Rate:
+                    </Typography>
+                    <br />
+                    <Typography sx={{ fontSize: 18, fontWeight: 'medium', color: 'red'}}>
+                      Payment Total:
                     </Typography>
                   </Box>
+                  <Grid justifyContent="space-between">
+                    <Typography color={Colors.black} sx={{ fontSize: 18 }} align="right">
+                      USD ${orderTotal}
+                    </Typography>
+                    <Typography color={Colors.black} sx={{ fontSize: 18 }} align="right">
+                      USD ${ethToUsd}
+                    </Typography>
+                    <br />
+                    <Typography sx={{ fontSize: 18, fontWeight: 'medium', color: 'red'}} align="right">
+                      {paymentTotal} ETH
+                    </Typography>
+                  </Grid>
                 </Box>
             </Grid>
 
-            <Box sx={{ mt: 2 }} variant="contain" display="flex">
+            <br />
+            <Box variant="contain" display="flex">
               <Button
-                variant="contained"
+                variant="outlined"
                 fullWidth={true}
                 sx={{ mr: 1 }}
                 onClick={handleClearCart}

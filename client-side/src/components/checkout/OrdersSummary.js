@@ -36,10 +36,23 @@ const OrderSummary = (product) => {
   };
 
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("md"));
+
+
+  // calculate tax rate of 12%
+  const tax = 0.12;
+  // cart subtotal, shipping, tax, and total amount in USD
+  const cartSubtotal = cart.cartTotalAmount;
+  const shippingFee = 10;
+  const orderTax = ((cart.cartTotalAmount) * (tax));
+  const orderTotal = ((cartSubtotal) + (orderTax) + (shippingFee)).toFixed(2);
 
   return (
-    <Grid container xs={12} columns={2} alignItems='center'>
+    <Grid container component="main" columns={12} alignItems='center' 
+          sx={{ pl: 2}}>
+
+    <Grid xs={4}>
+      <Paper></Paper>
+    </Grid>
 
       <Paper
         variant="outlined"
@@ -48,16 +61,15 @@ const OrderSummary = (product) => {
         {/* render below if there are items in cart */}
 
         {cart.cartItems.length > 0 ? (
-            <Box
-              display="flex"
+            <Grid item xs={12}
               justifyContent="center"
               flexDirection="column"
               alignItems="center"
             >
               <Typography variant="h4" color={Colors.black} align="center">
-                Order Summary
+                Review Your Order
               </Typography>
-              <Paper elevation={0} sx={{ p: 1, pl: 0.5 }}>
+              <Paper elevation={0} sx={{ p: 1 }}>
                 <CartItem />
               </Paper>
             
@@ -67,34 +79,59 @@ const OrderSummary = (product) => {
                   display="flex"
                   flexDirection="row"
                   justifyContent="space-between"
+                  >
+                  <Grid item justifyContent="space-between">
+                    <Typography color={Colors.black} sx={{ fontSize: 18 }}>
+                      Subtotal:
+                    </Typography>
+                    <Typography color={Colors.black} sx={{ fontSize: 18 }}>
+                      Shipping & Handling:
+                    </Typography>
+                    <Typography color={Colors.black} sx={{ fontSize: 18 }}>
+                      Tax:
+                    </Typography>
+                  </Grid>
+                  <Grid item justifyContent="space-between">
+                    <Typography color={Colors.black} sx={{ fontSize: 18 }} align="right">
+                      USD ${cart.cartTotalAmount}
+                    </Typography>
+                    <Typography color={Colors.black} sx={{ fontSize: 18 }} align="right">
+                      USD $10
+                    </Typography>
+                    <Typography color={Colors.black} sx={{ fontSize: 18 }} align="right">
+                      USD ${((cart.cartTotalAmount) * (tax)).toFixed(2)}
+                    </Typography>
+                  </Grid>
+                </Box>
+
+                <Divider sx={{ mt: 1, mb: 1 }} />
+
+                <Box
+                  display="flex"
+                  flexDirection="row"
+                  justifyContent="space-between"
                   alignItems="flex-start"
                   >
                     <Box
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="space-between"
-                      sx={{ pr: 25, mr: 20 }}
-                      >
-                      <Typography color={Colors.black} sx={{ fontSize: 20 }}>
-                        Subtotal:
-                      </Typography>
-                      <Typography color={Colors.black} sx={{ fontSize: 20 }}>
-                        Shipping:
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="space-between"
+                    sx={{ pr: 55, mr: 20 }}
+                    >
+                      <Typography color={Colors.black} sx={{ fontSize: 18 }}>
+                        Estimated Order Total:
                       </Typography>
                     </Box>
-                    <Box>
-                      <Typography color={Colors.black} sx={{ fontSize: 20 }}>
-                        ${cart.cartTotalAmount}
+                    <Grid justifyContent="space-between">
+                      <Typography color={Colors.black} sx={{ fontSize: 18 }} align="right">
+                        USD ${orderTotal}
                       </Typography>
-                      <Typography color={Colors.black} sx={{ fontSize: 20 }}>
-                        Free
-                      </Typography>
-                    </Box>
+                    </Grid>
                   </Box>
               </Grid>
-
+              <br />
               {/* CONTINUE SHOPPING & PROCEED TO CHECKOUT BUTTON */}
-              <Box display="flex" direction="row">
+              <Box display="flex" direction="row" justifyContent="center" alignItems="center">
                 <Button
                   sx={{ mr: 1 }}
                   variant="contained"
@@ -104,37 +141,48 @@ const OrderSummary = (product) => {
                   Continue Shopping
                 </Button>
                 <Button
-                  sx={{ ml:1, mr:1 }}
+                  sx={{ ml:1 }}
                   variant="contained"
                   href="/checkout"
                   alignItems="center"
                   >
                   Proceed to Checkout
                 </Button>
+              </Box>
+              <br />
+              <Box display="flex" direction="row" justifyContent="center" alignItems="center">
                 <Button
-                variant="contained"
-                sx={{ mr: 1 }}
-                onClick={handleClearCart}
-                >
+                  variant="outlined"
+                  sx={{ m: 1 }}
+                  onClick={handleClearCart}
+                  >
                   Clear Cart
                 </Button>
               </Box>
-            </Box>
+            </Grid>
+            
         ) : (
             // render below if cart is empty
+            <Grid item xs={12}
+              display="flex"
+              justifyContent="center"
+              flexDirection="column"
+              alignItems="center"
+            >
             <Box
               display="flex"
               flexDirection="column"
               justifyContent="center"
               alignItems="center"
               height="300px"
-              width="1300px"
+              width="1250px"
               sx={{  m: 5 }}
               >
                 <Typography variant="h4" color={Colors.primary}>
                   Your cart is empty. Please return to homepage to continue
                   shopping!
                 </Typography>
+                <br />
                 <Button
                   variant="contained"
                   fullWidth={true}
@@ -143,8 +191,14 @@ const OrderSummary = (product) => {
                   Continue Shopping
                 </Button>
               </Box>
+            </Grid>
             )}
       </Paper>
+
+      <Grid xs={2}>
+      <Paper></Paper>
+      </Grid>
+
     </Grid>
   );
 };
