@@ -23,7 +23,7 @@ const GetEthPrice = () => {
     })
   }, []);
 
-  console.log("geckoAPI:", data);
+  // console.log("geckoAPI:", data);
 
   // hide component if there's an error with api call
   if (!data) return null;

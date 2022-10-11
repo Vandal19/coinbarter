@@ -48,7 +48,7 @@ function App() {
     const favoriteData = async () => {
       try {
         const myFavorites = await axios.post(`/favorites/${user.id}`)
-        console.log("myfavorite", myFavorites.data)
+        // console.log("myfavorite", myFavorites.data)
         // const parseData = JSON.stringify(localStorage.getItem(myFavorites))
         dispatch(isItemInFavorite(myFavorites.data))
 
