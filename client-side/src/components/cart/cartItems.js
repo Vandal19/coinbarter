@@ -15,8 +15,9 @@ import {
   clearCart,
   sumTotal,
 } from "../../features/cartSlice";
-import GetEthPrice from "../checkout/GetEthPrice";
 import CartItem from "../cart/cartItem";
+
+import fetch from 'sync-fetch';
 
 const ItemsInCart = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,19 @@ const ItemsInCart = () => {
     dispatch(clearCart(product));
   };
 
+  // get eth/usd exchange rate 
+  const ccURL = 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD&api_key={524745d7a0665f7b239ce12f2cd467fd8928a0dda89f1589e95b1cc59a03ec0a}'
+  // call crypto price data from cryptocompare api
+  function getEthFx() {
+    let ethFx;
+    const response = fetch(ccURL);
+    ethFx = response.json();
+    return ethFx;
+    }
+  let ethFx = getEthFx();
+  // console.log("ethFx", ethFx);
+  // ethusd fx
+  const ethToUsd = ethFx.USD;
 
   // calculate tax rate of 12%
   const tax = 0.12;
@@ -120,7 +134,7 @@ const ItemsInCart = () => {
                       USD ${orderTotal}
                     </Typography>
                     <Typography color={Colors.black} sx={{ fontSize: 18 }} align="right">
-                      USD ${}
+                      USD ${ethToUsd}
                     </Typography>
                   </Grid>
                 </Box>
