@@ -76,7 +76,7 @@ app.get('/products/categories/:category', (req, res) => {
   // set up the request parameters
   const params = {
     api_key: "0CEB324D9F3949AE896B07885033BA92",
-    type: "category",
+    type: "bestsellers",
     category_id: req.params.category,
     amazon_domain: "amazon.com"
   }
@@ -88,12 +88,12 @@ app.get('/products/categories/:category', (req, res) => {
 
       // [product.category_id, product.brand_name, product.price, product.description, product.cover_image_url, product.create_date, product.update_date, product.stock]
 
-      const products = response.data.category_results;
+      const products = response.data.bestsellers;
       for (let a of products) {
 
         let randomStock = parseInt(Math.random() * 100);
 
-        let removeCommaProductPrice = a.price.raw.replaceAll(',', '')
+        let removeCommaProductPrice = a.price?.raw.replace(/,/g, '')
         let productPrice = a.price ? removeCommaProductPrice.slice(1) : "not available";
 
         const product = {
@@ -109,7 +109,7 @@ app.get('/products/categories/:category', (req, res) => {
       }
 
       // print the JSON response from Rainforest API
-      res.json(response.data.category_results);
+      res.json(response.data.bestsellers);
 
     }).catch(error => {
       // catch and print the error
@@ -143,6 +143,55 @@ app.get('/products/:productID', (req, res) => {
   })
 
 });
+
+// get bestselling electronics products on homepage
+// app.get('/products/categories/bestsellers_electronics', (req, res) => {
+
+//   // set up the request parameters
+//   const params = {
+//     api_key: "0CEB324D9F3949AE896B07885033BA92",
+//     type: "category",
+//     category_id: "bestsellers_electronics",
+//     amazon_domain: "amazon.com"
+//   }
+
+//   // make the http GET request to Rainforest API
+//   return axios.get('https://api.rainforestapi.com/request', { params })
+//     .then(response => {
+
+
+//       // [product.category_id, product.brand_name, product.price, product.description, product.cover_image_url, product.create_date, product.update_date, product.stock]
+
+//       // const products = response.data.bestsellers;
+//       // for (let a of products) {
+
+//       //   let randomStock = parseInt(Math.random() * 100);
+
+//       //   let removeCommaProductPrice = a.price.raw.replaceAll(',', '')
+//       //   let productPrice = a.price ? removeCommaProductPrice.slice(1) : "not available";
+
+//       //   const product = {
+//       //     category_id: req.params.category,
+//       //     brand_name: a.title,
+//       //     price: productPrice,
+//       //     cover_image_url: a.image,
+//       //     create_date: new Date(Date.now()),
+//       //     update_date: new Date(Date.now()),
+//       //     stock: randomStock
+//       //   }
+//       //   addProduct(product);
+//       // }
+
+//       // print the JSON response from Rainforest API
+//       res.json(response.data);
+//       console.log("data", response.data)
+
+//     }).catch(error => {
+//       // catch and print the error
+//       console.log(error);
+//     })
+
+// });
 
 
 

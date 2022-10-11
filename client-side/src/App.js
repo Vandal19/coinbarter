@@ -94,8 +94,9 @@ function App() {
             <Slider/>
 
           <Box display="flex" justifyContent="center" sx={{ p: 4 }}>
-            <Typography variant="h4">Our Products</Typography>
+            {/* <Typography variant="h4">Our Products</Typography> */}
           </Box>
+            <Products />
 
           </>} />
             <Route path="/products/:id" element={<>
