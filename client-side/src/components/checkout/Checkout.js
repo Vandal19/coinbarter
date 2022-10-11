@@ -1,18 +1,16 @@
 // CART ITEMS RENDERED IN CHECKOUT PAGE FROM CARTITEMS.JS
 
 import React from 'react'
-import { useState, useEffect } from 'react';
-import { Box, Grid, Container, Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button } from '@mui/material';
+import { useState, } from 'react';
+import { Box, Grid,  Paper, Stepper, Step, StepLabel, Typography,   Button } from '@mui/material';
 import { Colors } from "../../styles/theme";
 import AddressForm from './AddressForm';
 // import PaymentForm from './PaymentForm';
 import CryptoPaymentForm from './CryptoPaymentForm';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import ItemsInCart from '../cart/cartItems';
 import GetEthPrice from './GetEthPrice';
-import CartItem from '../cart/cartItem';
-import OrderSummary from './OrdersSummary';
 
 
 // manage steps for checkout

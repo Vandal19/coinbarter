@@ -5,14 +5,10 @@ import {
   Divider,
   Drawer,
   Grid,
-  ImageList,
-  ImageListItem,
   Paper,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
 import { useEffect } from "react";
-import { useUIContext } from "../../context/ui";
 import { Colors } from "../../styles/theme";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";

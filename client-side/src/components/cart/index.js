@@ -1,11 +1,6 @@
 import {
-  Avatar,
   Button,
-  Divider,
   Drawer,
-  Grid,
-  ImageList,
-  ImageListItem,
   Paper,
   Typography,
   useMediaQuery,
@@ -17,7 +12,7 @@ import { Colors } from "../../styles/theme";
 import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart, removeFromCart, decreaseCart, clearCart, sumTotal } from "../../features/cartSlice";
+import { clearCart, sumTotal } from "../../features/cartSlice";
 import CloseIcon from '@mui/icons-material/Close';
 import CartItem from "./cartItem"
 

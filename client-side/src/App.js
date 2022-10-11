@@ -1,29 +1,24 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ResponsiveAppBar from "./components/NavBar";
 import { Routes, Route } from "react-router-dom";
-import Homepage from "./pages/Home";
 
 import Products from "./components/products";
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
 import theme from "./styles/theme";
 import NavBar from "./components/navbar/index.js";
 import Footer from "./components/Footer";
 import Banner from "./components/banner";
 import Slider from "./components/slider";
-import { NavBarCategories } from "./styles/navbar";
 import MobileMenu from "./components/drawer";
 import { UIProvider } from "./context/ui";
 import Cart from "./components/cart";
-import ItemsInCart from "./components/cart/cartItems";
 import SearchBox from "./components/search";
 import LogIn from "../src/components/login/Login";
 import Favorite from "./components/favorites"
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from "./features/userSlice";
 import { isItemInFavorite } from './features/favoriteSlice'
-import { orderDetails } from "./features/orderSlice"
 import Checkout from "./components/checkout/Checkout.js";
 import OrderSummary from "./components/checkout/OrdersSummary.js"
 import MyOrders from "./components/checkout/MyOrders";
