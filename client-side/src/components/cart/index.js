@@ -70,7 +70,7 @@ const Cart = () => {
             <Typography color={Colors.black} sx = {{ fontSize: 15}}>Free Shipping* </Typography>
           </Box>
           <Box>
-            <Typography color={Colors.black}sx = {{ fontSize: 30}}>${cartTotalAmount}</Typography>
+            <Typography color={Colors.black}sx = {{ fontSize: 30}}>${cartTotalAmount.toFixed(2)}</Typography>
 
           </Box>
         </Box>

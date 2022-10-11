@@ -24,6 +24,8 @@ import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
 import OrderItem from "./OrderItem";
 import { orderTotal } from "../../features/orderSlice"
+import axios from "axios";
+import { orderDetails } from "../../features/orderSlice"
 
 const MyOrders = () => {
   const dispatch = useDispatch();
@@ -36,6 +38,26 @@ const MyOrders = () => {
 
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
+  const user = useSelector((state) => state.user.user)
+
+  useEffect(() => {
+    const ordersData = async () => {
+      try {
+        const myOrders = await axios.post(`/my-orders/${user.id}`)
+        console.log("myOrders", myOrders.data)
+        // const parseData = JSON.stringify(localStorage.getItem(myFavorites))
+        dispatch(orderDetails(myOrders.data))
+
+
+      } catch (error) {
+        console.log(error.response);
+      }
+    }
+    if(user?.id){
+      ordersData();
+    }
+  }, [dispatch, user?.id])
+
 
   return (
     <Container maxWidth="xl">

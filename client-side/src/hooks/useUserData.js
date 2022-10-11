@@ -61,17 +61,6 @@ export const useUserData = () => {
     // });
     }
 
-    // const favData = async (values) => {
-    //   try {
-    //     const { data } = await axios.post(`/favorites/${user.id}`, { ...values })
-    //     dispatch(isItemInFavorite({...data}))
-    //   } catch (error) {
-    //     console.log(error.response);
-    //   }
-    // }
-
-    // console.log("favData", favData)
-
   return {
     loginAuth,
     useUserData,
