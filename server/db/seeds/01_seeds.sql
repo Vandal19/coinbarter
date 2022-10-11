@@ -6,11 +6,12 @@ VALUES
 
 INSERT INTO categories (id, name)
 VALUES
-('bestsellers_electronics', 'Home Page Bestsellers'),
+
 ('2407748011', 'Cell Phones & Accessories'),
 ('565108', 'Computers & Accessories'),
 ('6463520011', 'Television & Video'),
-('7926841011', 'Video Game Consoles & Accessories');
+('7926841011', 'Video Game Consoles & Accessories'),
+('bestsellers_electronics', 'Home Page Bestsellers');
 
 -- INSERT INTO favorites (user_id, listing_id)
 -- VALUES

@@ -25,12 +25,15 @@ import { useSelector, useDispatch } from "react-redux";
 import OrderItem from "./OrderItem";
 import { orderTotal } from "../../features/orderSlice"
 import axios from "axios";
-import { orderDetails } from "../../features/orderSlice"
+
+
+import fetch from 'sync-fetch';
 
 const MyOrders = () => {
   const dispatch = useDispatch();
   const order = useSelector((state) => state.order.orderItems)
   const orderTotalAmount = useSelector((state) => state.order.orderTotalAmount)
+  console.log("order", order)
 
   // useEffect(() => {
   //   dispatch(orderTotal());
@@ -39,6 +42,10 @@ const MyOrders = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
   const user = useSelector((state) => state.user.user)
+
+  useEffect(() => {
+    dispatch(orderTotal());
+  }, [order, dispatch]);
 
   // useEffect(() => {
   //   const ordersData = async () => {
@@ -57,6 +64,28 @@ const MyOrders = () => {
   //   }
   // }, [dispatch, user?.id])
 
+  const ccURL = 'https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD&api_key={524745d7a0665f7b239ce12f2cd467fd8928a0dda89f1589e95b1cc59a03ec0a}'
+
+  function getEthFx() {
+    let ethFx;
+    const response = fetch(ccURL);
+    ethFx = response.json();
+    return ethFx;
+    }
+  let ethFx = getEthFx();
+  // console.log("ethFx", ethFx);
+  // ethusd fx
+  const ethToUsd = ethFx.USD;
+
+  const tax = 0.12;
+  // cart subtotal, shipping, tax, and total amount in USD
+
+  const orderSubtotal = orderTotalAmount
+  const shippingFee = 10;
+  const orderTax = ((orderSubtotal) * (tax));
+  const orderFinalTotal = ((orderSubtotal) + (orderTax) + (shippingFee)).toFixed(2);
+
+  const paymentTotal = ((orderFinalTotal) / (ethToUsd)).toFixed(4);
 
   return (
     <Container maxWidth="xl">
@@ -94,7 +123,7 @@ const MyOrders = () => {
         </Grid>
       </Box>
 
-      <Paper variant="outlined" sx={{ mb: 21, my: { xs: 3, md: 2 } }}>
+      <Paper variant="outlined" sx={{ my: { xs: 3, md: 2 } }}>
         <Box
           display="flex"
           justifyContent="center"
@@ -104,60 +133,77 @@ const MyOrders = () => {
           <OrderItem />
         </Box>
       </Paper>
-      <Grid item xs={12} sx={{pt:5, pb:5}}>
-        <Box
-          display="flex"
-          flexDirection="row"
-          justifyContent="space-between"
-          alignItems="flex-start"
-        >
-          <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="space-between"
-          >
-            <Typography sx={{ fontSize: 20 }}>
-              Merchandise Total
-            </Typography>
-            <Typography sx={{ fontSize: 20 }}>
-              Shipping:
-            </Typography>
-          </Box>
-          <Box>
-            <Typography sx={{ fontSize: 20 }}>
-            ${orderTotalAmount}
-            </Typography>
-            <Typography sx={{ fontSize: 20 }}>
-              Free
-            </Typography>
-          </Box>
-        </Box>
-        <Divider sx ={{pt:2}}/>
-        <Grid item xs={12} sx={{pt:3, pb:5}}>
-        <Box
-          display="flex"
-          flexDirection="row"
-          justifyContent="space-between"
-          alignItems="flex-start"
-        >
-          <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="space-between"
-          >
-            <Typography sx={{ fontSize: 20 }}>
-              Order Total
-            </Typography>
-          </Box>
-          <Box>
-            <Typography sx={{ fontSize: 20 }}>
-              ${orderTotalAmount}
-            </Typography>
-          </Box>
-        </Box>
-        <Divider sx ={{pt:2}}/>
-      </Grid>
-      </Grid>
+      <Grid item xs={12} sx={{p3:5}}>
+              <Box
+                display="flex"
+                flexDirection="row"
+                justifyContent="space-between"
+                alignItems="flex-start"
+                >
+                <Grid item justifyContent="space-between">
+                  <Typography color={Colors.black} sx={{ fontSize: 18 }}>
+                    Subtotal:
+                  </Typography>
+                  <Typography color={Colors.black} sx={{ fontSize: 18 }}>
+                    Shipping & Handling:
+                  </Typography>
+                  <Typography color={Colors.black} sx={{ fontSize: 18 }}>
+                    Tax:
+                  </Typography>
+                </Grid>
+                <Grid item justifyContent="space-between">
+                  <Typography color={Colors.black} sx={{ fontSize: 18 }} align="right">
+                    USD ${orderTotalAmount}
+                  </Typography>
+                  <Typography color={Colors.black} sx={{ fontSize: 18 }} align="right">
+                    USD $10
+                  </Typography>
+                  <Typography color={Colors.black} sx={{ fontSize: 18 }} align="right">
+                    USD ${((orderTotalAmount) * (tax)).toFixed(2)}
+                  </Typography>
+                </Grid>
+              </Box>
+
+              <Divider sx={{ mt: 1, mb: 1 }} />
+
+              <Box
+                display="flex"
+                flexDirection="row"
+                justifyContent="space-between"
+                alignItems="flex-start"
+                >
+                  <Box
+                  display="flex"
+                  flexDirection="column"
+                  justifyContent="space-between"
+                  sx={{ pr: 16, mr: 20 }}
+                  >
+                    <Typography color={Colors.black} sx={{ fontSize: 18 }}>
+                      Order Total:
+                    </Typography>
+                    <Typography color={Colors.black} sx={{ fontSize: 18 }}>
+                      ETH/USD Exchange Rate:
+                    </Typography>
+                    <br />
+                    <Typography sx={{ fontSize: 18, fontWeight: 'medium', color: 'red'}}>
+                      Payment Total:
+                    </Typography>
+                  </Box>
+                  <Grid justifyContent="space-between">
+                    <Typography color={Colors.black} sx={{ fontSize: 18 }} align="right">
+                      USD ${orderFinalTotal}
+                    </Typography>
+                    <Typography color={Colors.black} sx={{ fontSize: 18 }} align="right">
+                      USD ${ethToUsd}
+                    </Typography>
+                    <br />
+                    <Typography sx={{ fontSize: 18, fontWeight: 'medium', color: 'red'}} align="right">
+                      {paymentTotal} ETH
+                    </Typography>
+                  </Grid>
+                </Box>
+            <Divider sx={{pb:5}}/>
+            </Grid>
     </Container>
   )
 };

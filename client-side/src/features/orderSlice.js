@@ -37,9 +37,9 @@ const orderSlice = createSlice({
       console.log("items", state.orderItems)
       const price = state.orderItems[0].price
       // console.log("price", price)
-      const orderQuantity = state.orderItems[0].quantity
+      const quantity = state.orderItems[0].quantity
       // console.log("payload", orderQuantity)
-      state.orderTotalQuantity = orderQuantity
+      state.orderTotalQuantity = quantity
       state.orderTotalAmount = state.orderTotalQuantity * price
       setItemFunc(
       state.orderItems.map((item) => item),
@@ -54,30 +54,30 @@ const orderSlice = createSlice({
         state.orderItems.map((item) => item)
       );
     },
-    // orderTotal(state, action) {
-    //   let { total, quantity } = state.orderItems.reduce(
-    //     (orderTotal, orderItem) => {
-    //       const { price, orderQuantity } = orderItem;
-    //       const itemTotal = price * orderQuantity;
+    orderTotal(state, action) {
+      let { total, quantity } = state.orderItems.reduce(
+        (orderTotal, orderItem) => {
+          const { price, quantity } = orderItem;
+          const itemTotal = price * quantity;
 
-    //       orderTotal.total += itemTotal;
-    //       orderTotal.quantity += orderQuantity;
+          orderTotal.total += itemTotal;
+          orderTotal.quantity += quantity;
 
-    //       return orderTotal;
-    //     },
-    //     {
-    //       total: 0,
-    //       quantity: 0,
-    //     },
-    //     setItemFunc(
-    //       state.orderItems.map((item) => item),
-    //       state.orderTotalQuantity,
-    //       state.orderTotalAmount
-    //       )
-    //   );
-    //   state.orderTotalQuantity = quantity;
-    //   state.orderTotalAmount = total;
-    // },
+          return orderTotal;
+        },
+        {
+          total: 0,
+          quantity: 0,
+        },
+        setItemFunc(
+          state.orderItems.map((item) => item),
+          state.orderTotalQuantity,
+          state.orderTotalAmount
+          )
+      );
+      state.orderTotalQuantity = quantity;
+      state.orderTotalAmount = total;
+    },
   },
 });
 

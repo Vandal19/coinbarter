@@ -22,7 +22,7 @@ const store = configureStore({
 });
 
 store.dispatch(sumTotal());
-// store.dispatch(orderTotal)
+store.dispatch(orderTotal())
 // store.dispatch(sumQuantity());
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
