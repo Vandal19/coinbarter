@@ -34,10 +34,11 @@ const orderSlice = createSlice({
   reducers: {
     orderDetails(state, action) {
       state.orderItems = action.payload;
+      console.log("items", state.orderItems)
       const price = state.orderItems[0].price
-      console.log("price", price)
+      // console.log("price", price)
       const orderQuantity = state.orderItems[0].quantity
-      console.log("payload", orderQuantity)
+      // console.log("payload", orderQuantity)
       state.orderTotalQuantity = orderQuantity
       state.orderTotalAmount = state.orderTotalQuantity * price
       setItemFunc(
@@ -47,11 +48,12 @@ const orderSlice = createSlice({
       );
     },
     createOrder(state, action) {
+      // console.log("action", action)
       state.orderItems = action.payload
       setItemFunc(
-        state.orderItems.map((item) => item),
+        state.orderItems.map((item) => item)
       );
-    }
+    },
     // orderTotal(state, action) {
     //   let { total, quantity } = state.orderItems.reduce(
     //     (orderTotal, orderItem) => {
@@ -79,6 +81,6 @@ const orderSlice = createSlice({
   },
 });
 
-export const { orderDetails, orderTotal } = orderSlice.actions;
+export const { orderDetails, orderTotal, createOrder } = orderSlice.actions;
 
 export default orderSlice.reducer;

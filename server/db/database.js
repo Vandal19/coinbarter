@@ -108,7 +108,44 @@ return result.rows;
   console.log(error)
 }
 }
-console.log("orders", loadOrders)
+// console.log("orders", loadOrders)
+
+const addNewOrders = async (
+  user_id,
+  listing_id,
+  price,
+  quantity,
+  shipping_address,
+  order_status,
+  create_date,
+  update_date
+) => {
+  const result = await db.query(
+    `INSERT INTO orders (
+      user_id,
+      listing_id,
+      price,
+      quantity,
+      shipping_address,
+      order_status,
+      create_date,
+      update_date)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+      RETURNING *;`,
+    [
+      user_id,
+      listing_id,
+      price,
+      quantity,
+      shipping_address,
+      order_status,
+      create_date,
+      update_date,
+    ]
+  );
+  return result.rows;
+};
+
 
 
 
@@ -120,4 +157,5 @@ module.exports = {
   loadFavorites,
   checkIfFavoriteExists,
   loadOrders,
+  addNewOrders
 }

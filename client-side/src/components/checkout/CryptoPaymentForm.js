@@ -1,38 +1,58 @@
-import * as React from 'react';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import { Button } from '@mui/material';
+import * as React from "react";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { ethers } from "ethers";
-import ErrorMessage from './ErrorMessage';
-import TxList from './TxList';
-import { useNavigate } from 'react-router-dom';
+import ErrorMessage from "./ErrorMessage";
+import TxList from "./TxList";
+import { useNavigate } from "react-router-dom";
 import { clearFavorites } from "../../features/favoriteSlice";
-import {  clearCart } from "../../features/cartSlice";
-import { useDispatch } from "react-redux";
+import cartSlice, { clearCart } from "../../features/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { useEffect } from "react";
+import Cart from "../cart";
+import { createOrder } from "../../features/orderSlice";
 
-
-
-export default function CryptoPaymentForm({backStep, nextStep}) {
-
+export default function CryptoPaymentForm({ backStep, nextStep }) {
   // hooks to set amount and destination addr
   const [amount, setAmount] = useState();
   const [destinationAddr, setDestinationAddr] = useState("");
   // states for error msg and capture tx
   const [error, setError] = useState("");
   const [txs, setTxs] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
+  const cart = useSelector((state) => state.cart);
+  const order = useSelector((state) => state.order);
+  console.log("cart", cart);
 
+  const cartItems = [...cart.cartItems]
+  console.log("cart2", cartItems)
+
+  // Code to send data to the backend
+  // const updatedOrderDb = async () => {
+  //   try {
+  //     const newOrder = await axios.post(`/my-orders/${user.id}`)
+  //     console.log("myOrders1", newOrder.data)
+  //   } catch (error) {
+  //     console.log(error.response);
+  //   }
+  // }
+
+  // const updateOrderItems = () => {
+  //   dispatch(order(cart))
+  // }
 
   // ({ setError, setTxs, amount, destinationAddr })
   // initialize connection with metamask wallet
-  const startPayment = async ( event ) => {
-
+  const startPayment = async (event) => {
     console.log("debug:", { amount, destinationAddr });
 
     // reset state displaying error msg
@@ -61,7 +81,7 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
       // create the tx; to which addr & how much eth (converted to wei)
       const tx = await signer.sendTransaction({
         to: destinationAddr,
-        value: ethers.utils.parseEther(amount.toString())
+        value: ethers.utils.parseEther(amount.toString()),
       });
       console.log({ amount, destinationAddr });
       console.log("tx", tx);
@@ -73,16 +93,25 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
       //   nextStep();
       // }, 10000)
       setTimeout(() => {
-        dispatch(clearFavorites())
-        dispatch(clearCart())
-        navigate("/my-orders")
-      }, 5000)
+        // updatedOrderDb()
+        dispatch(createOrder( cartItems));
+        // updateOrderItems()
+        dispatch(clearFavorites());
+        dispatch(clearCart());
+        navigate("/my-orders");
+      }, 5000);
     } catch (error) {
       setError(error.reason);
-      console.log({error});
+      console.log({ error });
     }
   };
 
+  // const placeOrderHandler = (e) => {
+  //   const updatedOrderItems = cart
+  //   order = updatedOrderItems
+
+  // }
+  // console.log("createOrder", placeOrderHandler)
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -109,7 +138,9 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
             fullWidth
             variant="standard"
             value={destinationAddr}
-            onChange={event => {setDestinationAddr(event.target.value)}}
+            onChange={(event) => {
+              setDestinationAddr(event.target.value);
+            }}
           />
         </Grid>
         <Grid item xs={12}>
@@ -120,39 +151,44 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
             fullWidth
             variant="standard"
             value={amount}
-            onChange={event => {setAmount(Number.parseFloat(event.target.value))}}
+            onChange={(event) => {
+              setAmount(Number.parseFloat(event.target.value));
+            }}
           />
         </Grid>
 
         <br />
         <Grid item xs={12} sx={{ mt: 2 }}>
           <Box
-                display="flex"
-                alignitems="center"
-                fullWidth={true}
-                justifyContent="space-between"
-                sx={{ mt: 2 }}>
-            <Button variant='outlined'
-                    fullWidth={true}
-                    sx={{ mr: 1 }}
-                    type='submit'
-                    onClick={backStep}
-                    >
-                Back
+            display="flex"
+            alignitems="center"
+            fullWidth={true}
+            justifyContent="space-between"
+            sx={{ mt: 2 }}
+          >
+            <Button
+              variant="outlined"
+              fullWidth={true}
+              sx={{ mr: 1 }}
+              type="submit"
+              onClick={backStep}
+            >
+              Back
             </Button>
-            <Button variant='contained'
-                    fullWidth={true}
-                    sx={{ mr: 1 }}
-                    // type='submit'
-                    onClick={startPayment}
-                    >
+            <Button
+              variant="contained"
+              fullWidth={true}
+              sx={{ mr: 1 }}
+              // type='submit'
+              onClick={startPayment}
+            >
               Pay Now
             </Button>
           </Box>
         </Grid>
         <Grid item xs={12} sx={{ mt: 1 }}>
-        <ErrorMessage message={error} />
-        <TxList txs={txs} />
+          <ErrorMessage message={error} />
+          <TxList txs={txs} />
         </Grid>
       </Grid>
     </>

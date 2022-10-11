@@ -16,6 +16,14 @@ router.post("/:id", async(req, res) => {
 })
 
 //create new orders
+router.post("/:id", async(req, res) => {
+  const result = await addNewOrders(req.params.id)
+  if(result) {
+    res.send(result)
+  } else {
+    res.sendStatus(403)
+  }
+})
 
 
 
