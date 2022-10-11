@@ -24,10 +24,10 @@ const cartSlice = createSlice({
       const existingItem = state.cartItems.find((item) => item.id === newItem.id)
 
       if(existingItem) {
-        existingItem.cartQuantity ++
+        existingItem.quantity ++
         console.log("itemInCart1", existingItem)
       } else {
-        const tempProduct = { ...newItem, cartQuantity: 1 };
+        const tempProduct = { ...newItem, quantity: 1 };
         state.cartItems.push(tempProduct);
         console.log("itemInCart2", state.cartItems)
       }
@@ -59,8 +59,8 @@ const cartSlice = createSlice({
         (item) => item.id === action.payload.id
       );
 
-      if (state.cartItems[itemIndex].cartQuantity > 1) {
-        state.cartItems[itemIndex].cartQuantity -= 1;
+      if (state.cartItems[itemIndex].quantity > 1) {
+        state.cartItems[itemIndex].quantity -= 1;
       } else if (state.cartItems[itemIndex] === 1) {
         const updatedCartItems = state.cartItems.filter(
           (cartItem) => cartItem.id !== action.payload.id
@@ -76,11 +76,11 @@ const cartSlice = createSlice({
     sumTotal(state, action) {
       let { total, quantity } = state.cartItems.reduce(
         (cartTotal, cartItem) => {
-          const { price, cartQuantity } = cartItem;
-          const itemTotal = price * cartQuantity;
+          const { price, quantity } = cartItem;
+          const itemTotal = price * quantity;
 
           cartTotal.total += itemTotal;
-          cartTotal.quantity += cartQuantity;
+          cartTotal.quantity += quantity;
 
           return cartTotal;
         },

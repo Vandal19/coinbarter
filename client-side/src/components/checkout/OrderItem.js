@@ -34,7 +34,7 @@ const OrderItem = () => {
   return order.orderItems?.map((product) => (
     <Container maxWidth="xl" key={product.id}>
       <Box display="flex" justifyContent="center" flexDirection="row" >
-        <Grid container spacing={1} sx={{pb:3}}>
+        <Grid container spacing={0} sx={{m:2, pr:2}}>
           <Grid item xs={1.5}>
             <Avatar
               sx={{
@@ -47,7 +47,7 @@ const OrderItem = () => {
               <img
                 alt={product.title}
                 src={`${product.cover_image_url}?w=60&h=60&fit=crop&auto=format`}
-                srcSet={`${product.cover_image_url}?w=60&h=60&fit=crop&auto=format&dpr= 2x`}
+                srcSet={`${product.cover_image_url}?w=60&h=60&fit=crop&auto=format&dpr= 2.5x`}
                 sx={{ objectFit: "contain" }}
               />
             </Avatar>
@@ -61,11 +61,11 @@ const OrderItem = () => {
           </Grid>
           <Divider orientation="vertical"/>
           <Grid item xs={1} display="flex" direction="row" justifyContent="center" alignItems='center'>
-            <Typography fontSize="20px">{product.cartQuantity}</Typography>
+            <Typography fontSize="20px">{product.quantity}</Typography>
           </Grid>
           <Divider orientation="vertical"/>
-          <Grid item xs={1} display="flex" direction="row" justifyContent="center" alignItems='center'>
-            <Typography fontSize="20px">${product.price * product.cartQuantity}</Typography>
+          <Grid item xs={1} display="flex" direction="row" justifyContent="flex-end" alignItems='center'>
+            <Typography fontSize="20px">${product.price * product.quantity}</Typography>
           </Grid>
         </Grid>
       </Box>

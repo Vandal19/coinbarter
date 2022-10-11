@@ -72,7 +72,7 @@ const CartItem = () => {
               >
                 -
               </Button>
-              <Typography>{product.cartQuantity}</Typography>
+              <Typography>{product.quantity}</Typography>
               <Button
                 onClick={() => handleAddToCart(product)}
                 sx={{ fontSize: 25 }}
@@ -90,7 +90,7 @@ const CartItem = () => {
         </Box>
         <Box display="flex" alignItems="flex-end">
           <Typography variant="body1" sx={{ mr: 2 }}>
-            ${product.price * product.cartQuantity}
+            ${product.price * product.quantity}
           </Typography>
         </Box>
       </Box>
