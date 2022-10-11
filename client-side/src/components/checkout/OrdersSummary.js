@@ -47,9 +47,10 @@ const OrderSummary = (product) => {
   const orderTotal = ((cartSubtotal) + (orderTax) + (shippingFee)).toFixed(2);
 
   return (
-    <Grid container xs={12} columns={12} alignItems='center'>
+    <Grid container component="main" columns={12} alignItems='center' 
+          sx={{ pl: 2}}>
 
-    <Grid xs={2}>
+    <Grid xs={4}>
       <Paper></Paper>
     </Grid>
 
@@ -61,7 +62,6 @@ const OrderSummary = (product) => {
 
         {cart.cartItems.length > 0 ? (
             <Grid item xs={12}
-              display="flex"
               justifyContent="center"
               flexDirection="column"
               alignItems="center"
@@ -69,7 +69,7 @@ const OrderSummary = (product) => {
               <Typography variant="h4" color={Colors.black} align="center">
                 Review Your Order
               </Typography>
-              <Paper elevation={0} sx={{ p: 1, pl: 0.5 }}>
+              <Paper elevation={0} sx={{ p: 1 }}>
                 <CartItem />
               </Paper>
             
@@ -116,10 +116,10 @@ const OrderSummary = (product) => {
                     display="flex"
                     flexDirection="column"
                     justifyContent="space-between"
-                    sx={{ pr: 60, mr: 20 }}
+                    sx={{ pr: 55, mr: 20 }}
                     >
                       <Typography color={Colors.black} sx={{ fontSize: 18 }}>
-                        Order Total:
+                        Estimated Order Total:
                       </Typography>
                     </Box>
                     <Grid justifyContent="space-between">
@@ -129,9 +129,9 @@ const OrderSummary = (product) => {
                     </Grid>
                   </Box>
               </Grid>
-
+              <br />
               {/* CONTINUE SHOPPING & PROCEED TO CHECKOUT BUTTON */}
-              <Box display="flex" direction="row" justifyContent="center" sx={{ mt : 3}} alignItems="center">
+              <Box display="flex" direction="row" justifyContent="center" alignItems="center">
                 <Button
                   sx={{ mr: 1 }}
                   variant="contained"
@@ -149,7 +149,8 @@ const OrderSummary = (product) => {
                   Proceed to Checkout
                 </Button>
               </Box>
-              <Box display="flex" direction="row" justifyContent="center" sx={{ mt : 2}} alignItems="center">
+              <br />
+              <Box display="flex" direction="row" justifyContent="center" alignItems="center">
                 <Button
                   variant="outlined"
                   sx={{ m: 1 }}
@@ -162,19 +163,26 @@ const OrderSummary = (product) => {
             
         ) : (
             // render below if cart is empty
+            <Grid item xs={12}
+              display="flex"
+              justifyContent="center"
+              flexDirection="column"
+              alignItems="center"
+            >
             <Box
               display="flex"
               flexDirection="column"
               justifyContent="center"
               alignItems="center"
               height="300px"
-              width="1300px"
+              width="1250px"
               sx={{  m: 5 }}
               >
                 <Typography variant="h4" color={Colors.primary}>
                   Your cart is empty. Please return to homepage to continue
                   shopping!
                 </Typography>
+                <br />
                 <Button
                   variant="contained"
                   fullWidth={true}
@@ -183,6 +191,7 @@ const OrderSummary = (product) => {
                   Continue Shopping
                 </Button>
               </Box>
+            </Grid>
             )}
       </Paper>
 
