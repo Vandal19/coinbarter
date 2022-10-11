@@ -4,11 +4,9 @@ import {
   Divider,
   Drawer,
   Grid,
-  ImageList,
-  ImageListItem,
   Paper,
   Typography,
-  useMediaQuery,
+  IconButton
 } from "@mui/material";
 import { useEffect } from "react";
 import { Box } from "@mui/system";
@@ -18,7 +16,7 @@ import { useUIContext } from "../../context/ui";
 import { Colors } from "../../styles/theme";
 import { useTheme } from "@mui/material/styles";
 import { addToCart } from "../../features/cartSlice";
-import { useUserData } from "../../hooks/useUserData";
+import CloseIcon from '@mui/icons-material/Close';
 
 const Favorite = () => {
 
@@ -96,7 +94,7 @@ const Favorite = () => {
         </Typography>
       </Box>
     </Box>
-    <Divider variant="inset" />
+    <Divider/>
   </Box>
 ));
 
@@ -106,7 +104,7 @@ const Favorite = () => {
       onClose={() => setShowFav(false)}
       anchor="right"
       PaperProps={{
-        sx: { width: 500, background: Colors.light_gray, borderRadius: 0 },
+        sx: { width: 500, background: Colors.light_gray, borderRadius: 1 },
       }}
     >
       {favorite?.favoriteItems?.length > 0 ?
@@ -115,15 +113,21 @@ const Favorite = () => {
         justifyContent="center"
         flexDirection="column"
         alignItems="center"
-        sx={{ p: 4 }}
+        sx={{ p: 2 }}
       >
-        <Typography variant="h4" color={Colors.black}>
+        <Typography variant="h4" color={Colors.black} gutterBottom>
           Favorites
+          <IconButton onClick={()=> setShowFav(false)}>
+            <CloseIcon />
+          </IconButton>
         </Typography>
-        <Paper elevation={0} sx={{ p: 1, pl: 0.5 }}>
+
+        <Paper elevation={1} variant="outlined">
           {favContent}
         </Paper>
-        <Box sx={{ mt:4 }} variant="contain">
+        
+        <Box variant="contain" justifyContent="space-between">
+        <br />
           <Button>
             Proceed to Cart
           </Button>
@@ -142,9 +146,6 @@ const Favorite = () => {
           You have not added anything to Favorites!
         </Typography>
       </Box> }
-      <Button onClick={()=> setShowFav(false)}>
-        Close
-      </Button>
     </Drawer>
   );
 }
