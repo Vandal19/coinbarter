@@ -3,8 +3,8 @@ import { lighten, modularScale } from 'polished';
 import { borders, borderRadius, borderRight } from '@mui/system';
 
 export const Colors = {
-  primary: "#5f2c3e",
-  secondary: "#d1adcc",
+  primary: "#145DA0",
+  secondary: "#2E8BC0",
   success: "#4CAF50",
   info: "#00a2ff",
   danger: "#FF5722",
