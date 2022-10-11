@@ -11,13 +11,14 @@ import { ethers } from "ethers";
 import ErrorMessage from './ErrorMessage';
 import TxList from './TxList';
 
-
+// set to admin_coinbarter
+const DEFAULT_DESTINATION_ADDR = "0xE1096fBC80a1968d1A0ADbd29C2c76595A44954B";
 
 export default function CryptoPaymentForm({backStep, nextStep}) {
 
   // hooks to set amount and destination addr
   const [amount, setAmount] = useState();
-  const [destinationAddr, setDestinationAddr] = useState("");
+  const [destinationAddr, setDestinationAddr] = useState(DEFAULT_DESTINATION_ADDR);
   // states for error msg and capture tx
   const [error, setError] = useState("");
   const [txs, setTxs] = useState([]);
@@ -72,19 +73,6 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
     }
   };
 
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const data = new FormData(e.target);
-  //   setError();
-  //   await startPayment({
-  //     setError,
-  //     setTxs,
-  //     ether: data.get("ether"),
-  //     addr: data.get("addr")
-  //   });
-  // };
-
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -100,6 +88,9 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
             value={destinationAddr}
             onChange={event => {setDestinationAddr(event.target.value)}}
           />
+          <Typography variant="body2" sx={{fontStyle: 'italic', color: 'red'}}>
+            * destination address has been set to CoinBarter wallet
+          </Typography>
         </Grid>
         <Grid item xs={12}>
           <TextField
@@ -112,7 +103,7 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
             onChange={event => {setAmount(Number.parseFloat(event.target.value))}}
           />
         </Grid>
-
+        
         <br />
         <Grid item xs={12} sx={{ mt: 2 }}>
           <Box
