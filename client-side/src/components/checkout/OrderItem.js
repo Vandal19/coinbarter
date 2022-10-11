@@ -29,7 +29,7 @@ const OrderItem = () => {
 
   const order = useSelector((state) => state.order);
 
-  console.log("order", order);
+  // console.log("order", order);
 
   return order.orderItems?.map((product) => (
     <Container maxWidth="xl" key={product.id}>
@@ -61,11 +61,11 @@ const OrderItem = () => {
           </Grid>
           <Divider orientation="vertical"/>
           <Grid item xs={1} display="flex" direction="row" justifyContent="center" alignItems='flex-start'>
-            <Typography fontSize="20px">{product.quantity}</Typography>
+            <Typography fontSize="20px">{product.cartQuantity}</Typography>
           </Grid>
           <Divider orientation="vertical"/>
           <Grid item xs={1} display="flex" direction="row" justifyContent="center" alignItems='flex-start'>
-            <Typography fontSize="20px">${product.price * product.quantity}</Typography>
+            <Typography fontSize="20px">${product.price * product.cartQuantity}</Typography>
           </Grid>
         </Grid>
       </Box>

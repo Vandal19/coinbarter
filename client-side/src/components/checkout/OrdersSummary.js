@@ -21,7 +21,7 @@ const OrderSummary = (product) => {
   const cart = useSelector((state) => state.cart);
   const order = useSelector((state) => state.order.orderItems);
 
-  console.log("order", order);
+  // console.log("order", order);
 
   useEffect(() => {
     dispatch(sumTotal());
@@ -68,7 +68,7 @@ const OrderSummary = (product) => {
               <Paper elevation={0} sx={{ p: 1 }}>
                 <CartItem />
               </Paper>
-            
+
               {/* SUBTOTAL & SHIPPING COMPONENTS */}
               <Grid item xs={12}>
                 <Box

@@ -30,14 +30,13 @@ const favoriteSlice = createSlice({
       const itemInFavorite = state.favoriteItems.find(
         (item) => item.id === action.payload.id
       );
-      console.log("action", action.payload)
+      // console.log("action", action.payload)
       if (itemInFavorite) {
         const updatedFavState = state.favoriteItems = state.favoriteItems.filter((item) => item.id !== action.payload.id)
         state.favoriteItems = updatedFavState
       } else {
         const updatedFavState = state.favoriteItems.filter((item) => item.id !== action.payload.id)
         state.favoriteItems = updatedFavState
-        console.log(state.favoriteItems)
         state.favoriteQuantity = state.favoriteItems.length
         state.favoriteTotalQuantity = state.favoriteQuantity
       }

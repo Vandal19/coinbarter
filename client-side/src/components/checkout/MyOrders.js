@@ -40,23 +40,22 @@ const MyOrders = () => {
   const matches = useMediaQuery(theme.breakpoints.down("md"));
   const user = useSelector((state) => state.user.user)
 
-  useEffect(() => {
-    const ordersData = async () => {
-      try {
-        const myOrders = await axios.post(`/my-orders/${user.id}`)
-        console.log("myOrders", myOrders.data)
-        // const parseData = JSON.stringify(localStorage.getItem(myFavorites))
-        dispatch(orderDetails(myOrders.data))
+  // useEffect(() => {
+  //   const ordersData = async () => {
+  //     try {
+  //       const myOrders = await axios.post(`/my-orders/${user.id}`)
+  //       // const parseData = JSON.stringify(localStorage.getItem(myFavorites))
+  //       console.log("data", myOrders.data)
+  //       dispatch(orderDetails(myOrders.data))
 
-
-      } catch (error) {
-        console.log(error.response);
-      }
-    }
-    if(user?.id){
-      ordersData();
-    }
-  }, [dispatch, user?.id])
+  //     } catch (error) {
+  //       console.log(error.response);
+  //     }
+  //   }
+  //   if(user?.id){
+  //     ordersData();
+  //   }
+  // }, [dispatch, user?.id])
 
 
   return (
