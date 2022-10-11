@@ -98,8 +98,11 @@ export default function Checkout() {
       <Grid container component="main" columns={16} spacing={3}
             sx={{ mb: 50, height: '100vh' }}>
           <>
+        <Grid item xs={16}>
+          <GetEthPrice />
+        </Grid>
         <Grid item xs={8}>
-          <Paper variant="outlined" sx={{ mt: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+          <Paper variant="outlined" sx={{ mb: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
             <Typography component="h1" variant="h4" align="center">
               Checkout
             </Typography>
@@ -116,9 +119,6 @@ export default function Checkout() {
         </Grid>
         <Grid item xs={8}>
           <ItemsInCart />
-        </Grid>
-        <Grid item xs={8}>
-          <GetEthPrice />
         </Grid>
           </>
       </Grid>
