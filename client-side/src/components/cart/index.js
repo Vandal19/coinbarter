@@ -9,6 +9,7 @@ import {
   Paper,
   Typography,
   useMediaQuery,
+  IconButton
 } from "@mui/material";
 import { useEffect } from "react";
 import { useUIContext } from "../../context/ui";
@@ -17,6 +18,7 @@ import { useTheme } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, removeFromCart, decreaseCart, clearCart, sumTotal } from "../../features/cartSlice";
+import CloseIcon from '@mui/icons-material/Close';
 import CartItem from "./cartItem"
 
 const Cart = () => {
@@ -46,41 +48,49 @@ const Cart = () => {
       onClose={() => setShowCart(false)}
       anchor="right"
       PaperProps={{
-        sx: { width: 500, background: Colors.light_gray, borderRadius: 0 },
+        sx: { width: 500, background: Colors.light_gray, borderRadius: 1 },
       }}
     >
       {cart.cartItems.length > 0 ?
       <Box
         display="flex"
-        justifyContent="center"
+        justifyContent="space-between"
         flexDirection="column"
         alignItems="center"
         sx={{ p: 4 }}
       >
-        <Typography variant="h4" color={Colors.black}>
+        <Typography variant="h4" color={Colors.black} gutterBottom>
           Your Cart
+          <IconButton onClick={() => setShowCart(false)}>
+            <CloseIcon />
+          </IconButton>
         </Typography>
-        <Paper elevation={0} sx={{ p: 1, pl: 0.5 }}>
+        <Paper elevation={1} variant="outlined" sx={{ mx: 2 }}>
         {/* {cart?.cartItems?.map((product, index) => ( */}
           <CartItem  />
         </Paper>
-        <Box display="flex" flexDirection="row" justifyContent="center" alignItems="flex-start"  >
-          <Box display="flex" flexDirection="column" sx={{ pr: 10, mr:10 }}>
-            <Typography color={Colors.black} sx = {{ fontSize: 35}}>Subtotal:</Typography>
-            <Typography color={Colors.black} sx = {{ fontSize: 15}}>Free Shipping* </Typography>
+
+        <br />
+        <Box display="flex" flexDirection="row" justifyContent="center" alignItems="flex-start">
+          <Box display="flex" flexDirection="column" sx={{ pr: 28 }}>
+            <Typography color={Colors.black} sx = {{ fontSize: 18 }}>
+              Subtotal: 
+            </Typography>
           </Box>
           <Box>
-            <Typography color={Colors.black}sx = {{ fontSize: 30}}>${cartTotalAmount}</Typography>
-
+            <Typography color={Colors.black} sx = {{ fontSize: 18 }} align="right">
+              USD ${cartTotalAmount.toFixed(2)}
+            </Typography>
           </Box>
         </Box>
-        <Box sx={{ mt:4 }} variant="contain">
-          <Button onClick={handleClearCart}>Clear Cart</Button>
-          <Button href="/order-summary" >
-            <Typography variant='contained'
-                    fullWidth={true}  align="center" style={{ wordWrap: "break-word" }}>
-            Proceed to Order Summary
-            </Typography>
+
+        <Box variant="contain" justifyContent="space-between">
+        <br />
+          <Button onClick={handleClearCart}>
+            Clear Cart
+          </Button>
+          <Button href="/order-summary">
+            Review Your Order
           </Button>
         </Box>
       </Box>
@@ -96,9 +106,6 @@ const Cart = () => {
           Your cart is empty!
         </Typography>
       </Box> }
-      <Button onClick={()=> setShowCart(false)}>
-        Close
-      </Button>
     </Drawer>
   );
 
