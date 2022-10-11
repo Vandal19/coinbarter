@@ -1,4 +1,4 @@
-// SHOW ITEMS IN CART -- OUTSIDE OF DRAWER
+// CART ITEMS RENDERED IN CHECKOUT PAGE 
 
 import {
   Button,
@@ -53,6 +53,9 @@ const ItemsInCart = () => {
   const shippingFee = 10;
   const orderTax = ((cart.cartTotalAmount) * (tax));
   const orderTotal = ((cartSubtotal) + (orderTax) + (shippingFee)).toFixed(2);
+
+  // payment total in ETH
+  const paymentTotal = ((orderTotal) / (ethToUsd)).toFixed(4);
 
   return (
     <Grid container xs={12} columns={2}>
@@ -128,6 +131,10 @@ const ItemsInCart = () => {
                     <Typography color={Colors.black} sx={{ fontSize: 18 }}>
                       ETH/USD Exchange Rate:
                     </Typography>
+                    <br />
+                    <Typography sx={{ fontSize: 18, fontWeight: 'medium', color: 'red'}}>
+                      Payment Total:
+                    </Typography>
                   </Box>
                   <Grid justifyContent="space-between">
                     <Typography color={Colors.black} sx={{ fontSize: 18 }} align="right">
@@ -136,13 +143,18 @@ const ItemsInCart = () => {
                     <Typography color={Colors.black} sx={{ fontSize: 18 }} align="right">
                       USD ${ethToUsd}
                     </Typography>
+                    <br />
+                    <Typography sx={{ fontSize: 18, fontWeight: 'medium', color: 'red'}} align="right">
+                      {paymentTotal} ETH
+                    </Typography>
                   </Grid>
                 </Box>
             </Grid>
 
-            <Box sx={{ mt: 2 }} variant="contain" display="flex">
+            <br />
+            <Box variant="contain" display="flex">
               <Button
-                variant="contained"
+                variant="outlined"
                 fullWidth={true}
                 sx={{ mr: 1 }}
                 onClick={handleClearCart}
