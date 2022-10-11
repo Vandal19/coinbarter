@@ -57,25 +57,11 @@ function App() {
         console.log(error.response);
       }
     }
-
-    const ordersData = async () => {
-      try {
-        const myOrders = await axios.post(`/my-orders/${user.id}`)
-        console.log("myOrders", myOrders.data)
-        // const parseData = JSON.stringify(localStorage.getItem(myFavorites))
-        dispatch(orderDetails(myOrders.data))
-
-
-      } catch (error) {
-        console.log(error.response);
-      }
-    }
     if(user?.id){
       favoriteData();
-      ordersData();
+      // ordersData();
     }
 
-    // console.log("favData", favoriteData)
   }, [dispatch, user?.id])
 
   async function postName(e) {

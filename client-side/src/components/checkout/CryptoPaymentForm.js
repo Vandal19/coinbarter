@@ -10,6 +10,10 @@ import { useState } from "react";
 import { ethers } from "ethers";
 import ErrorMessage from './ErrorMessage';
 import TxList from './TxList';
+import { useNavigate } from 'react-router-dom';
+import { clearFavorites } from "../../features/favoriteSlice";
+import {  clearCart } from "../../features/cartSlice";
+import { useDispatch } from "react-redux";
 
 // set to admin_coinbarter
 const DEFAULT_DESTINATION_ADDR = "0xE1096fBC80a1968d1A0ADbd29C2c76595A44954B";
@@ -22,37 +26,39 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
   // states for error msg and capture tx
   const [error, setError] = useState("");
   const [txs, setTxs] = useState([]);
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
 
 
   // ({ setError, setTxs, amount, destinationAddr })
   // initialize connection with metamask wallet
   const startPayment = async ( event ) => {
-  
+
     console.log("debug:", { amount, destinationAddr });
 
     // reset state displaying error msg
     setError("");
 
     event.preventDefault();
-  
+
     try {
       // throw this error if user doesn't have a metamask wallet
       if (!window.ethereum)
         throw new Error("No crypto wallet found. Please install it.");
-  
+
       // ask user for permission to connect with metamask wallet
       await window.ethereum.send("eth_requestAccounts");
-  
+
       // establish connection with eth provider to send tx
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
-  
+
       // get testnet network
       const network = await provider.getNetwork();
-  
+
       // validate destination addr
       ethers.utils.getAddress(destinationAddr);
-      
+
       // create the tx; to which addr & how much eth (converted to wei)
       const tx = await signer.sendTransaction({
         to: destinationAddr,
@@ -64,9 +70,14 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
       setTxs([tx]);
 
       // move to order confirmation step after 10 seconds
+      // setTimeout(() => {
+      //   nextStep();
+      // }, 10000)
       setTimeout(() => {
-        nextStep();
-      }, 10000)
+        dispatch(clearFavorites())
+        dispatch(clearCart())
+        navigate("/my-orders")
+      }, 5000)
     } catch (error) {
       setError(error.reason);
       console.log({error});
@@ -114,7 +125,7 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
                 sx={{ mt: 2 }}>
             <Button variant='outlined'
                     fullWidth={true}
-                    sx={{ mr: 1 }} 
+                    sx={{ mr: 1 }}
                     type='submit'
                     onClick={backStep}
                     >
@@ -122,7 +133,7 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
             </Button>
             <Button variant='contained'
                     fullWidth={true}
-                    sx={{ mr: 1 }} 
+                    sx={{ mr: 1 }}
                     // type='submit'
                     onClick={startPayment}
                     >
