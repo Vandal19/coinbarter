@@ -104,7 +104,7 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
         dispatch(clearFavorites());
         dispatch(clearCart());
         navigate("/my-orders");
-      }, 5000);
+      }, 3000);
     } catch (error) {
       setError(error.reason);
       console.log({ error });

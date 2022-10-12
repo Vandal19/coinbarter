@@ -19,7 +19,7 @@ export default function NavBarDesktop({ matches }) {
   return (
     <NavBarContainer>
       <NavBarHeader>
-      <Link to="/products/bestsellers_electronics" style={{ textDecoration: "none", color: Colors.primary }}>CoinBarter</Link>
+      <Link to="/" style={{ textDecoration: "none", color: Colors.primary }}>CoinBarter</Link>
       </NavBarHeader>
       <MyList type="row">
         <NavBarCategories>

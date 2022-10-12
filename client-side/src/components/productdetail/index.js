@@ -65,13 +65,13 @@ export default function ProductDetail({open, onClose, product}) {
           alignItems="center"
           justifyContent={"space-between"}
           sx={{ ml: 6, mr: 6 }}>
-          Product Title
+          Product
           <IconButton onClick={onClose}>
             <CloseIcon />
           </IconButton>
         </Box>
       </DialogTitle>
-      <DialogContent> 
+      <DialogContent>
         <ProductDetailWrapper flexDirection={matches ? 'column' : 'row'}>
           <Product sx={{ mr: 4 }}>
             <ProductImage src={product.cover_image_url} />
@@ -83,7 +83,7 @@ export default function ProductDetail({open, onClose, product}) {
             {/* <Typography variant="subtitle">SKU 123</Typography> */}
             <Typography variant="subtitle2">Availability: {product.stock} in stock</Typography>
             <Divider  sx={{ mt: 2, mb: 2 }} />
-            <Typography 
+            <Typography
               variant="h7"
               sx={{ fontWeight: 500 }}>
               About This Item: <br />
@@ -101,7 +101,7 @@ export default function ProductDetail({open, onClose, product}) {
               alignitems="center"
               justifyContent="space-between"
               sx={{ mt: 4, color: Colors.light }}>
-              <Button variant="contained" 
+              <Button variant="contained"
                       fullWidth={true}
                       sx={{ mr: 1 }}
                       isFav={0} onClick={() => handleAddToFavorite(product)}
