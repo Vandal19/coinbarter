@@ -10,24 +10,22 @@ export default function Banner() {
 
   return (
     <BannerContainer>
-        <BannerImage src="/images/banner/homepage-dcut.png"/>
+        
       <BannerContent>
-
-        <Typography>
-        </Typography>
 
         <BannerTitle variant="h2">
           Buy Now, <br/>
           Pay With<Box sx={{ display: 'inline', fontStyle: 'italic' }}> Crypto</Box>
         </BannerTitle>
 
-        <BannerDescription variant="subtitle">
+        <BannerDescription variant="body2">
           E-commerce Reimagined
         </BannerDescription>
 
-        <BannerShopButton href="/login" color="primary">SHOP NOW</BannerShopButton>
+        <BannerShopButton href="/login">SHOP NOW</BannerShopButton>
 
       </BannerContent>
+      <BannerImage src="/images/banner/homepage-dcut.png"/>
     </BannerContainer>
   );
 }
