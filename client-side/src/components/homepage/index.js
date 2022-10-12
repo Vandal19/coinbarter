@@ -7,7 +7,7 @@ const HomePage = () => {
   return (
     <Grid>
       <Banner />
-      <Slider />
+      {/* <Slider /> */}
     </Grid>
   );
 };

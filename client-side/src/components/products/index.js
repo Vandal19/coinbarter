@@ -5,6 +5,7 @@ import SingleProduct from './SingleProduct';
 import SingleProductDT from './SingleProductDT';
 import { useSelector, useDispatch } from 'react-redux';
 import useProductsData from '../../hooks/useProductsData';
+import Slider from '../slider';
 
 
 const Products = () => {
@@ -26,7 +27,8 @@ const Products = () => {
 
   ))
   return (
-<Container >
+<Grid container component="main" columns={16}>
+  <Slider />
   <Grid
   container spacing={{ xs: 2, md: 4}}
   justifyContent="center"
@@ -35,7 +37,7 @@ const Products = () => {
   >
     {renderProducts}
   </Grid>
-</Container>
+</Grid>
   )
 }
 
