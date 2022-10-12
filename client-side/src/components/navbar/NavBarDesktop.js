@@ -23,6 +23,7 @@ export default function NavBarDesktop({ matches }) {
       </NavBarHeader>
       <MyList type="row">
         <NavBarCategories>
+        <Link to="/products/bestsellers_electronics" style={{ textDecoration: "none", color: Colors.primary }}>Best Sellers</Link>
         <Link to="/products/2407748011" style={{ textDecoration: "none", color: Colors.primary }}>Cell Phones</Link>
         <Link to="/products/565108" style={{ textDecoration: "none", color: Colors.primary }}>Computers</Link>
         <Link to="/products/7926841011" style={{ textDecoration: "none", color: Colors.primary }}>Gaming</Link>

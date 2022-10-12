@@ -22,7 +22,7 @@ export default function Banner() {
           E-commerce Reimagined
         </BannerDescription>
 
-        <BannerShopButton href="/login">SHOP NOW</BannerShopButton>
+        <BannerShopButton href="products/bestsellers_electronics">SHOP NOW</BannerShopButton>
 
       </BannerContent>
       <BannerImage src="/images/banner/homepage-dcut.png"/>
