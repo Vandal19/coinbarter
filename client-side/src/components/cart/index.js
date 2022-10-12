@@ -110,16 +110,24 @@ const Cart = () => {
       </Box>
       :
       <Box
-        display="flex"
-        justifyContent="center"
-        flexDirection="column"
-        alignItems="center"
-        sx={{p:4}}
+      display="flex"
+      justifyContent="center"
+      flexDirection="column"
+      alignItems="center"
+      sx={{ p: 2 }}
+    >
+      <Button
+        variant="contained"
+        style={{
+          minWidth: "150px",
+          minHeight: "100px",
+          fontSize: "25px",
+        }}
       >
-        <Typography variant="h4" color={Colors.primary}>
-          Your cart is empty!
-        </Typography>
-      </Box> }
+        Your Cart is Empty
+      </Button>
+    </Box>
+      }
     </Drawer>
   );
 
