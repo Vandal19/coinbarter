@@ -21,7 +21,7 @@ export default function MobileMenu() {
   return (
     <>
       {drawerOpen && (<DrawerCloseButton onClick={() => setDrawerOpen(false)}>
-        <CloseIcon sx={{ fontSize: '2.5rem', color: lighten(0.09, Colors.secondary)}}/>  
+        <CloseIcon sx={{ fontSize: '2.5rem', color: lighten(0.09, Colors.secondary)}}/>
       </DrawerCloseButton> )}
       <Drawer open={drawerOpen}>
         <List>

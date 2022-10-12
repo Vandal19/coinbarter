@@ -22,6 +22,7 @@ import { isItemInFavorite } from './features/favoriteSlice'
 import Checkout from "./components/checkout/Checkout.js";
 import OrderSummary from "./components/checkout/OrdersSummary.js"
 import MyOrders from "./components/checkout/MyOrders";
+import HomePage from "./components/homepage";
 
 function App() {
   const [name, setName] = useState("");
@@ -90,13 +91,13 @@ function App() {
 
             {/* Home Page*/}
             <Route path="/" element={<>
-            <Banner/>
+            {/* <Banner/>
             <Slider/>
 
           <Box display="flex" justifyContent="center" sx={{ p: 4 }}>
             <Typography variant="h4">Best Sellers</Typography>
-          </Box>
-            <Products />
+          </Box> */}
+            <HomePage/>
 
           </>} />
             <Route path="/products/:id" element={<>

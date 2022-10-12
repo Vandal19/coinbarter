@@ -25,7 +25,7 @@ export default function Banner() {
           E-commerce Reimagined
         </BannerDescription>
 
-        <BannerShopButton href="/login" color="primary">SHOP NOW</BannerShopButton>
+        <BannerShopButton href="products/bestsellers_electronics" color="primary">SHOP NOW</BannerShopButton>
 
       </BannerContent>
     </BannerContainer>
