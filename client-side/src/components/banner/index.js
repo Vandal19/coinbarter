@@ -2,6 +2,7 @@ import { useTheme } from "@mui/material/styles";
 import { Typography, useMediaQuery } from "@mui/material";
 import { BannerContainer, BannerContent, BannerDescription, BannerImage, BannerShopButton, BannerTitle } from "../../styles/banner";
 import Box from '@mui/material/Box';
+import CryptoCarousel from "./CryptoCarousel";
 
 export default function Banner() {
 
@@ -9,8 +10,10 @@ export default function Banner() {
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
+  <>
+    {/* <CryptoCarousel /> */}
     <BannerContainer>
-        
+
       <BannerContent>
 
         <BannerTitle variant="h2">
@@ -27,5 +30,6 @@ export default function Banner() {
       </BannerContent>
       <BannerImage src="/images/banner/homepage-dcut.png"/>
     </BannerContainer>
+    </>
   );
 }

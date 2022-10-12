@@ -94,9 +94,9 @@ function App() {
             {/* <Banner/>
             <Slider/>
 
-          <Box display="flex" justifyContent="center" sx={{ p: 4 }}>
-            <Typography variant="h4">Best Sellers</Typography>
-          </Box> */}
+            <Box display="flex" justifyContent="center" sx={{ p: 4 }}>
+              <Typography variant="h4">Best Sellers</Typography>
+            </Box> */}
             <HomePage/>
 
           </>} />

@@ -2,13 +2,12 @@ import { Typography } from "@mui/material";
 import { Box, styled } from "@mui/system";
 import { Colors } from "../theme";
 import "@fontsource/fira-code";
+import "@fontsource/inter";
 
 // slider container
 export const SliderContainer = styled(Box)(({theme}) => ({
 
-  [theme.breakpoints.up('md')]: {
-    padding: '30px 0px 30px 0px'
-  },
+  width: '100%',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -20,9 +19,9 @@ export const SliderContainer = styled(Box)(({theme}) => ({
 // slider messages
 export const MessageText = styled(Typography)(({theme}) => ({
 
-  fontFamily: '"Fira Code", monospace',
+  fontFamily: '"Inter", sans-serif',
   [theme.breakpoints.up('md')]: {
-    fontSize: '2rem',
+    fontSize: '1.3rem',
   },
   color: Colors.white,
   fontSize: '1.2rem'

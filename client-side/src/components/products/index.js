@@ -5,6 +5,7 @@ import SingleProduct from './SingleProduct';
 import SingleProductDT from './SingleProductDT';
 import { useSelector, useDispatch } from 'react-redux';
 import useProductsData from '../../hooks/useProductsData';
+import Slider from '../slider';
 
 
 const Products = () => {
@@ -16,7 +17,11 @@ const Products = () => {
 
 
   const renderProducts = products?.map((product) => (
-    <Grid item key={product.id} xs={2} sm={4} md={4} display="flex" flexDirection={"column"} alignItems="center">
+    <Grid item key={product.id} xs={2} sm={4} md={4} 
+          sx={{ pt: '20px' }}
+          display="flex" 
+          flexDirection={"column"} 
+          alignItems="center">
       {matches ? (
       <SingleProduct product={product} matches={matches} />
       ) : (
@@ -26,16 +31,17 @@ const Products = () => {
 
   ))
   return (
-<Container >
-  <Grid
-  container spacing={{ xs: 2, md: 4}}
+<Grid container component="main" columns={16}>
+  <Slider />
+  <Grid container  
+  spacing={{ xs: 2, md: 4}}
   justifyContent="center"
-  sx={{margin: '20px 4px 10px 4px'}}
+  sx={{margin: '20px 4px 10px 4px', pt: '20px' }}
   columns={{xs: 4, s: 8, md:12}}
   >
     {renderProducts}
   </Grid>
-</Container>
+</Grid>
   )
 }
 
