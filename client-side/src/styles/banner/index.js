@@ -2,28 +2,31 @@ import { styled } from "@mui/material/styles";
 import { Box, Button, Typography } from "@mui/material";
 import { Colors } from "../theme";
 import "@fontsource/fira-code";
+import "@fontsource/inter";
+
 
 // banner container
-export const BannerContainer = styled(Box)(({ image, theme}) => ({
+export const BannerContainer = styled(Box)(({}) => ({
 
   display: 'flex',
-  justifyContent: 'center',
+  justifyContent: 'space-evenly',
   width: '100%',
   height: '100%',
-  padding: '200px 0px',
-  background: Colors.light_gray,
-  backgroundImage: `url(${image})`,
-  [theme.breakpoints.down('sm')]: {
-    flexDirection: 'column',
-    alignItems: 'center'
-  }
+  padding: '100px 0px',
+  background: 'linear-gradient(45deg, #185a9d 30%, #43cea2 90%)',
+  boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
+  borderRadius: 3,
+  // [theme.breakpoints.down('sm')]: {
+  //   flexDirection: 'column',
+  //   alignItems: 'center'
+  // }
 }));
 
 // banner image
 export const BannerImage = styled('img')(({ src, theme }) => ({
 
   src: `url(${src})`,
-  width: '400px',
+  width: '500px',
   [theme.breakpoints.down('md')]: {
     width: '350px'
   },
@@ -76,17 +79,19 @@ export const BannerShopButton = styled(Button, {
   slot: 'Root',
   overridesResolver: (props, styles) => [
     styles.root,
-    props.color === 'primary' && styles.primary,
-    props.color === 'secondary' && styles.secondary,
+    props.color === '#FE6B8B',
+    props.color === '#FF8E53',
   ]
-})(({theme}) => ({
+})(({}) => ({
 
   padding: '10px 0px',
   color: Colors.white,
   fontWeight: "bold",
   fontSize: '16px',
-  [theme.breakpoints.down('sm')]: {
-    padding: '5px 0px',
-    fontSize: '14px'
-  }
+  background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  // [theme.breakpoints.down('sm')]: {
+  //   padding: '5px 0px',
+  //   fontSize: '14px'
+  // }
 }));
