@@ -23,6 +23,7 @@ const Cart = () => {
 
   const cart = useSelector((state) => state.cart);
   const cartTotalAmount = useSelector((state) => state.cart.cartTotalAmount)
+  const cartTotalQuantity = useSelector((state) => state.cart.cartTotalQuantity)
 
   useEffect(() => {
     dispatch(sumTotal());
@@ -46,61 +47,87 @@ const Cart = () => {
         sx: { width: 500, background: Colors.light_gray, borderRadius: 1 },
       }}
     >
+            <Box display="flex" justifyContent="flex-end">
+        <IconButton onClick={() => setShowCart(false)}>
+          <CloseIcon />
+        </IconButton>
+        </Box>
       {cart.cartItems.length > 0 ?
       <Box
         display="flex"
         justifyContent="space-between"
         flexDirection="column"
         alignItems="center"
-        sx={{ p: 4 }}
+        sx={{ pb: 2 }}
       >
-        <Typography variant="h4" color={Colors.black} gutterBottom>
-          Your Cart
-          <IconButton onClick={() => setShowCart(false)}>
-            <CloseIcon />
-          </IconButton>
-        </Typography>
-        <Paper elevation={1} variant="outlined" sx={{ mx: 2 }}>
+        <Box
+            display="flex"
+            justifyContent="center"
+            flexDirection="row"
+            alignItems="center"
+            sx={{ pb: 2 }}
+          >
+            <Button
+              variant="contained"
+              style={{
+                minWidth: "150px",
+                minHeight: "50px",
+                fontSize: "23px",
+              }}
+            >
+              Your Cart Items: {cartTotalQuantity} Items
+            </Button>
+          </Box>
+
+        <Paper elevation={1} >
         {/* {cart?.cartItems?.map((product, index) => ( */}
           <CartItem  />
         </Paper>
 
         <br />
-        <Box display="flex" flexDirection="row" justifyContent="center" alignItems="flex-start">
-          <Box display="flex" flexDirection="column" sx={{ pr: 28 }}>
-            <Typography color={Colors.black} sx = {{ fontSize: 18 }}>
-              Subtotal: 
-            </Typography>
+        {/* <Box display="flex" flexDirection="row" justifyContent="flex-end" alignItems="flex-end"> */}
+          {/* <Box display="flex" flexDirection="column" sx={{ pr: 35 }}> */}
+            {/* <Button variant="outlined" sx = {{ fontSize: 18 }}>
+              Subtotal:
+            </Button> */}
+          {/* </Box> */}
+          <Box display="flex" flexDirection="row" justifyContent="flex-end" alignItems="flex-end">
+            <Button variant="contained" sx = {{ fontSize: 15, backgroundColor:"Green" }} align="right">
+              Subtotal: USD ${cartTotalAmount.toFixed(2)}
+            </Button>
           </Box>
-          <Box>
-            <Typography color={Colors.black} sx = {{ fontSize: 18 }} align="right">
-              USD ${cartTotalAmount.toFixed(2)}
-            </Typography>
-          </Box>
-        </Box>
+        {/* </Box> */}
 
         <Box variant="contain" justifyContent="space-between">
         <br />
-          <Button onClick={handleClearCart}>
+          <Button variant="contained" onClick={handleClearCart}  sx={{ mr: 2 }}>
             Clear Cart
           </Button>
-          <Button href="/order-summary">
+          <Button variant="contained" href="/order-summary">
             Review Your Order
           </Button>
         </Box>
       </Box>
       :
       <Box
-        display="flex"
-        justifyContent="center"
-        flexDirection="column"
-        alignItems="center"
-        sx={{p:4}}
+      display="flex"
+      justifyContent="center"
+      flexDirection="column"
+      alignItems="center"
+      sx={{ p: 2 }}
+    >
+      <Button
+        variant="contained"
+        style={{
+          minWidth: "150px",
+          minHeight: "100px",
+          fontSize: "25px",
+        }}
       >
-        <Typography variant="h4" color={Colors.primary}>
-          Your cart is empty!
-        </Typography>
-      </Box> }
+        Your Cart is Empty
+      </Button>
+    </Box>
+      }
     </Drawer>
   );
 

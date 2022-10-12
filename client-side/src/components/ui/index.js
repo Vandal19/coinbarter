@@ -15,7 +15,7 @@ export default function ProductIncDec() {
   const [value, setValue] = useState(1);
 
   return (
-    <Box display="flex">
+    <Box display="flex" sx={{pr:2}}>
       <IconButton
         sx={{
           borderRadius: 0,

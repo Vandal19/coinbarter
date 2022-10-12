@@ -5,6 +5,8 @@ import {
   Button,
   Divider,
   Typography,
+  IconButton,
+  Tooltip,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,6 +15,7 @@ import {
   removeFromCart,
   decreaseCart,
 } from "../../features/cartSlice";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 const CartItem = () => {
   const dispatch = useDispatch();
@@ -32,19 +35,19 @@ const CartItem = () => {
   };
 
   return cart.cartItems?.map((product) => (
-
     <Box key={product.id}>
       <Box
         display="flex"
         alignItems="start"
         justifyContent="space-between"
-        sx={{ pt: 2, pb: 2 }}
+        sx={{ mt: 2, mb: 2 }}
       >
         <Avatar
           sx={{
             width: 150,
             height: 150,
             backgroundColor: "transparent",
+            mr: 1,
           }}
           variant="square"
         >
@@ -66,25 +69,33 @@ const CartItem = () => {
             }}
           >
             <Box display="flex" flexDirection="row" alignItems="center">
-              <Button
-                onClick={() => handleDecreaseCartQty(product)}
-                sx={{ fontSize: 25 }}
-              >
-                -
-              </Button>
-              <Typography>{product.quantity}</Typography>
-              <Button
-                onClick={() => handleAddToCart(product)}
-                sx={{ fontSize: 25 }}
-              >
-                +
-              </Button>
-              <Button
-                onClick={() => handleRemoveFromCart(product)}
-                sx={{ fontSize: 15 }}
-              >
-                Remove
-              </Button>
+              <Tooltip title="Decrease Quantity">
+                <Button
+                  onClick={() => handleDecreaseCartQty(product)}
+                  sx={{ fontSize: 20, mr: 2 }}
+                  variant="outlined"
+                >
+                  -
+                </Button>
+              </Tooltip>
+              <Typography sx={{ fontSize: 20 }}>{product.quantity}</Typography>
+              <Tooltip title="Increase Quantity">
+                <Button
+                  onClick={() => handleAddToCart(product)}
+                  sx={{ fontSize: 20, ml: 2, mr: 3 }}
+                  variant="outlined"
+                >
+                  +
+                </Button>
+              </Tooltip>
+              <Tooltip title="Delete">
+                <IconButton>
+                  <DeleteOutlineIcon
+                    onClick={() => handleRemoveFromCart(product)}
+                    sx={{ fontSize: 35, color: "maroon" }}
+                  />
+                </IconButton>
+              </Tooltip>
             </Box>
           </Typography>
         </Box>
@@ -94,7 +105,7 @@ const CartItem = () => {
           </Typography>
         </Box>
       </Box>
-      <Divider  />
+      <Divider />
     </Box>
     // </Box>
     // </Paper>
