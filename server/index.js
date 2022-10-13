@@ -34,10 +34,10 @@ app.use(morgan());
 
 // connect to routes
 const categoryRoutes = require('./routes/categoryRoutes');
-const products = require("./products")
+// const products = require("./products")
 const userRoutes = require("./routes/userRoutes")
 const favoriteRoutes = require("./routes/favoriteRoutes")
-const orderRoutes = require("./routes/orderRoutes")
+const orderRoutes = require("./routes/orderRoutes");
 
 app.use('/products', categoryRoutes);
 app.use('/favorites', favoriteRoutes);
@@ -70,78 +70,78 @@ app.get('/categories', (req, res) => {
 });
 
 
-// get products within a certain category
-app.get('/products/categories/:category', (req, res) => {
-  // set up the request parameters
-  const params = {
-    api_key: "0CEB324D9F3949AE896B07885033BA92",
-    type: "category",
-    category_id: req.params.category,
-    amazon_domain: "amazon.com"
-  }
-  // make the http GET request to Rainforest API
-  return axios.get('https://api.rainforestapi.com/request', { params })
-    .then(response => {
-      const products = response.data.category_results
-      for (let a of products) {
-        let randomStock = parseInt(Math.random() * 100);
-        let removeCommaProductPrice = a.price?.raw.replaceAll(',', '')
-        let productPrice = a.price ? removeCommaProductPrice.slice(1) : "not available";
-        const product = {
-          category_id: req.params.category,
-          brand_name: a.title,
-          price: productPrice,
-          cover_image_url: a.image,
-          create_date: new Date(Date.now()),
-          update_date: new Date(Date.now()),
-          stock: randomStock
-        }
-        addProduct(product);
-      }
-      // print the JSON response from Rainforest API
-      res.json((response.data.category_results)) ;
-    }).catch(error => {
-      // catch and print the error
-      console.log(error);
-    })
-});
+// // get products within a certain category
+// app.get('/products/categories/:category', (req, res) => {
+//   // set up the request parameters
+//   const params = {
+//     api_key: "0CEB324D9F3949AE896B07885033BA92",
+//     type: "category",
+//     category_id: req.params.category,
+//     amazon_domain: "amazon.com"
+//   }
+//   // make the http GET request to Rainforest API
+//   return axios.get('https://api.rainforestapi.com/request', { params })
+//     .then(response => {
+//       const products = response.data.category_results
+//       for (let a of products) {
+//         let randomStock = parseInt(Math.random() * 100);
+//         let removeCommaProductPrice = a.price?.raw.replaceAll(',', '')
+//         let productPrice = a.price ? removeCommaProductPrice.slice(1) : "not available";
+//         const product = {
+//           category_id: req.params.category,
+//           brand_name: a.title,
+//           price: productPrice,
+//           cover_image_url: a.image,
+//           create_date: new Date(Date.now()),
+//           update_date: new Date(Date.now()),
+//           stock: randomStock
+//         }
+//         addProduct(product);
+//       }
+//       // print the JSON response from Rainforest API
+//       res.json((response.data.category_results)) ;
+//     }).catch(error => {
+//       // catch and print the error
+//       console.log(error);
+//     })
+// });
 
-// get products for electronics best sellers
-app.get('/products/bestsellers/:category', (req, res) => {
-  // set up the request parameters
-  const params = {
-    api_key: "0CEB324D9F3949AE896B07885033BA92",
-    type: "bestsellers",
-    category_id: req.params.category,
-    amazon_domain: "amazon.com"
-  }
-  // make the http GET request to Rainforest API
-  return axios.get('https://api.rainforestapi.com/request', { params })
-    .then(response => {
-      const products = response.data.bestsellers;
-      for (let a of products) {
-        let randomStock = parseInt(Math.random() * 100);
-        let removeCommaProductPrice = a.price?.raw.replace(/,/g, '')
-        let productPrice = a.price ? removeCommaProductPrice.slice(1) : "not available";
+// // get products for electronics best sellers
+// app.get('/products/bestsellers/:category', (req, res) => {
+//   // set up the request parameters
+//   const params = {
+//     api_key: "0CEB324D9F3949AE896B07885033BA92",
+//     type: "bestsellers",
+//     category_id: req.params.category,
+//     amazon_domain: "amazon.com"
+//   }
+//   // make the http GET request to Rainforest API
+//   return axios.get('https://api.rainforestapi.com/request', { params })
+//     .then(response => {
+//       const products = response.data.bestsellers;
+//       for (let a of products) {
+//         let randomStock = parseInt(Math.random() * 100);
+//         let removeCommaProductPrice = a.price?.raw.replace(/,/g, '')
+//         let productPrice = a.price ? removeCommaProductPrice.slice(1) : "not available";
 
-        const product = {
-          category_id: req.params.category,
-          brand_name: a.title,
-          price: productPrice,
-          cover_image_url: a.image,
-          create_date: new Date(Date.now()),
-          update_date: new Date(Date.now()),
-          stock: randomStock
-        }
-        addProduct(product);
-      }
-      // print the JSON response from Rainforest API
-      res.json(response.data.bestsellers);
-    }).catch(error => {
-      // catch and print the error
-      console.log(error);
-    })
-});
+//         const product = {
+//           category_id: req.params.category,
+//           brand_name: a.title,
+//           price: productPrice,
+//           cover_image_url: a.image,
+//           create_date: new Date(Date.now()),
+//           update_date: new Date(Date.now()),
+//           stock: randomStock
+//         }
+//         addProduct(product);
+//       }
+//       // print the JSON response from Rainforest API
+//       res.json(response.data.bestsellers);
+//     }).catch(error => {
+//       // catch and print the error
+//       console.log(error);
+//     })
+// });
 
 
 
@@ -236,20 +236,28 @@ app.get("/home", async (req, res) => {
   res.send(`Testing data`);
 });
 
-app.get("/products", (req, res) => {
-  res.send(products)
-})
 
-app.post("/products", async (req, res) => {
-  const product = {
-    ...req.body,
-    category_id: parseFloat(req.body.category_id),
-    price: parseFloat(req.body.price),
-    stock: parseFloat(req.body.stock)
-  };
-  await addProduct(product);
-  // console.log("product", product)
-});
+
+// app.post("/products", async (req, res) => {
+//   const product = {
+//     ...req.body,
+//     category_id: parseFloat(req.body.category_id),
+//     price: parseFloat(req.body.price),
+//     stock: parseFloat(req.body.stock)
+//   };
+//   await addProduct(product);
+//   // console.log("product", product)
+// });
+
+// app.get("/products", async(req, res) => {
+//   try {
+//     const { name } = req.query
+
+//     const searchResults =
+//   } catch (error) {
+
+//   }
+// })
 
 
 

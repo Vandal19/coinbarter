@@ -147,6 +147,19 @@ const addNewOrders = async (
 };
 
 
+// For search Features
+const searchResults = async(name) => {
+  try {
+    const result = await db.query(
+      `SELECT * FROM products
+      WHERE products.brand_name ILIKE $1;`, [`%${name}%`])
+      console.log("result1", result.rows)
+      return result.rows;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 
 
 module.exports = {
@@ -157,5 +170,6 @@ module.exports = {
   loadFavorites,
   checkIfFavoriteExists,
   loadOrders,
-  addNewOrders
+  addNewOrders,
+  searchResults,
 }
