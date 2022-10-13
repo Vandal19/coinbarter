@@ -1,12 +1,9 @@
-import { display, height } from '@mui/system'
 import React from 'react'
-import { useTheme } from '@mui/material/styles';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
-import { Card, CardContent, CardMedia, Grid, Paper, Typography }from '@mui/material';
-import { makeStyles } from '@mui/material';
+import { Card, CardContent, CardMedia, Grid, Typography }from '@mui/material';
 
 // carousel styling
 // const useStyles = makeStyles((theme) => ({
@@ -44,32 +41,39 @@ const CryptoCarousel = () => {
   console.log("carousel", carousel);
 
   const items = carousel.map((coin) => {
-    let profit = coin?.price_change_percentage_24h >= 0;
+    let priceChange = coin?.price_change_percentage_24h;
 
     return (
       <>
-        <img
-          src={coin?.image}
-          alt={coin.name}
-          height="50"
-          style={{ marginBottom: 5 }}
-        />
-        <span>
-          {coin?.symbol}
-          &nbsp;
-          <span
-            style={{
-              color: profit > 0 ? "rgb(14, 203, 129)" : "red",
-              fontWeight: 500,
-            }}
-          >
-            {profit && "+"}
-            {coin?.price_change_percentage_24h?.toFixed(2)}%
-          </span>
-        </span>
-        <span style={{ fontSize: 22, fontWeight: 500 }}>
-          {coin?.current_price.toFixed(2)}
-        </span>
+        <Card sx={{ display: 'flex'}} elevation={0}>
+          <CardMedia
+            component="img"
+            image={coin?.image}
+            sx={{ width: "80px", height: "100%", mx: 1, my: 1}}
+          />
+          <CardContent>
+              <Typography 
+                variant="h6" 
+                component="div" 
+                sx={{ textTransform: 'uppercase' }}>
+                  {coin?.symbol}
+              </Typography>
+
+              {priceChange < 0 ? (
+                <Typography variant="body2" color="red">
+                  {coin?.price_change_percentage_24h?.toFixed(2)}%
+                </Typography>
+              ) : (
+                <Typography variant="body2" color="green">
+                  +{coin?.price_change_percentage_24h?.toFixed(2)}%
+                </Typography>
+              )}
+            
+              <Typography sx={{ fontSize: 15 }}>
+                ${coin?.current_price.toLocaleString()}
+              </Typography>
+          </CardContent>
+        </Card>
       </>
     )
   })
