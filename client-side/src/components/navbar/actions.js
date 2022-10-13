@@ -146,7 +146,7 @@ export default function Actions({ matches }) {
                         sx={{ wordWrap: "break-word" }}
                         textAlign={"right"}
                       >
-                        {`Logged in as ${user?.name}`}
+                        {`Hi, ${user?.name}`}
                       </Typography>
                     </Paper>
                   }

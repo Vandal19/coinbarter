@@ -13,7 +13,7 @@ export const NavBarContainer = styled(Box)(() => ({
   marginTop: 4,
   justifyContent: 'center',
   alignItems: 'center',
-  padding: '2px 8px'
+  padding: '2px'
 }));
 
 // header
@@ -23,10 +23,8 @@ export const NavBarHeader = styled(Typography)(() => ({
   flexGrow: 1,
   fontSize: '4em',
   fontFamily: '"Fira Code", monospace',
-  color: Colors.primary
+  color: Colors.primary,
 }));
-
-
 
 
 export const NavBarCategories = styled(Breadcrumbs)(({theme}) => ({
@@ -40,7 +38,8 @@ export const MyList = styled(List)(({ type }) => ({
   display: type === 'row' ? 'flex' : 'block',
   flexGrow: 3,
   justifyContent: 'center',
-  alignItems: 'center'
+  alignItems: 'center',
+  fontSize: 14
 }));
 
 // icon actions for mobile
