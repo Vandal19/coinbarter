@@ -64,7 +64,7 @@ export const BannerDescription = styled(Typography)(({theme}) => ({
 
   lineHeight: 1.25,
   letterSpacing: 1.25,
-  marginBottom: "3em",
+  marginBottom: "2.5em",
   [theme.breakpoints.down('md')]: {
     lineHeight: 1.15,
     letterSpacing: 1.15,

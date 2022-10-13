@@ -2,7 +2,6 @@ import {
   Button,
   Drawer,
   Paper,
-  Typography,
   useMediaQuery,
   IconButton
 } from "@mui/material";
@@ -35,7 +34,7 @@ const Cart = () => {
 
 
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("md"));
+  // const matches = useMediaQuery(theme.breakpoints.down("md"));
 
 
   return (
