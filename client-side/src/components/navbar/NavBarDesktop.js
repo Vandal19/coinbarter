@@ -80,7 +80,7 @@ export default function NavBarDesktop({ matches }) {
           CoinBarter
         </Link>
       </NavBarHeader>
-      <MyList type="row">
+      <MyList type="row" sx={{pr:4}}>
         <NavBarCategories>
           <Link
             to="/products/bestsellers_electronics"
