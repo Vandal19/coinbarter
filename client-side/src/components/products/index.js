@@ -17,10 +17,10 @@ const Products = () => {
 
 
   const renderProducts = products?.map((product) => (
-    <Grid item key={product.id} xs={2} sm={4} md={4} 
-          sx={{ pt: '20px' }}
-          display="flex" 
-          flexDirection={"column"} 
+    <Grid item key={product.id} xs={2} sm={4} md={4}
+          sx={{ pt: '10px' }}
+          display="flex"
+          flexDirection={"column"}
           alignItems="center">
       {matches ? (
       <SingleProduct product={product} matches={matches} />
@@ -31,9 +31,9 @@ const Products = () => {
 
   ))
   return (
-<Grid container component="main" columns={16}>
+<Grid container component="main" columns={12}>
   <Slider />
-  <Grid container  
+  <Grid container
   spacing={{ xs: 2, md: 4}}
   justifyContent="center"
   sx={{margin: '20px 4px 10px 4px', pt: '20px' }}
