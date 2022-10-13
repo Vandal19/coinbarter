@@ -3,13 +3,11 @@ import axios from "axios";
 import { Routes, Route } from "react-router-dom";
 
 import Products from "./components/products";
-import { Box, Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
 import theme from "./styles/theme";
 import NavBar from "./components/navbar/index.js";
 import Footer from "./components/Footer";
-import Banner from "./components/banner";
-import Slider from "./components/slider";
 import MobileMenu from "./components/drawer";
 import { UIProvider } from "./context/ui";
 import Cart from "./components/cart";
@@ -26,7 +24,7 @@ import HomePage from "./components/homepage";
 
 function App() {
   const [name, setName] = useState("");
-  const [home, setHome] = useState("");
+  // const [home, setHome] = useState("");
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user)

@@ -131,7 +131,7 @@ const ItemsInCart = () => {
                       ETH/USD Exchange Rate:
                     </Typography>
                     <br />
-                    <Typography sx={{ fontSize: 18, fontWeight: 'medium', color: 'red'}}>
+                    <Typography sx={{ fontSize: 18, fontWeight: 'bold', color: 'red'}}>
                       Payment Total:
                     </Typography>
                   </Box>
@@ -143,7 +143,7 @@ const ItemsInCart = () => {
                       USD ${ethToUsd}
                     </Typography>
                     <br />
-                    <Typography sx={{ fontSize: 18, fontWeight: 'medium', color: 'red'}} align="right">
+                    <Typography sx={{ fontSize: 18, fontWeight: 'bold', color: 'red'}} align="right">
                       {paymentTotal} ETH
                     </Typography>
                   </Grid>

@@ -38,7 +38,7 @@ const CryptoCarousel = () => {
     })
   }, []);
 
-  console.log("carousel", carousel);
+  // console.log("carousel", carousel);
 
   const items = carousel.map((coin) => {
     let priceChange = coin?.price_change_percentage_24h;
@@ -83,7 +83,7 @@ const CryptoCarousel = () => {
       items: 2,
     },
     512: {
-      items: 4,
+      items: 7,
     },
   };
 

@@ -7,8 +7,8 @@ import CryptoCarousel from "./CryptoCarousel";
 
 export default function Banner() {
 
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("md"));
+  // const theme = useTheme();
+  // const matches = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
   <>
@@ -24,7 +24,7 @@ export default function Banner() {
           Pay With<Box sx={{ display: 'inline', fontStyle: 'italic' }}> Crypto</Box>
         </BannerTitle>
 
-        <BannerDescription variant="body2">
+        <BannerDescription variant="body2" sx={{ fontSize: 18 }}>
           E-commerce Reimagined
         </BannerDescription>
 
