@@ -15,7 +15,7 @@
 
 INSERT INTO favorites (user_id, listing_id)
 VALUES
-(2, 159);
+(2, 1);
 
 
 

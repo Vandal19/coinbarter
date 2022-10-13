@@ -24,6 +24,7 @@ import { useUIContext } from "../../context/ui";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../features/userSlice";
 import { clearFavorites } from "../../features/favoriteSlice";
+import { clearCart } from "../../features/cartSlice";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 
@@ -57,6 +58,7 @@ export default function Actions({ matches }) {
   const logoutAuth = () => {
     localStorage.clear();
       dispatch(clearFavorites())
+      dispatch(clearCart())
       dispatch(logout());
       navigate("/");
       console.log("logout", logoutAuth)
