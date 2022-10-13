@@ -24,6 +24,8 @@ import ProductDetail from '../productdetail'
 const SingleProductDT = ({ product, matches }) => {
   const [showOpt, setShowOpt] = useState(false);
   const products = useSelector(state => state.products.value.products);
+  const [ changeColor, setChangeColor ] = useState(false)
+  const [cartText, setCartText] = useState('Add to Cart')
 
   // hook to open and close product details dialog
   const [ProductDetailDialog, showProductDetailDialog, closeProductDetailDialog] = useDialogModal(ProductDetail);
@@ -31,10 +33,14 @@ const SingleProductDT = ({ product, matches }) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = (product) => {
-    dispatch(addToCart(product))
-  }
+    // if (!cartText) {
+    //   setCartText('Added to Cart')
+      dispatch(addToCart(product))
+    }
+
 
   const handleAddToFavorite = (product) => {
+    setChangeColor(!changeColor)
     dispatch(addToFavorite(product))
   }
 
@@ -56,7 +62,7 @@ const SingleProductDT = ({ product, matches }) => {
   return (
     <>
       <Product onMouseEnter={toggleMouse} onMouseLeave={toggleMouse}>
-        <ProductFavButton isFav={0} onClick={() => handleAddToFavorite(product)}>
+        <ProductFavButton isFav={0} onClick={() => handleAddToFavorite(product)} style={ changeColor ? {color:'firebrick', background:"none"} : { color:'grey', background:"none"}}>
           <FavoriteIcon />
         </ProductFavButton>
         {/* <ImageList > */}
@@ -64,7 +70,7 @@ const SingleProductDT = ({ product, matches }) => {
         {/* </ImageList> */}
 
         {showOpt && (
-          <ProductAddToCart onClick={() => handleAddToCart(product)} show={showOpt} variant="contained">
+          <ProductAddToCart onClick={() => handleAddToCart(product)} show={showOpt} variant="contained" >
             {addToCartText}
           </ProductAddToCart>
         )}
