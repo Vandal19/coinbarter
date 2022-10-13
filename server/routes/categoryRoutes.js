@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const axios = require('axios');
 
-const { getProductsForCategory } = require('../db/database');
+const { getProductsForCategory, searchResults } = require('../db/database');
+
 
 
 
@@ -13,6 +14,18 @@ router.get('/:category', (req, res) => {
     .then(result => res.send(result))
     .catch(error => console.error(error));
 
+})
+
+router.post("/", async(req, res) => {
+  const {search} =req.query
+  const result = await searchResults(search)
+
+    if(result) {
+      res.send(result)
+
+  } else {
+    res.sendStatus(403)
+  }
 })
 
 // connect to index.js
