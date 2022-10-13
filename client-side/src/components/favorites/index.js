@@ -3,12 +3,10 @@ import {
   Button,
   Divider,
   Drawer,
-  Grid,
   Paper,
   Typography,
   IconButton,
 } from "@mui/material";
-import { useEffect } from "react";
 import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -17,7 +15,7 @@ import {
 } from "../../features/favoriteSlice";
 import { useUIContext } from "../../context/ui";
 import { Colors } from "../../styles/theme";
-import { useTheme } from "@mui/material/styles";
+// import { useTheme } from "@mui/material/styles";
 import { addToCart } from "../../features/cartSlice";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -28,7 +26,7 @@ const Favorite = () => {
   const favorite = useSelector((state) => state.favorite);
   const cart = useSelector((state) => state.cart);
   const { favoriteTotalQuantity } = useSelector((state) => state.favorite);
-  const theme = useTheme();
+  // const theme = useTheme();
 
   // useEffect(() => {
   //   dispatch(sumQuantity());

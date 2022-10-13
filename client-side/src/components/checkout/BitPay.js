@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardMedia, CardContent, CardActionArea, Grid }from '@mui/material';
+import { CardMedia, CardContent, CardActionArea, Grid }from '@mui/material';
 
 const BitPay = () => {
   return (
