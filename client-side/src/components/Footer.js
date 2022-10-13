@@ -10,7 +10,8 @@ import Colors from '../styles/theme'
 
 const Footer = () => {
   return (
-    <FooterContainer>
+    <Grid item xs={12} sx={{ pt: 10 }}>
+    <FooterContainer sx={{ mt: 10 }}>
       <br />
       <Grid container spacing={2} justifyContent="center" >
         <Grid item md={6} lg={4}>
@@ -86,6 +87,7 @@ const Footer = () => {
         </Grid>
       </Grid>
     </FooterContainer>
+    </Grid>
   );
 };
 
