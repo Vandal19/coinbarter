@@ -22,23 +22,12 @@ export default function Checkout() {
   // states to move through steps for checkout
   const [activeStep, setActiveStep] = useState(0);
   // states to capture shipping data
-  const [shippingData, setShippingData] = useState({});
-
-  // hook to generate checkout token when user enters checkout process
-  // useEffect(() => {
-  //   const generateToken = async () => {
-  //     try {
-
-  //     } catch (error) {
-
-  //     }
-  //   }
-  // }, []);
+  // const [shippingData, setShippingData] = useState({});
 
   // capture items in cart data
   const cart = useSelector((state) => state.cart);
   // cart = {cartItems, cartTotalQuantity, cartTotalAmount}
-  const cartOrder = cart.cartTotalQuantity;
+  // const cartOrder = cart.cartTotalQuantity;
   // console.log("orders in cart:", cartOrder);
 
 
@@ -47,9 +36,8 @@ export default function Checkout() {
   const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
   // capture shipping data and move to payment step of checkout
-  const next = (data) => {
-    setShippingData(data);
-
+  const next = () => {
+    // setShippingData(data);
     nextStep();
   }
 
@@ -96,13 +84,13 @@ export default function Checkout() {
     <>
         {cart.cartItems.length > 0 ?
       <Grid container component="main" columns={16} spacing={3}
-            sx={{ mb: 40, height: '100vh' }}>
+            sx={{ height: '100%' }}>
           <>
         <Grid item xs={16}>
           <GetEthPrice />
         </Grid>
         <Grid item xs={8}>
-          <Paper variant="outlined" sx={{ mb: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+          <Paper variant="outlined" sx={{ p: { xs: 2, md: 3 } }}>
             <Typography component="h1" variant="h4" align="center">
               Checkout
             </Typography>
