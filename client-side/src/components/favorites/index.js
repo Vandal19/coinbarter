@@ -157,7 +157,7 @@ const Favorite = () => {
             </Button>
           </Box>
 
-          <Paper elevation={1} variant="outlined">
+          <Paper elevation={3}>
             {favContent}
           </Paper>
 
