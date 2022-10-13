@@ -27,7 +27,7 @@ const CryptoCarousel = () => {
 
   const [carousel, setCarousel] = useState([null]);
 
-  const cgURL = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2Cethereum%2Cbinancecoin%2Ccardano%2Cripple%2Csolana%2Cdogecoin%2Cpolkadot%2Cmatic-network%2Ctron%2Cavalanche-2%2Clitecoin%2Cchainlink%2Cstellar%2Cshiba-inu%2Caave%2Cterra-luna-2&order=market_cap_desc&sparkline=false'
+  const cgURL = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2Cethereum%2Cbinancecoin%2Ccardano%2Cripple%2Csolana%2Cdogecoin%2Cpolkadot%2Cmatic-network%2Ctron%2Cavalanche-2%2Clitecoin%2Cchainlink%2Cstellar%2Caave%2Cterra-luna-2&order=market_cap_desc&sparkline=false'
 
   // call crypto price data from coingecko api
   useEffect(() => {
@@ -38,7 +38,7 @@ const CryptoCarousel = () => {
     })
   }, []);
 
-  console.log("carousel", carousel);
+  // console.log("carousel", carousel);
 
   const items = carousel.map((coin) => {
     let priceChange = coin?.price_change_percentage_24h;
@@ -83,7 +83,7 @@ const CryptoCarousel = () => {
       items: 2,
     },
     512: {
-      items: 4,
+      items: 7,
     },
   };
 
