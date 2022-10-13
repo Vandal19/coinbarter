@@ -154,9 +154,7 @@ const ItemsInCart = () => {
               <BitPay />
             </Grid>
 
-
-            <br />
-            <Box variant="contain" display="flex">
+            {/* <Box variant="contain" display="flex">
               <Button
                 variant="outlined"
                 fullWidth={true}
@@ -165,7 +163,7 @@ const ItemsInCart = () => {
               >
                 Clear Cart
               </Button>
-            </Box>
+            </Box> */}
           </Box>
         ) : (
           // render below if cart is empty
