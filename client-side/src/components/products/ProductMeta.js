@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material'
+import { Button, Typography } from '@mui/material'
 import React from 'react'
 import { ProductMetaWrapper } from '../../styles/products'
 import { useSelector } from "react-redux";
@@ -11,11 +11,11 @@ const ProductMeta = ({ id, matches }) => {
   return (
     <>
     <ProductMetaWrapper  >
+      <Button variant='outlined' sx={{mt:2, color:"green"}} >
+        ${product.price}
+      </Button>
       <Typography variant={matches ? 'h6' : 'h5'} lineHeight={2} sx={{fontSize: 15}}>
         {product.brand_name}
-      </Typography>
-      <Typography variant={matches ? 'caption' : 'body1'}>
-        ${product.price}
       </Typography>
     </ProductMetaWrapper>
     </>

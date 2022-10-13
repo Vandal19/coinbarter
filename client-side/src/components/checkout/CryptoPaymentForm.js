@@ -10,8 +10,9 @@ import ErrorMessage from "./ErrorMessage";
 import TxList from "./TxList";
 import { useNavigate } from "react-router-dom";
 import { clearFavorites } from "../../features/favoriteSlice";
+import { createOrder } from "../../features/orderSlice";
 import { clearCart } from "../../features/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 // set to admin_coinbarter
@@ -27,12 +28,12 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
   const [txs, setTxs] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const user = useSelector((state) => state.user.user);
-  // const cart = useSelector((state) => state.cart);
-  // const order = useSelector((state) => state.order);
+  const user = useSelector((state) => state.user.user);
+  const cart = useSelector((state) => state.cart);
+  const order = useSelector((state) => state.order);
   // console.log("cart", cart);
 
-  // const cartItems = [...cart.cartItems, ...order.orderItems]
+  const cartItems = [...cart.cartItems, ...order.orderItems]
   // console.log("cart2", cartItems)
 
   // Code to send data to the backend
@@ -90,6 +91,7 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
       //   nextStep();
       // }, 10000)
       setTimeout(() => {
+        dispatch(createOrder( cartItems));
         dispatch(clearFavorites());
         dispatch(clearCart());
         navigate("/my-orders");

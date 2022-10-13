@@ -27,7 +27,7 @@ const CryptoCarousel = () => {
 
   const [carousel, setCarousel] = useState([null]);
 
-  const cgURL = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2Cethereum%2Cbinancecoin%2Ccardano%2Cripple%2Csolana%2Cdogecoin%2Cpolkadot%2Cmatic-network%2Ctron%2Cavalanche-2%2Clitecoin%2Cchainlink%2Cstellar%2Cshiba-inu%2Caave%2Cterra-luna-2&order=market_cap_desc&sparkline=false'
+  const cgURL = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin%2Cethereum%2Cbinancecoin%2Ccardano%2Cripple%2Csolana%2Cdogecoin%2Cpolkadot%2Cmatic-network%2Ctron%2Cavalanche-2%2Clitecoin%2Cchainlink%2Cstellar%2Caave%2Cterra-luna-2&order=market_cap_desc&sparkline=false'
 
   // call crypto price data from coingecko api
   useEffect(() => {
@@ -52,9 +52,9 @@ const CryptoCarousel = () => {
             sx={{ width: "80px", height: "100%", mx: 1, my: 1}}
           />
           <CardContent>
-              <Typography 
-                variant="h6" 
-                component="div" 
+              <Typography
+                variant="h6"
+                component="div"
                 sx={{ textTransform: 'uppercase' }}>
                   {coin?.symbol}
               </Typography>
@@ -68,7 +68,7 @@ const CryptoCarousel = () => {
                   +{coin?.price_change_percentage_24h?.toFixed(2)}%
                 </Typography>
               )}
-            
+
               <Typography sx={{ fontSize: 15 }}>
                 ${coin?.current_price.toLocaleString()}
               </Typography>
