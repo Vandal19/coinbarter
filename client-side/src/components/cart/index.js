@@ -79,7 +79,7 @@ const Cart = () => {
             </Button>
           </Box>
 
-        <Paper elevation={1} >
+        <Paper elevation={3}>
         {/* {cart?.cartItems?.map((product, index) => ( */}
           <CartItem  />
         </Paper>
@@ -98,8 +98,8 @@ const Cart = () => {
           </Box>
         {/* </Box> */}
 
-        <Box variant="contain" justifyContent="space-between">
         <br />
+        <Box variant="contain" justifyContent="space-between">
           <Button variant="contained" onClick={handleClearCart}  sx={{ mr: 2 }}>
             Clear Cart
           </Button>

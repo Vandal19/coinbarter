@@ -11,13 +11,11 @@ import { useEffect } from "react";
 import { Colors } from "../../styles/theme";
 import { Box } from "@mui/system";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  clearCart,
-  sumTotal,
-} from "../../features/cartSlice";
+import { clearCart, sumTotal } from "../../features/cartSlice";
 import CartItem from "../cart/cartItem";
 
 import fetch from 'sync-fetch';
+import BitPay from "../checkout/BitPay";
 
 const ItemsInCart = () => {
   const dispatch = useDispatch();
@@ -43,18 +41,19 @@ const ItemsInCart = () => {
     }
   let ethFx = getEthFx();
   // console.log("ethFx", ethFx);
-  // ethusd fx
+
+  // destructure ethFx obj to get ethusd fx rate
   const ethToUsd = ethFx.USD;
 
   // calculate tax rate of 12%
   const tax = 0.12;
-  // cart subtotal, shipping, tax, and total amount in USD
+  // calculate cart subtotal, shipping, tax, and total amount in USD
   const cartSubtotal = cart.cartTotalAmount;
   const shippingFee = 10;
   const orderTax = ((cart.cartTotalAmount) * (tax));
   const orderTotal = ((cartSubtotal) + (orderTax) + (shippingFee)).toFixed(2);
 
-  // payment total in ETH
+  // calculate payment total in ETH
   const paymentTotal = ((orderTotal) / (ethToUsd)).toFixed(4);
 
   return (
@@ -150,9 +149,12 @@ const ItemsInCart = () => {
                   </Grid>
                 </Box>
             </Grid>
-
             <br />
-            <Box variant="contain" display="flex">
+            <Grid item>
+              <BitPay />
+            </Grid>
+
+            {/* <Box variant="contain" display="flex">
               <Button
                 variant="outlined"
                 fullWidth={true}
@@ -161,7 +163,7 @@ const ItemsInCart = () => {
               >
                 Clear Cart
               </Button>
-            </Box>
+            </Box> */}
           </Box>
         ) : (
           // render below if cart is empty

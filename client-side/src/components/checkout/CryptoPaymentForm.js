@@ -1,10 +1,7 @@
-
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
@@ -13,12 +10,9 @@ import ErrorMessage from "./ErrorMessage";
 import TxList from "./TxList";
 import { useNavigate } from "react-router-dom";
 import { clearFavorites } from "../../features/favoriteSlice";
-import cartSlice, { clearCart } from "../../features/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { useEffect } from "react";
-import Cart from "../cart";
-import { createOrder } from "../../features/orderSlice";
+import { clearCart } from "../../features/cartSlice";
+import { useDispatch } from "react-redux";
+
 
 // set to admin_coinbarter
 const DEFAULT_DESTINATION_ADDR = "0xE1096fBC80a1968d1A0ADbd29C2c76595A44954B";
@@ -33,13 +27,13 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
   const [txs, setTxs] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
-  const cart = useSelector((state) => state.cart);
-  const order = useSelector((state) => state.order);
-  console.log("cart", cart);
+  // const user = useSelector((state) => state.user.user);
+  // const cart = useSelector((state) => state.cart);
+  // const order = useSelector((state) => state.order);
+  // console.log("cart", cart);
 
-  const cartItems = [...cart.cartItems, ...order.orderItems]
-  console.log("cart2", cartItems)
+  // const cartItems = [...cart.cartItems, ...order.orderItems]
+  // console.log("cart2", cartItems)
 
   // Code to send data to the backend
   // const updatedOrderDb = async () => {
@@ -56,9 +50,10 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
   // }
 
   // ({ setError, setTxs, amount, destinationAddr })
+
   // initialize connection with metamask wallet
   const startPayment = async (event) => {
-    console.log("debug:", { amount, destinationAddr });
+    // console.log("debug:", { amount, destinationAddr });
 
     // reset state displaying error msg
     setError("");
@@ -76,9 +71,6 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
       // establish connection with eth provider to send tx
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
-
-      // get testnet network
-      const network = await provider.getNetwork();
 
       // validate destination addr
       ethers.utils.getAddress(destinationAddr);
@@ -98,38 +90,15 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
       //   nextStep();
       // }, 10000)
       setTimeout(() => {
-        // updatedOrderDb()
-        dispatch(createOrder( cartItems));
-        // updateOrderItems()
         dispatch(clearFavorites());
         dispatch(clearCart());
         navigate("/my-orders");
-      }, 3000);
+      }, 7000);
     } catch (error) {
       setError(error.reason);
       console.log({ error });
     }
   };
-
-
-  // const placeOrderHandler = (e) => {
-  //   const updatedOrderItems = cart
-  //   order = updatedOrderItems
-
-  // }
-  // console.log("createOrder", placeOrderHandler)
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const data = new FormData(e.target);
-  //   setError();
-  //   await startPayment({
-  //     setError,
-  //     setTxs,
-  //     ether: data.get("ether"),
-  //     addr: data.get("addr")
-  //   });
-  // };
 
   return (
     <>
@@ -167,7 +136,7 @@ export default function CryptoPaymentForm({backStep, nextStep}) {
         </Grid>
 
         <br />
-        <Grid item xs={12} sx={{ mt: 2 }}>
+        <Grid item xs={12}>
           <Box
             display="flex"
             alignitems="center"

@@ -1,6 +1,7 @@
 import { useTheme } from "@mui/material/styles";
-import { Typography, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import { BannerContainer, BannerContent, BannerDescription, BannerImage, BannerShopButton, BannerTitle } from "../../styles/banner";
+import { Grid }from '@mui/material';
 import Box from '@mui/material/Box';
 import CryptoCarousel from "./CryptoCarousel";
 
@@ -11,7 +12,9 @@ export default function Banner() {
 
   return (
   <>
-    {/* <CryptoCarousel /> */}
+    <Grid container>
+      <CryptoCarousel />
+    </Grid>
     <BannerContainer>
 
       <BannerContent>
@@ -30,6 +33,9 @@ export default function Banner() {
       </BannerContent>
       <BannerImage src="/images/banner/homepage-dcut.png"/>
     </BannerContainer>
+    {/* <Grid container>
+      <CryptoCarousel />
+    </Grid> */}
     </>
   );
 }
