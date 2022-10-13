@@ -12,9 +12,9 @@ export default function Banner() {
 
   return (
   <>
-  <Grid item>
-    {/* <CryptoCarousel /> */}
-  </Grid>
+    <Grid container>
+      <CryptoCarousel />
+    </Grid>
     <BannerContainer>
 
       <BannerContent>
@@ -33,6 +33,9 @@ export default function Banner() {
       </BannerContent>
       <BannerImage src="/images/banner/homepage-dcut.png"/>
     </BannerContainer>
+    {/* <Grid container>
+      <CryptoCarousel />
+    </Grid> */}
     </>
   );
 }
