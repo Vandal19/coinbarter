@@ -10,7 +10,8 @@ import CryptoPaymentForm from './CryptoPaymentForm';
 import { useSelector } from "react-redux";
 
 import ItemsInCart from '../cart/cartItems';
-import GetEthPrice from './GetEthPrice';
+// import GetEthPrice from './GetEthPrice';
+import CryptoCarousel from '../banner/CryptoCarousel';
 
 
 // manage steps for checkout
@@ -87,7 +88,7 @@ export default function Checkout() {
             sx={{ height: '100%' }}>
           <>
         <Grid item xs={16}>
-          <GetEthPrice />
+          <CryptoCarousel />
         </Grid>
         <Grid item xs={8}>
           <Paper variant="outlined" sx={{ p: { xs: 2, md: 3 } }}>
