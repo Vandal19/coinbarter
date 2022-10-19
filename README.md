@@ -1,6 +1,6 @@
 # CoinBarter
 
-CoinBarter is an e-commerce web application that enables users to purchase electronic merchandise from Amazon using crypto currencies, and pay using Ethereum directly from their MetaMask wallet.
+CoinBarter is an e-commerce web application that enables users to purchase electronic merchandise from Amazon using crypto currencies, paying with Ethereum directly from their MetaMask wallet.
 
 This application is built with a Node.js backend and a React frontend, and  makes requests to an API to fetch and store products data from Amazon. It uses the React-Redux library for state management, React-Router for routing, and Material-UI for the UI components.
 
