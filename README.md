@@ -60,7 +60,7 @@ This application is built with a Node.js backend and a React frontend, and  make
 1. Clone this repository onto your local device.
 2. Install dependencies:
     ```sh
-    npm install 
+    cd coinbarter && npm install 
     cd client-side && npm install
     cd server && npm install
     ```
@@ -73,7 +73,7 @@ This application is built with a Node.js backend and a React frontend, and  make
     \i server/db/seeds/01_seeds.sql;
     \x 
     ```
-5. Seed databse by running server > index.js.
+5. Seed database by running server > index.js.
 6. Start the web server. The app will be served at <http://localhost:8000/>.
     ```sh
     cd server
